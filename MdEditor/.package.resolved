@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "datastructurespackage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ioskendev/DataStructuresPackage",
+      "state" : {
+        "branch" : "main",
+        "revision" : "344485ac2ff7c043d1eb05528912ff98ae9bdda4"
+      }
+    },
+    {
+      "identity" : "taskmanagerpackage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ioskendev/TaskManagerPackage",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a9869c13a3b0bd91ee50a89937aa48156c670fa8"
+      }
+    }
+  ],
+  "version" : 2
+}

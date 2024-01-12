@@ -1,6 +1,4 @@
 import ProjectDescription
-import ProjectDescriptionHelpers
-import MyPlugin
 
 public var scripts: [TargetScript] {
 
@@ -24,6 +22,20 @@ public var scripts: [TargetScript] {
 	return scripts
 }
 
+let infoPlist: [String: Plist.Value] = [
+	"UIApplicationSceneManifest": [
+		"UIApplicationSupportsMultipleScenes": false,
+		"UISceneConfigurations": [
+			"UIWindowSceneSessionRoleApplication": [
+				[
+					"UISceneConfigurationName": "Default Configuration",
+					"UISceneDelegateClassName": "$(PRODUCT_MODULE_NAME).SceneDelegate"
+				]
+			]
+		]
+	]
+]
+
 let project = Project(
 	name: "MdEdit",
 	packages: [
@@ -36,6 +48,7 @@ let project = Project(
 			destinations: .iOS,
 			product: .app,
 			bundleId: "com.ioskendev.MdEditor",
+			infoPlist: .extendingDefault(with: infoPlist),
 			sources: ["Sources/**"],
 			resources: ["Resources/**"],
 			scripts: scripts,

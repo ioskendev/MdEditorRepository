@@ -8,13 +8,14 @@
 import Foundation
 import TaskManagerPackage
 
+/// ITodoList Presentation logic protocol
 protocol ITodoListPresenter {
 
-	/// Отображение экрана со списком заданий.
-	/// - Parameter response: Подготовленные к отображению данные.
+	/// Show screen with task list.
+	/// - Parameter response: Prepared data to show.
 	func present(response: TodoListModel.Response)
 
-	/// Создание нового задания.
+	/// ITodoList Presentation logic
 	func createTask()
 }
 
@@ -58,9 +59,9 @@ final class TodoListPresenter: ITodoListPresenter {
 		tasks.map { mapTaskData(task: $0) }
 	}
 
-	/// Мапинг одного задания из бизнес-модели в задание для отображения
-	/// - Parameter task: Задание для преобразования.
-	/// - Returns: Преобразованный результат.
+	/// Map task from business model to task to show
+	/// - Parameter task: Task to mapping.
+	/// - Returns: Mapping result.
 	private func mapTaskData(task: Task) -> TodoListModel.ViewModel.Task {
 		if let task = task as? ImportantTask {
 			let result = TodoListModel.ViewModel.ImportantTask(

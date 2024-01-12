@@ -7,19 +7,21 @@
 
 import Foundation
 
+/// TodoListInteractor protocol
 protocol ITodoListInteractor {
 
-	/// Событие на предоставление информации для списка заданий.
+	/// Event to response with data to tasklist.
 	func fetchData()
 
-	/// Событие, что задание было выбрано.
-	/// - Parameter request: Запрос, содержащий информацию о выбранном задании.
+	/// Did task selected event method.
+	/// - Parameter request: Request, with selected task information.
 	func didTaskSelected(request: TodoListModel.Request.TaskSelected)
 
-	/// Событие на создание нового задания.
+	/// New task created event.
 	func createTask()
 }
 
+/// Todo List Interactor logic
 final class TodoListInteractor: ITodoListInteractor {
 
 	// MARK: - Dependencies
@@ -36,7 +38,7 @@ final class TodoListInteractor: ITodoListInteractor {
 
 	// MARK: - Public methods
 
-	/// Событие на предоставление информации для списка заданий.
+	/// fetch data realization func.
 	func fetchData() {
 		var responseData = [TodoListModel.Response.SectionWithTasks]()
 
@@ -52,8 +54,8 @@ final class TodoListInteractor: ITodoListInteractor {
 		presenter.present(response: response)
 	}
 
-	/// Событие, что задание было выбрано.
-	/// - Parameter request: Запрос, содержащий информацию о выбранном задании.
+	/// didTaskSelected action realization
+	/// - Parameter request: TodoListModel.Request.TaskSelected
 	func didTaskSelected(request: TodoListModel.Request.TaskSelected) {
 		let section = sectionManager.getSection(forIndex: request.indexPath.section)
 		let task = sectionManager.getTasksForSection(section: section)[request.indexPath.row]
@@ -61,7 +63,7 @@ final class TodoListInteractor: ITodoListInteractor {
 		fetchData()
 	}
 
-	/// Событие на создание нового задания.
+	/// Create task event.
 	func createTask() {
 		presenter.createTask()
 	}

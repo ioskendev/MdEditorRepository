@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// LoginModel является NameSpace для отделения ViewData различных экранов друг отдруга
+/// LoginModel it is NameSpace for Login ViewData ond ViewData other screens
 enum LoginModel {
 	struct Request {
 		var login: String

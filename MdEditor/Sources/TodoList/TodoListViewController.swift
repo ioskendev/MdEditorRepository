@@ -7,11 +7,11 @@
 
 import UIKit
 
-/// Протокол главного экрана приложения.
+/// TodoList screen.
 protocol ITodoListViewController: AnyObject {
 
-	/// Метод отрисовки информации на экране.
-	/// - Parameter viewModel: данные для отрисовки на экране.
+	/// Method to render information on the screen.
+	/// - Parameter viewModel: viewModel with data to render.
 	func render(viewModel: TodoListModel.ViewModel)
 }
 
@@ -139,8 +139,8 @@ private extension TodoListViewController {
 
 extension TodoListViewController: ITodoListViewController {
 
-	/// Метод отрисовки информации на экране.
-	/// - Parameter viewModel: данные для отрисовки на экране.
+	/// Render TodoListModel data model.
+	/// - Parameter viewModel: TodoListModel data.
 	func render(viewModel: TodoListModel.ViewModel) {
 		self.viewModel = viewModel
 		tableView.reloadData()

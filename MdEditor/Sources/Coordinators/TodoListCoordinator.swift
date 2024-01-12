@@ -39,12 +39,4 @@ final class TodoListCoordinator: ICoordinator {
 		}
 		navigationController.pushViewController(viewController, animated: true)
 	}
-
-	//	private func showCreateTaskScene() {
-	//		let assembler = CreateTaskAssembler(taskManager: taskManager)
-	//		let viewController = assembler.assembly {
-	//			self.navigationController.popViewController(animated: true)
-	//		}
-	//		navigationController.pushViewController(viewController, animated: true)
-	//	}
 }

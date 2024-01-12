@@ -8,21 +8,21 @@
 import Foundation
 import TaskManagerPackage
 
-/// Протокол адаптера, позволяющего использовать TaskManager для предоставления заданий по секциям.
+/// Adapter protocol, to use TaskManager to return tasks from sections.
 protocol ISectionForTaskManagerAdapter {
 
-	/// Получить список секций.
-	/// - Returns: Массив с ссекциями.
+	/// Get list of sections.
+	/// - Returns: Array with sections.
 	func getSections() -> [Section]
 
-	/// Доступ к секции по индексу.
-	/// - Parameter index: Индекс, для которого нужно вернуть секцию.
-	/// - Returns: Нужная секция.
+	/// Access to section from index.
+	/// - Parameter index: Index, to return section with.
+	/// - Returns: Section.
 	func getSection(forIndex index: Int) -> Section
 
-	/// Получить список заданий для конкретной секции.
-	/// - Parameter section: Секция для которой нужен список заданий.
-	/// - Returns: Массив с секциями.
+	/// Get tasks for section.
+	/// - Parameter section: Section to return tasks.
+	/// - Returns: Array with Tasks.
 	func getTasksForSection(section: Section) -> [Task]
 }
 
@@ -49,6 +49,7 @@ enum Section {
 	}
 }
 
+/// SectionForTaskManagerAdapter provide new functions with sections to ITaskManager type member
 final class SectionForTaskManagerAdapter: ISectionForTaskManagerAdapter {
 	// MARK: - Dependencies
 
@@ -71,11 +72,17 @@ final class SectionForTaskManagerAdapter: ISectionForTaskManagerAdapter {
 		sections
 	}
 
+	/// Get section for index
+	/// - Parameter index: index of section
+	/// - Returns: Section for index
 	func getSection(forIndex index: Int) -> Section {
 		let correctedIndex = min(index, sections.count - 1)
 		return sections[correctedIndex]
 	}
 
+	/// return array of TaskManagerPackage Tasks from tasks type
+	/// - Parameter section: enum Section with staks description
+	/// - Returns: [TaskManagerPackage.Task]
 	func getTasksForSection(section: Section) -> [TaskManagerPackage.Task] {
 		switch section {
 		case .completed:

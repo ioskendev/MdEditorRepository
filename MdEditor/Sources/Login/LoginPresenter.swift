@@ -9,8 +9,8 @@ import Foundation
 
 protocol ILoginPresenter {
 
-	/// Отображение экрана со авторизации.
-	/// - Parameter response: Подготовленные к отображению данные.
+	/// Login screen presentation.
+	/// - Parameter response: Login model ro present.
 	func present(responce: LoginModel.Response)
 }
 
@@ -32,8 +32,8 @@ final class LoginPresenter: ILoginPresenter {
 
 	// MARK: - Public methods
 
-	/// Отображение экрана со авторизации.
-	/// - Parameter response: Подготовленные к отображению данные.
+	/// Login scene presentation.
+	/// - Parameter response: Login model data to present.
 	func present(responce: LoginModel.Response) {
 		loginResultClosure?(responce.result)
 	}

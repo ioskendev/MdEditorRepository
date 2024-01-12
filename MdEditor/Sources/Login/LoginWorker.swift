@@ -9,14 +9,15 @@ import Foundation
 
 protocol ILoginWorker {
 
-	/// Авторизация пользователя.
+	/// User autorisation.
 	/// - Parameters:
-	///   - login: Логин пользователя.
-	///   - password: Пароль пользователя.
-	/// - Returns: Результат прохождения авторизации.
+	///   - login: User login.
+	///   - password: User password.
+	/// - Returns: Autorisation result.
 	func login(login: String, password: String) -> Result<Void, LoginError>
 }
 
+// TODO: login error transport to delete
 enum LoginError: Error {
 	case wrongPassword
 	case wrongLogin

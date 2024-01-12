@@ -7,11 +7,12 @@
 
 import UIKit
 
+/// Assemble login scene
 final class LoginAssembler {
 
-	/// Сборка модуля авторизации
-	/// - Parameter loginResultClosure: замыкание оповещающие о результате авторизации
-	/// - Returns: вью
+	/// Assemby login scene
+	/// - Parameter loginResultClosure: closure for end scene running
+	/// - Returns: LoginViewController
 	func assembly(loginResultClosure: LoginResultClosure?) -> LoginViewController {
 		let viewController = LoginViewController()
 		let presenter = LoginPresenter(viewController: viewController, loginResultClosure: loginResultClosure)

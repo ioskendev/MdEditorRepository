@@ -16,18 +16,18 @@ final class TodoListAssembler {
 
 	// MARK: - Initialization
 
-	/// Инициализатор сборщика модуля списка заданий.
+	/// Init of TodoListAssembler.
 	/// - Parameters:
-	///   - taskManager: Менеджер заданий.
+	///   - taskManager: Task manager.
 	init(taskManager: ITaskManager) {
 		self.taskManager = taskManager
 	}
 
 	// MARK: - Public methods
 
-	/// Сборка модуля списка заданий.
-	/// - Parameter createTaskClosure: замыкание оповещающие о инициации создания заданий.
-	/// - Returns: TodoListViewController с проставленными зависимостями VIP цикла.
+	/// Assemble TodoList scene
+	/// - Parameter handleCreateTask: delegation of creation task
+	/// - Returns: TodoListViewController
 	func assembly(createTaskClosure: EmptyClosure?) -> TodoListViewController {
 		let viewController = TodoListViewController()
 		let sectionForTaskManagerAdapter = SectionForTaskManagerAdapter(taskManager: taskManager)

@@ -27,6 +27,8 @@ final class LoginInteractor: ILoginInteractor {
 
 	// MARK: - Public methods
 
+	/// login func realisation with request model
+	/// - Parameter request: LoginModel.Request
 	func login(request: LoginModel.Request) {
 		let result = worker.login(login: request.login, password: request.password)
 		let responce = LoginModel.Response(result: result)

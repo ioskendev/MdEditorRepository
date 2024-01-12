@@ -9,7 +9,7 @@ import UIKit
 
 protocol ILoginCoordinator: ICoordinator {
 
-	/// Метод для завершении сценария
+	/// Finish flow method
 	var finishFlow: (() -> Void)? { get set }
 }
 

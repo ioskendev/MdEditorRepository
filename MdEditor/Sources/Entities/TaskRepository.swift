@@ -8,19 +8,19 @@
 import Foundation
 import TaskManagerPackage
 
-/// Репозиторий для получения заданий.
+/// Repository to get tasks.
 protocol ITaskRepository {
 
-	/// Получить список заданий.
-	/// - Returns: Массив заданий.
+	/// Get task list.
+	/// - Returns: Array of tasks.
 	func getTasks() -> [Task]
 }
 
-/// Stub Репозиторя для получения заданий.
+/// Stub Repository to get tasks.
 final class TaskRepositoryStub: ITaskRepository {
 
-	/// Возвращает предустановленные данные для приолжения.
-	/// - Returns: Массив заданий.
+	/// Return stub data with tasks.
+	/// - Returns: Array of tasks.
 	func getTasks() -> [Task] {
 		[
 			ImportantTask(title: "Do homework", taskPriority: .high),

@@ -2,7 +2,7 @@
 //  SectionForTaskManagerAdapter.swift
 //  MdEdit
 //
-//  Created by Yuri Volegov on 12.01.2024.
+//  Created by ioskendev on 12.01.2024.
 //
 
 import Foundation

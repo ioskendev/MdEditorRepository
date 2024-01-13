@@ -33,7 +33,8 @@ let infoPlist: [String: Plist.Value] = [
 				]
 			]
 		]
-	]
+	],
+	"UILaunchStoryboardName": "LaunchScreen"
 ]
 
 let project = Project(
@@ -50,7 +51,10 @@ let project = Project(
 			bundleId: "com.ioskendev.MdEditor",
 			infoPlist: .extendingDefault(with: infoPlist),
 			sources: ["Sources/**"],
-			resources: ["Resources/**"],
+			resources: [
+				"Resources/**",
+				"Resources/LaunchScreen.storyboard"
+			],
 			scripts: scripts,
 			dependencies: [
 				.package(product: "DataStructuresPackage"),

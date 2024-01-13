@@ -42,7 +42,7 @@ indentation: tabs
 
 # путь к исходникам для проверки кода
 included:
-  - ./MdEditor/Sources
+  - ./Project/Sources
 
 # подкаталоги, в которых линтер не будет делать проверку кода
 excluded:

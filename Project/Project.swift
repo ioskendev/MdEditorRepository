@@ -2,7 +2,7 @@ import ProjectDescription
 
 enum ProjectSettings {
 	public static var organizationName: String { "ru.ioskendev.MdEditor" }
-	public static var projectName: String { "MdEdit" }
+	public static var projectName: String { "MdEditor" }
 	public static var appVersionName: String { "1.0.0" }
 	public static var appVersionBuild: Int { 1 }
 	public static var developmentTeam: String { "" }
@@ -24,11 +24,49 @@ public var scripts: [TargetScript] {
 	 fi
 	 """
 
+	let swiftGenScriptString = """
+	 export PATH="$PATH:/opt/homebrew/bin"
+	 OUTPUT_FILES=()
+	 COUNTER=0
+	 while [ $COUNTER -lt ${SCRIPT_OUTPUT_FILE_COUNT} ];
+	 do
+	  tmp="SCRIPT_OUTPUT_FILE_$COUNTER"
+	  OUTPUT_FILES+=("${!tmp}")
+	  COUNTER=$[$COUNTER+1]
+	 done
+	 for file in "${OUTPUT_FILES[@]}"
+	 do
+	  if [ -f "$file" ]
+	  then
+	   chmod a=rw "$file"
+	  fi
+	 done
+
+	 if which swiftgen > /dev/null; then
+	  swiftgen config run --config swiftgen.yml
+	 else
+	  echo "warning: SwiftGen not installed, download from https://github.com/SwiftGen/SwiftGen"
+	  exit 1
+	 fi
+
+	 for file in "${OUTPUT_FILES[@]}"
+	 do
+	  chmod a=r "$file"
+	 done
+	"""
+
 	let swiftLintScript = TargetScript.post(
 		script: swiftLintScriptString, name: "SwiftLint", basedOnDependencyAnalysis: false
 	)
 
+	let swiftGenScript = TargetScript.post(
+		script: swiftGenScriptString,
+		name: "SwiftGen",
+		basedOnDependencyAnalysis: false
+	)
+
 	scripts.append(swiftLintScript)
+	scripts.append(swiftGenScript)
 	return scripts
 }
 
@@ -49,6 +87,10 @@ let infoPlist: [String: Plist.Value] = [
 
 let project = Project(
 	name: ProjectSettings.projectName ,
+	options: .options(
+		defaultKnownRegions: [ "Base", "en", "ru"],
+		developmentRegion: "en"
+	),
 	packages: [
 		.local(path: .relativeToManifest("../Packages/TaskManagerPackage"))
 	],
@@ -72,7 +114,9 @@ let project = Project(
 			sources: ["Sources/**"],
 			resources: [
 				"Resources/**",
-				"Resources/LaunchScreen.storyboard"
+				"Resources/LaunchScreen.storyboard",
+				"Resources/en.lproj/Localizable.strings",
+				"Resources/ru.lproj/Localizable.strings"
 			],
 			scripts: scripts,
 			dependencies: [

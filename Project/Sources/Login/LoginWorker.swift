@@ -17,7 +17,6 @@ protocol ILoginWorker {
 	func login(login: String, password: String) -> Result<Void, LoginError>
 }
 
-// TODO: login error transport to delete
 enum LoginError: Error {
 	case wrongPassword
 	case wrongLogin

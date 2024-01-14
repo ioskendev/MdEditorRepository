@@ -43,7 +43,7 @@ public var scripts: [TargetScript] {
 	 done
 
 	 if which swiftgen > /dev/null; then
-	  swiftgen config run --config swiftgen.yml
+	  swiftgen config run --config SwiftGen/swiftgen.yml
 	 else
 	  echo "warning: SwiftGen not installed, download from https://github.com/SwiftGen/SwiftGen"
 	  exit 1

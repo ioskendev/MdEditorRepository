@@ -54,7 +54,6 @@ internal enum Asset {
 }
 
 internal extension Image {
-  @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
   @available(OSX, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
   convenience init!(asset: ImageAsset) {

@@ -101,7 +101,6 @@
 }
 
 {{accessModifier}} extension {{imageAlias}} {
-  @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
   @available(OSX, deprecated,
     message: "This initializer is unsafe on macOS, please use the {{imageType}}.image property")
   convenience init!(asset: {{imageType}}) {

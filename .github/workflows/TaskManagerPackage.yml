@@ -1,0 +1,22 @@
+name: TaskManagerPackage
+
+on:
+  pull_request:
+    branches: [ "MdEditor_CI_Input_Turulin" ]
+
+jobs: 
+  build:
+    name: Test TaskManagerPackage
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          cd Packages/TaskManagerPackage
+          swift build -v
+      - name: Run tests
+        run: |
+          cd Packages/TaskManagerPackage
+          swift test -v

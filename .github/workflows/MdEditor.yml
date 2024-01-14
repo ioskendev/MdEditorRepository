@@ -1,0 +1,16 @@
+name: MdEditor
+
+on:
+  pull_request:
+    branches: [ "MdEditor_CI_Input_Turulin" ]
+
+jobs: 
+  build:
+    name: Build app
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: ./.github/build.sh

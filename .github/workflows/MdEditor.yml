@@ -2,7 +2,7 @@ name: MdEditor
 
 on:
   pull_request:
-    branches: [ "MdEditor_CI_Input_Turulin" ]
+    branches: [ "develop" ]
 
 jobs: 
   build:

@@ -10,65 +10,27 @@ enum ProjectSettings {
 	public static var bundleId: String { "\(organizationName).\(projectName)" }
 }
 
-public var scripts: [TargetScript] {
-
-	var scripts = [TargetScript]()
-
+private var swiftLintTargetScript: TargetScript {
 	let swiftLintScriptString = """
-	 export PATH="$PATH:/opt/homebrew/bin"
-	 if which swiftlint > /dev/null; then
-	   swiftlint
-	 else
-	   echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
-	   exit 1
-	 fi
-	 """
+		export PATH="$PATH:/opt/homebrew/bin"
+		if which swiftlint > /dev/null; then
+		  swiftlint
+		else
+		  echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+		  exit 1
+		fi
+		"""
 
-	let swiftGenScriptString = """
-	 export PATH="$PATH:/opt/homebrew/bin"
-	 OUTPUT_FILES=()
-	 COUNTER=0
-	 while [ $COUNTER -lt ${SCRIPT_OUTPUT_FILE_COUNT} ];
-	 do
-	  tmp="SCRIPT_OUTPUT_FILE_$COUNTER"
-	  OUTPUT_FILES+=("${!tmp}")
-	  COUNTER=$[$COUNTER+1]
-	 done
-	 for file in "${OUTPUT_FILES[@]}"
-	 do
-	  if [ -f "$file" ]
-	  then
-	   chmod a=rw "$file"
-	  fi
-	 done
-
-	 if which swiftgen > /dev/null; then
-	  swiftgen config run --config SwiftGen/swiftgen.yml
-	 else
-	  echo "warning: SwiftGen not installed, download from https://github.com/SwiftGen/SwiftGen"
-	  exit 1
-	 fi
-
-	 for file in "${OUTPUT_FILES[@]}"
-	 do
-	  chmod a=r "$file"
-	 done
-	"""
-
-	let swiftLintScript = TargetScript.post(
-		script: swiftLintScriptString, name: "SwiftLint", basedOnDependencyAnalysis: false
-	)
-
-	let swiftGenScript = TargetScript.post(
-		script: swiftGenScriptString,
-		name: "SwiftGen",
+	return TargetScript.pre(
+		script: swiftLintScriptString,
+		name: "Run SwiftLint",
 		basedOnDependencyAnalysis: false
 	)
-
-	scripts.append(swiftLintScript)
-	scripts.append(swiftGenScript)
-	return scripts
 }
+
+private let scripts: [TargetScript] = [
+	swiftLintTargetScript
+]
 
 let infoPlist: [String: Plist.Value] = [
 	"UIApplicationSceneManifest": [

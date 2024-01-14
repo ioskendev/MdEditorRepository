@@ -1,0 +1,22 @@
+name: DataStructuresPackage
+
+on:
+  pull_request:
+    branches: [ "develop" ]
+
+jobs: 
+  build:
+    name: Test DataStructuresPackage
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          cd Packages/DataStructuresPackage
+          swift build -v
+      - name: Run tests
+        run: |
+          cd Packages/DataStructuresPackage
+          swift test -v

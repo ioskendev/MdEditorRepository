@@ -34,9 +34,7 @@ final class TodoListCoordinator: ICoordinator {
 		orderedTaskManager.addTasks(tasks: repository.getTasks())
 
 		let assembler = TodoListAssembler(taskManager: orderedTaskManager)
-		let viewController = assembler.assembly {
-			//			self.showCreateTaskScene()
-		}
+		let viewController = assembler.assembly()
 		navigationController.pushViewController(viewController, animated: true)
 	}
 }

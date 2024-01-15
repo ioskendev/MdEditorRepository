@@ -14,9 +14,6 @@ protocol ITodoListPresenter {
 	/// Show screen with task list.
 	/// - Parameter response: Prepared data to show.
 	func present(response: TodoListModel.Response)
-
-	/// ITodoList Presentation logic
-	func createTask()
 }
 
 typealias EmptyClosure = () -> Void
@@ -30,9 +27,8 @@ final class TodoListPresenter: ITodoListPresenter {
 
 	// MARK: - Initialization
 
-	init(viewController: ITodoListViewController, createTaskClosure: EmptyClosure?) {
+	init(viewController: ITodoListViewController) {
 		self.viewController = viewController
-		self.createTaskClosure = createTaskClosure
 	}
 
 	// MARK: - Public methods
@@ -47,10 +43,6 @@ final class TodoListPresenter: ITodoListPresenter {
 			sections.append(sectionData)
 		}
 		viewController.render(viewModel: TodoListModel.ViewModel(tasksBySections: sections))
-	}
-
-	func createTask() {
-		createTaskClosure?()
 	}
 
 	// MARK: - Private methods

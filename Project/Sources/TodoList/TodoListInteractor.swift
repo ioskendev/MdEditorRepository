@@ -16,9 +16,6 @@ protocol ITodoListInteractor {
 	/// Did task selected event method.
 	/// - Parameter request: Request, with selected task information.
 	func didTaskSelected(request: TodoListModel.Request.TaskSelected)
-
-	/// New task created event.
-	func createTask()
 }
 
 /// Todo List Interactor logic
@@ -61,10 +58,5 @@ final class TodoListInteractor: ITodoListInteractor {
 		let task = sectionManager.getTasksForSection(section: section)[request.indexPath.row]
 		task.completed.toggle()
 		fetchData()
-	}
-
-	/// Create task event.
-	func createTask() {
-		presenter.createTask()
 	}
 }

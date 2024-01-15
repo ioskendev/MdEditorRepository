@@ -80,5 +80,3 @@ To provide a complete package, remember to implement and add the missing `Queue`
 ---
 
 For issues, suggestions, or contributions, feel free to open an issue or pull request in the repository.
-
-

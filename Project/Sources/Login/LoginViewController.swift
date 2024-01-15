@@ -72,9 +72,11 @@ private extension LoginViewController {
 		textField.layer.borderColor = UIColor.lightGray.cgColor
 		textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: Sizes.Padding.half, height: textField.frame.height))
 		textField.leftViewMode = .always
-		textField.translatesAutoresizingMaskIntoConstraints = false
 
 		textField.translatesAutoresizingMaskIntoConstraints = false
+
+		textField.font = UIFont.preferredFont(forTextStyle: .body)
+		textField.adjustsFontForContentSizeCategory = true
 
 		return textField
 	}

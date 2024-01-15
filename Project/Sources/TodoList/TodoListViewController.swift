@@ -92,7 +92,7 @@ extension TodoListViewController {
 private extension TodoListViewController {
 
 	private func setupUI() {
-		view.backgroundColor = .white
+		view.backgroundColor = Theme.backgroundColor
 		title = L10n.TodoListScreen.title
 		navigationController?.navigationBar.prefersLargeTitles = true
 
@@ -114,12 +114,13 @@ private extension TodoListViewController {
 	func configureCell(_ cell: UITableViewCell, with task: TodoListModel.ViewModel.Task) {
 		var contentConfiguration = cell.defaultContentConfiguration()
 
-		cell.tintColor = .red
+		cell.tintColor = Theme.accentColor
+		cell.backgroundColor = Theme.backgroundColor
 		cell.selectionStyle = .none
 
 		switch task {
 		case .importantTask(let task):
-			let redText = [NSAttributedString.Key.foregroundColor: UIColor.red]
+			let redText = [NSAttributedString.Key.foregroundColor: Theme.accentColor]
 			let taskText = NSMutableAttributedString(string: task.priority + " ", attributes: redText )
 			taskText.append(NSAttributedString(string: task.title))
 

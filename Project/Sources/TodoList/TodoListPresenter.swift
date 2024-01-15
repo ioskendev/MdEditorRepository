@@ -23,7 +23,6 @@ final class TodoListPresenter: ITodoListPresenter {
 	// MARK: - Dependencies
 
 	private weak var viewController: ITodoListViewController! // swiftlint:disable:this implicitly_unwrapped_optional
-	private var createTaskClosure: EmptyClosure?
 
 	// MARK: - Initialization
 

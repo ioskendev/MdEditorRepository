@@ -52,9 +52,9 @@ tuist generate
 
 We hope you enjoy using MdEditor project, and we welcome any feedback, contributions, or bug reports in our issues section.
 
-## Developers:
-Yuri Volegov (iosken - teamlead)
-Maxim Alexeev
-Alexey Turulin
-Dinar Khakimov
-Rinat
+## Developers(ioskendev team):
+- Yuri Volegov (iosken - teamlead)
+- Maxim Alexeev
+- Alexey Turulin
+- Dinar Khakimov
+- Rinat

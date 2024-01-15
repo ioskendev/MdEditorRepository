@@ -8,10 +8,10 @@
 import Foundation
 
 /// Linear twosided list.
-public struct LinkedList<T: Equatable> {
+public struct DoublyLinkedList<T: Equatable> {
 
 	/// Two linear node.
-	final class Node<N>: CustomStringConvertible {
+	final class Node<N> {
 		/// Value was stored in node.
 		var value: N
 
@@ -20,11 +20,6 @@ public struct LinkedList<T: Equatable> {
 
 		/// Link to next Node (if next Node is exist).
 		var next: Node<N>?
-
-		/// Node CustomStringConvertible protocol realisation
-		var description: String {
-			"\(value)"
-		}
 
 		/// Twosided list initialisator.
 		/// - Parameters:
@@ -37,8 +32,8 @@ public struct LinkedList<T: Equatable> {
 		}
 	}
 
-	private var head: Node<T>?
-	private var tail: Node<T>?
+	private(set) var head: Node<T>?
+	private(set) var tail: Node<T>?
 
 	/// Return elements count result.
 	///
@@ -53,9 +48,12 @@ public struct LinkedList<T: Equatable> {
 
 	/// LinkedList init.
 	/// - Parameter value: Create LinkedList with Equatable type value parameter.
-	public init(value: T? = nil) {
+	public init(_ value: T? = nil) {
 		if let value = value {
-			push(value)
+			let newNode = Node(value)
+			head = newNode
+			tail = newNode
+			count = 1
 		}
 	}
 
@@ -68,7 +66,9 @@ public struct LinkedList<T: Equatable> {
 		head?.previous = newNode
 		head = newNode
 
-		if tail == nil { tail = head }
+		if tail == nil {
+			tail = head
+		}
 
 		count += 1
 	}
@@ -79,10 +79,13 @@ public struct LinkedList<T: Equatable> {
 	/// - Parameter value: Value to adding to list.
 	public mutating func append(_ value: T) {
 		let newNode = Node(value, previous: tail)
+
 		tail?.next = newNode
 		tail = newNode
 
-		if head == nil { head = tail }
+		if head == nil {
+			head = tail
+		}
 
 		count += 1
 	}
@@ -102,7 +105,7 @@ public struct LinkedList<T: Equatable> {
 
 		if newNode.next == nil {
 			tail = newNode
-			}
+		}
 
 		count += 1
 	}
@@ -115,8 +118,13 @@ public struct LinkedList<T: Equatable> {
 		guard let currentHead = head else { return nil }
 		head = currentHead.next
 		head?.previous = nil
-		if head == nil { tail = nil }
+
+		if head == nil {
+			tail = nil
+		}
+
 		count -= 1
+
 		return currentHead.value
 	}
 
@@ -128,9 +136,13 @@ public struct LinkedList<T: Equatable> {
 		guard let currentTail = tail else { return nil }
 		tail = currentTail.previous
 		tail?.next = nil
-		if tail == nil { head = nil }
+
+		if tail == nil {
+			head = nil
+		}
 
 		count -= 1
+
 		return currentTail.value
 	}
 
@@ -139,51 +151,18 @@ public struct LinkedList<T: Equatable> {
 	/// - Returns: Cuting value from middle of list after index.
 	public mutating func remove(after index: Int) -> T? {
 		guard let currentNode = node(at: index), let nextNode = currentNode.next else { return nil }
+
 		if nextNode === tail {
 			tail = currentNode
 			currentNode.next = nil
-			} else {
+		} else {
 				currentNode.next = nextNode.next
 				nextNode.next?.previous = currentNode
-			}
+		}
+
 		count -= 1
+
 		return nextNode.value
-	}
-
-	/// Cut value from middle of list where value is same as first of value of list.
-	/// - Parameter value: Value which will be find first of value from list to cutting and return index.
-	/// - Returns: if cutting is succesful returns index of cutting element.
-	public mutating func remove(first value: T) -> Int? {
-		guard let index = find(value: value) else { return nil }
-
-		if index == 0 {
-			_ = pop()
-			return 0
-		} else {
-			_ = remove(after: index - 1)
-			return index
-		}
-	}
-
-	/// Find node from value in parameter.
-	/// - Parameter element: Value to cuttring node.
-	/// - Returns: Index of cutting node.
-	public mutating func find(value: T) -> Int? {
-		guard let head = head else { return nil }
-		guard head.value != value else { return 0 }
-
-		var currentNode = head
-		var counter = 0
-
-		while let next = currentNode.next {
-			counter += 1
-
-			guard next.value != value else { return  counter }
-
-			currentNode = next
-		}
-
-		return nil
 	}
 
 	/// Return value from index.
@@ -192,11 +171,6 @@ public struct LinkedList<T: Equatable> {
 	public func value(at index: Int) -> T? {
 		node(at: index)?.value
 	}
-}
-
-// MARK: Find Node Realization
-
-private extension LinkedList {
 
 	/// Return node of list from index.
 	///
@@ -205,41 +179,25 @@ private extension LinkedList {
 	/// - Returns: Node.
 	func node(at index: Int) -> Node<T>? {
 		guard index >= 0 && index < count else { return nil }
+
 		var currentIndex = 0
 		var currentNode: Node<T>?
+
 		if index <= count / 2 {
 			currentNode = head
 			while currentIndex < index {
 				currentNode = currentNode?.next
 				currentIndex += 1
-				}
-			} else {
-				currentIndex = count - 1
-				currentNode = tail
-				while currentIndex > index {
-					currentNode = currentNode?.previous
-					currentIndex -= 1
-				}
 			}
-		return currentNode
-	}
-}
-
-// MARK: Node CustomStringConvertible Realization
-
-extension LinkedList: CustomStringConvertible {
-	
-	/// LinkedList CustomStringConvertible description realisation
-	public var description: String {
-		var values = [String]()
-		var current = head
-
-		while current != nil {
-			values.append("\(current!)")
-			current = current?.next
+		} else {
+			currentIndex = count - 1
+			currentNode = tail
+			while currentIndex > index {
+				currentNode = currentNode?.previous
+				currentIndex -= 1
+			}
 		}
-
-		return "count = \(count); list = " + values.joined(separator: " <-> ")
-
+		
+		return currentNode
 	}
 }

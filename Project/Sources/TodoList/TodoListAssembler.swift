@@ -26,12 +26,11 @@ final class TodoListAssembler {
 	// MARK: - Public methods
 
 	/// Assemble TodoList scene
-	/// - Parameter handleCreateTask: delegation of creation task
 	/// - Returns: TodoListViewController
-	func assembly(createTaskClosure: EmptyClosure?) -> TodoListViewController {
+	func assembly() -> TodoListViewController {
 		let viewController = TodoListViewController()
 		let sectionForTaskManagerAdapter = SectionForTaskManagerAdapter(taskManager: taskManager)
-		let presenter = TodoListPresenter(viewController: viewController, createTaskClosure: createTaskClosure)
+		let presenter = TodoListPresenter(viewController: viewController)
 		let interactor = TodoListInteractor(presenter: presenter, sectionManager: sectionForTaskManagerAdapter)
 		viewController.interactor = interactor
 

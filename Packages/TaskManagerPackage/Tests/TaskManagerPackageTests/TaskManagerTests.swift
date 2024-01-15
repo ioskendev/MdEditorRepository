@@ -2,7 +2,7 @@
 //  TaskManagerTests.swift
 //
 //
-//  Created by Maxim Alekseev on 06.01.2024.
+//  Created by Alexey Turulin on 1/13/24.
 //
 
 import XCTest
@@ -10,96 +10,75 @@ import XCTest
 
 final class TaskManagerTests: XCTestCase {
 
-	private var stub: ITasksStub!
-	private var sut: TaskManager!
+	private let completedTask = Task(title: "completedTask", completed: true)
+	private let uncompletedTask = Task(title: "uncompletedTask", completed: false)
 
-	override func setUp() {
-		stub = TasksStub()
-		sut = TaskManager(taskList: stub.getTasks())
+	func test_allTasks_addTwoTasks_shouldBeTwoTasks() {
+		let sut = makeSUT()
+
+		let allTasks = sut.allTasks()
+
+		XCTAssertEqual(allTasks.count, 2, "Expected 2 tasks, but found \(allTasks.count).")
+		XCTAssertTrue(allTasks.contains { $0 === completedTask }, "Completed task not found in the task list.")
+		XCTAssertTrue(allTasks.contains { $0 === uncompletedTask }, "Uncompleted task not found in the task list." )
 	}
 
-	override func tearDown() {
-		stub = nil
-		sut = nil
+	func test_completedTasks_add1CompletedAnd1Uncompleted_shouldBe1Task() {
+		let sut = makeSUT()
+
+		let completedTasks = sut.completedTasks()
+
+		XCTAssertEqual(completedTasks.count, 1, "Expected 1 completed task, but found \(completedTasks.count).")
+		XCTAssertTrue(completedTasks.contains { $0 === completedTask }, "Completed task not found in the completed task list.")
+		XCTAssertFalse(completedTasks.contains { $0 === uncompletedTask}, "Uncompleted task found in the completed task list.")
 	}
 
-	func test_getTasks_tasksCountShouldBeEqualStubTaskCount() throws {
+	func test_uncompletedTasks_add1CompletedAnd1Uncompleted_shouldBe1Task() {
+		let sut = makeSUT()
 
-		let stubCount = stub.getTasks().count
-		let sutCount = sut.allTasks().count
+		let uncompletedTasks = sut.uncompletedTasks()
 
-		XCTAssertEqual(
-			sutCount,
-			stubCount,
-			"Количество задач в task manager не соответствует исходному значению"
-		)
+		XCTAssertEqual(uncompletedTasks.count, 1, "Expected 1 uncompleted task, but found \(uncompletedTasks.count).")
+		XCTAssertTrue(uncompletedTasks.contains { $0 === uncompletedTask }, "Uncompleted task not found in the uncompleted task list.")
+		XCTAssertFalse(uncompletedTasks.contains { $0 === completedTask}, "Completed task found in the uncompleted task list.")
 	}
 
-	func test_completedTasks_countCompletedTasksShouldBeEqualCountCompletedTasksInStub() throws {
+	func test_addTask_add1Task_ShouldBe1Task() {
+		let sut = TaskManager()
 
-		let countCompletedTasksInStub = stub.getTasks().filter { $0.completed }.count
-		let countCompletedTasksInSut = sut.completedTasks().count
+		sut.addTask(task: uncompletedTask)
+		let allTasks = sut.allTasks()
 
-		XCTAssertEqual(
-			countCompletedTasksInSut,
-			countCompletedTasksInStub,
-			"Количество завершенных задач в task manager не соответствует исходным параметрам"
-		)
+		XCTAssertTrue(allTasks.contains { $0 === uncompletedTask }, "Task not added successfully.")
 	}
 
-	func test_uncompletedTaskscountUncompletedTasksShouldBeEqualCountUncompletedTasksInStub() throws {
+	func test_addTasks_add2Task_ShouldBe2Task() {
+		let sut = TaskManager()
 
-		let countUncompletedTasksInStub = stub.getTasks().filter { !$0.completed }.count
-		let countUncompletedTasksInSut = sut.uncompletedTasks().count
+		sut.addTasks(tasks: [completedTask, uncompletedTask])
+		let allTasks = sut.allTasks()
 
-		XCTAssertEqual(
-			countUncompletedTasksInSut,
-			countUncompletedTasksInStub,
-			"Количество незавершенных задач в task manager не соответствует исходным параметрам"
-		)
+		XCTAssertEqual(allTasks.count, 2, "Expected 2 tasks, but found \(allTasks.count).")
+		XCTAssertTrue(allTasks.contains { $0 === completedTask }, "Completed task not found in the task list.")
+		XCTAssertTrue(allTasks.contains { $0 === uncompletedTask }, "Uncompleted task not found in the task list.")
 	}
 
-	func test_addTask_withNewTask_sutShouldContainNewTask() throws {
+	func test_removeTask_add2TasksAndRemove1Task_shouldBe1Task() {
+		let sut = makeSUT()
 
-		let task = Task(title: "Foo")
+		sut.removeTask(task: completedTask)
+		let allTasks = sut.allTasks()
 
-		sut.addTask(task: task)
-
-		XCTAssert(
-			sut.allTasks().contains { $0 === task },
-			"В task manager не добавляется новая запись"
-		)
+		XCTAssertEqual(allTasks.count, 1, "Expected 1 task after removal, but found \(allTasks.count).")
+		XCTAssertFalse(allTasks.contains { $0 === completedTask }, "Removed task still found in the task list.")
+		XCTAssertTrue(allTasks.contains { $0 === uncompletedTask }, "Unremoved task not found in the task list.")
 	}
+}
 
-	func test_addTasks_withNewTasks_sutShouldContainNewTasks() throws {
+// MARK: - TestData
 
-		let tasks = [Task(title: "Foo"), Task(title: "Bar")]
-
-		sut.addTasks(tasks: tasks)
-		let sutContainAddedTasks = sut
-			.allTasks()
-			.contains { $0 === tasks[0]}
-		&& sut
-			.allTasks()
-			.contains { $0 === tasks[1] }
-
-		XCTAssert(
-			sutContainAddedTasks,
-			"Task manager не содержит добавленных записей"
-		)
-	}
-
-	func test_removeTask_whithTask_sutShouldNotContainTask() throws {
-
-		let task = Task(title: "Foo")
-
-		sut.addTask(task: task)
-		sut.removeTask(task: task)
-		let sutContainRemovedTask = sut.allTasks().contains { $0 === task }
-
-		XCTAssertFalse(
-			sutContainRemovedTask,
-			"Task manager не должен содержать удаленной задачи"
-		)
+private extension TaskManagerTests {
+	func makeSUT() -> TaskManager {
+		TaskManager(taskList: [completedTask, uncompletedTask])
 	}
 }

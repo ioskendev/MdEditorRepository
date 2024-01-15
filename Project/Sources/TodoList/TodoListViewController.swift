@@ -49,15 +49,6 @@ final class TodoListViewController: UITableViewController {
 	}
 }
 
-// MARK: - Actions
-
-private extension TodoListViewController {
-	@objc
-	func addTapped() {
-		interactor?.createTask()
-	}
-}
-
 // MARK: - UITableView
 
 extension TodoListViewController {
@@ -95,14 +86,9 @@ private extension TodoListViewController {
 		view.backgroundColor = Theme.backgroundColor
 		title = L10n.TodoListScreen.title
 		navigationController?.navigationBar.prefersLargeTitles = true
+		navigationItem.hidesBackButton = true
 
 		self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-
-		navigationItem.rightBarButtonItem = UIBarButtonItem(
-			barButtonSystemItem: .add,
-			target: self,
-			action: #selector(addTapped)
-		)
 	}
 
 	func getTaskForIndex(_ indexPath: IndexPath) -> TodoListModel.ViewModel.Task {
@@ -135,7 +121,7 @@ private extension TodoListViewController {
 		contentConfiguration.secondaryTextProperties.font = UIFont.preferredFont(forTextStyle: .caption1)
 		contentConfiguration.secondaryTextProperties.adjustsFontForContentSizeCategory = true
 		contentConfiguration.textProperties.font = UIFont.preferredFont(forTextStyle: .body)
-		contentConfiguration.secondaryTextProperties.adjustsFontForContentSizeCategory = true
+		contentConfiguration.textProperties.adjustsFontForContentSizeCategory = true
 
 		cell.contentConfiguration = contentConfiguration
 	}

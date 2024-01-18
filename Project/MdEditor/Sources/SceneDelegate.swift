@@ -21,7 +21,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		guard let scene = (scene as? UIWindowScene) else { return }
 		let window = UIWindow(windowScene: scene)
 
-		appCoordinator = AppCoordinator(window: window)
+		let repository = TaskRepositoryStub()
+		let orderedTaskManager = OrderedTaskManager(taskManager: TaskManager())
+		orderedTaskManager.addTasks(tasks: repository.getTasks())
+		
+		appCoordinator = AppCoordinator(window: window, taskManager: orderedTaskManager)
 		appCoordinator.start()
 
 		self.window = window

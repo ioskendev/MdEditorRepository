@@ -16,8 +16,6 @@ protocol ITodoListPresenter {
 	func present(response: TodoListModel.Response)
 }
 
-typealias EmptyClosure = () -> Void
-
 final class TodoListPresenter: ITodoListPresenter {
 
 	// MARK: - Dependencies

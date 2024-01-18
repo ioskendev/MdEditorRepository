@@ -43,6 +43,9 @@ indentation: tabs
 # путь к исходникам для проверки кода
 included:
   - ./Project/Sources
+  - ./Project/Shared
+  - ./Project/MdEditorTests/Sources
+  - ./Project/MdEditorUITests/Sources
 
 # подкаталоги, в которых линтер не будет делать проверку кода
 excluded:

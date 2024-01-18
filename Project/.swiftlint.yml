@@ -35,14 +35,15 @@ opt_in_rules:
   - vertical_parameter_alignment_on_call
   - vertical_whitespace_closing_braces
 
-# trailing whitespace good autocorrection enable
-trailing_whitespace:
-  autocorrect: true
-indentation: tabs
+# отключенные правила
+disabled_rules:
+  - trailing_whitespace
 
 # путь к исходникам для проверки кода
 included:
-  - Sources
+  - MdEditor
+  - MdEditorTests
+  - MdEditorUITests
 
 # подкаталоги, в которых линтер не будет делать проверку кода
 excluded:

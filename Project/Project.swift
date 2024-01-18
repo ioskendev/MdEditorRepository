@@ -10,7 +10,7 @@ enum ProjectSettings {
 	public static var bundleId: String { "\(organizationName).\(projectName)" }
 }
 
-let swiftLintScriptBody = "SwiftLint/swiftlint --fix && SwiftLint/swiftlint"
+let swiftLintScriptBody = "SwiftLint/swiftlint"
 let swiftlintScript = TargetScript.pre(script: swiftLintScriptBody, name: "SwiftLint", basedOnDependencyAnalysis: false)
 
 let infoPlist: [String: Plist.Value] = [

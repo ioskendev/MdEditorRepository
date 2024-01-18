@@ -14,7 +14,7 @@ private var swiftlintScript: TargetScript {
 	let swiftLintScriptString = """
 		export PATH="$PATH:/opt/homebrew/bin"
 		if which swiftlint > /dev/null; then
-			"SwiftLint/swiftlint --fix && SwiftLint/swiftlint"
+			"SwiftLint/swiftlint"
 		else
 		  echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
 		  exit 1

@@ -15,12 +15,13 @@ final class AppCoordinator: BaseCoordinator {
 	private let navigationController: UINavigationController
 	private var window: UIWindow?
 
-	private let taskManager = TaskManager()
+	private let taskManager: ITaskManager
 
 	// MARK: - Initialization
 
-	init(window: UIWindow?) {
+	init(window: UIWindow?, taskManager: ITaskManager) {
 		self.window = window
+		self.taskManager = taskManager
 		self.navigationController = UINavigationController()
 	}
 

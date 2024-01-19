@@ -41,7 +41,7 @@ let target = Target(
 	infoPlist: .extendingDefault(with: infoPlist),
 	sources: ["Sources/**"],
 	resources: ["Resources/**"],
-	scripts: [swiftLintScript],
+	scripts: [scripts],
 	dependencies: [
 		.package(product: "TaskManagerPackage")
 	]

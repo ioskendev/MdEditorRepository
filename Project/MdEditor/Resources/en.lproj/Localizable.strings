@@ -1,0 +1,32 @@
+/* 
+  Localizable.strings
+  MdEditor
+
+  Created by Maxim Alekseev on 13.01.2024.
+
+*/
+
+	// MARK: - Error
+
+	"Error.WrongLoginOrPassword.text" = "Wrong login or password";
+
+	// MARK: -  Common strings
+
+	"Ok.text" = "Ok";
+	"Error.text" = "Error";
+
+	// MARK: - LoginScreen
+
+	"LoginScreen.Title" = "Authorization";
+	"LoginScreen.Textfield.Login.Placeholder" = "Login";
+	"LoginScreen.Textfield.Password.Placeholder" = "Login";
+	"LoginScreen.Button.Login.Title" = "Login";
+
+	// MARK: - TodoListScreen
+
+	"TodoListScreen.Title" = "ToDoList";
+	"TodoListScreen.Section.Completed.text" = "Completed";
+	"TodoListScreen.Section.Uncompleted.text" = "Uncompleted";
+	"TodoListScreen.Section.AllTasks.text" = "All";
+	"TodoListScreen.Section.Important.text" = "Important";
+	"TodoListScreen.Section.Regular.text" = "Regular";

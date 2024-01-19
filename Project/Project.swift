@@ -13,6 +13,10 @@ enum ProjectSettings {
 let swiftLintScriptBody = "SwiftLint/swiftlint --fix && SwiftLint/swiftlint"
 let swiftlintScript = TargetScript.post(script: swiftLintScriptBody, name: "SwiftLint", basedOnDependencyAnalysis: false)
 
+private let scripts: [TargetScript] = [
+	swiftLintScript
+]
+
 let infoPlist: [String: Plist.Value] = [
 	"UIApplicationSceneManifest": [
 		"UIApplicationSupportsMultipleScenes": false,
@@ -61,7 +65,7 @@ let project = Project(
 				"Resources/en.lproj/Localizable.strings",
 				"Resources/ru.lproj/Localizable.strings"
 			],
-			scripts: [swiftlintScript],
+			scripts: scripts,
 			dependencies: [
 				.package(product: "TaskManagerPackage")
 			]

@@ -10,23 +10,12 @@ enum ProjectSettings {
 	public static var bundleId: String { "\(organizationName).\(projectName)" }
 }
 
-private var swiftlintScript: TargetScript {
-	let swiftLintScriptString = """
-		export PATH="$PATH:/opt/homebrew/bin"
-		if which swiftlint > /dev/null; then
-			"SwiftLint/swiftlint"
-		else
-		  echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
-		  exit 1
-		fi
-		"""
+let swiftLintScriptBody = "SwiftLint/swiftlint --fix && SwiftLint/swiftlint"
+let swiftLintScript = TargetScript.post(script: swiftLintScriptBody, name: "SwiftLint", basedOnDependencyAnalysis: false)
 
-	return TargetScript.pre(
-		script: swiftLintScriptString,
-		name: "Run SwiftLint",
-		basedOnDependencyAnalysis: false
-	)
-}
+private let scripts: [TargetScript] = [
+	swiftLintScript
+]
 
 let infoPlist: [String: Plist.Value] = [
 	"UIApplicationSceneManifest": [
@@ -52,7 +41,7 @@ let target = Target(
 	infoPlist: .extendingDefault(with: infoPlist),
 	sources: ["Sources/**"],
 	resources: ["Resources/**"],
-	scripts: [swiftlintScript],
+	scripts: [swiftLintScript],
 	dependencies: [
 		.package(product: "TaskManagerPackage")
 	]

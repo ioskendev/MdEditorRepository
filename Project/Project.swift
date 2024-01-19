@@ -11,7 +11,7 @@ enum ProjectSettings {
 }
 
 let swiftLintScriptBody = "SwiftLint/swiftlint --fix && SwiftLint/swiftlint"
-let swiftlintScript = TargetScript.post(script: swiftLintScriptBody, name: "SwiftLint", basedOnDependencyAnalysis: false)
+let swiftLintScript = TargetScript.post(script: swiftLintScriptBody, name: "SwiftLint", basedOnDependencyAnalysis: false)
 
 private let scripts: [TargetScript] = [
 	swiftLintScript

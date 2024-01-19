@@ -41,15 +41,6 @@ final class LoginPresenter: ILoginPresenter {
 
 extension LoginError: LocalizedError {
 	var errorDescription: String? {
-		switch self {
-		case .wrongPassword:
-			return "Неверный пароль."
-		case .wrongLogin:
-			return "Неверный логин."
-		case .emptyFields:
-			return "Пустые поля логин или пароль."
-		case .errorAuth:
-			return "Неверный пароль и логин."
-		}
+		L10n.Error.WrongLoginOrPassword.text
 	}
 }

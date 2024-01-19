@@ -18,10 +18,7 @@ protocol ILoginWorker {
 }
 
 enum LoginError: Error {
-	case wrongPassword
-	case wrongLogin
-	case errorAuth
-	case emptyFields
+	case wrongLoginOrPassword
 }
 
 final class LoginWorker: ILoginWorker {
@@ -39,17 +36,11 @@ final class LoginWorker: ILoginWorker {
 	///   - password: Пароль пользователя.
 	/// - Returns: Результат прохождения авторизации.
 	func login(login: String, password: String) -> Result<Void, LoginError> {
-		guard !login.isEmpty, !password.isEmpty else { return .failure(.emptyFields) }
-
-		switch (login == validLogin, password == validPassword) {
-		case (true, true):
+	
+		if login == validLogin && password == validPassword {
 			return .success(())
-		case (false, true):
-			return .failure(.wrongLogin)
-		case (true, false):
-			return .failure(.wrongPassword)
-		case (false, false):
-			return .failure(.errorAuth)
+		} else {
+			return .failure(.wrongLoginOrPassword)
 		}
 	}
 }

@@ -6,13 +6,27 @@
   
 */
 
-// MARK: - LoginScreen
+	// MARK: - Error
 
-"LoginScreen.Title" = "Авторизация";
-"LoginScreen.Textfield.Login.Placeholder" = "Логин";
-"LoginScreen.Textfield.Password.Placeholder" = "Пароль";
-"LoginScreen.Button.Login.Title" = "Войти";
+	"Error.WrongLoginOrPassword.text" = "Неверный логин или пароль";
 
-// MARK: - TodoListScreen
+	// MARK: -  Common strings
 
-"TodoListScreen.Title" = "Список задач";
+	"Ok.text" = "Ок";
+	"Error.text" = "Ошибка";
+
+	// MARK: - LoginScreen
+
+	"LoginScreen.Title" = "Авторизация";
+	"LoginScreen.Textfield.Login.Placeholder" = "Логин";
+	"LoginScreen.Textfield.Password.Placeholder" = "Пароль";
+	"LoginScreen.Button.Login.Title" = "Войти";
+
+	// MARK: - TodoListScreen
+
+	"TodoListScreen.Title" = "Список задач";
+	"TodoListScreen.Section.Completed.text" = "Завершённые";
+	"TodoListScreen.Section.Uncompleted.text" = "Незавершённые";
+	"TodoListScreen.Section.AllTasks.text" = "Все";
+	"TodoListScreen.Section.Important.text" = "Важные";
+	"TodoListScreen.Section.Regular.text" = "Обычные";

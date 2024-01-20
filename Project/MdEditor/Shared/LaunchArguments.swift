@@ -6,8 +6,6 @@
 //  Copyright © 2024 repakuku. All rights reserved.
 //
 
-import Foundation
-
 enum LaunchArguments: String {
 	case enableTesting = "-enableTesting"
 }

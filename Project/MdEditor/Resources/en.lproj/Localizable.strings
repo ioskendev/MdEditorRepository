@@ -19,7 +19,7 @@
 
 	"LoginScreen.Title" = "Authorization";
 	"LoginScreen.Textfield.Login.Placeholder" = "Login";
-	"LoginScreen.Textfield.Password.Placeholder" = "Login";
+	"LoginScreen.Textfield.Password.Placeholder" = "Password";
 	"LoginScreen.Button.Login.Title" = "Login";
 
 	// MARK: - TodoListScreen

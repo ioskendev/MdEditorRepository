@@ -17,9 +17,15 @@ final class LoginViewController: UIViewController {
 
 	// MARK: - Private properties
 
-	private lazy var textFieldLogin: UITextField = makeTextField()
-	private lazy var textFieldPass: UITextField = makeTextField()
-	private lazy var buttonLogin: UIButton = makeButtonLogin()
+	private lazy var textFieldLogin: UITextField = makeTextField(
+		accessibilityIndentifier: AccessibilityIdentifier.textFieldLogin.rawValue
+	)
+	private lazy var textFieldPass: UITextField = makeTextField(
+		accessibilityIndentifier: AccessibilityIdentifier.textFieldPass.rawValue
+	)
+	private lazy var buttonLogin: UIButton = makeButtonLogin(
+		accessibilityIndentifier: AccessibilityIdentifier.buttonLogin.rawValue
+	)
 
 	private var constraints = [NSLayoutConstraint]()
 
@@ -62,7 +68,7 @@ private extension LoginViewController {
 
 private extension LoginViewController {
 
-	func makeTextField() -> UITextField {
+	func makeTextField(accessibilityIndentifier: String) -> UITextField {
 		let textField = UITextField()
 
 		textField.backgroundColor = Theme.backgroundColor
@@ -71,6 +77,8 @@ private extension LoginViewController {
 		textField.layer.cornerRadius = Sizes.cornerRadius
 		textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: Sizes.Padding.half, height: textField.frame.height))
 		textField.leftViewMode = .always
+		
+		textField.accessibilityIdentifier = accessibilityIndentifier
 
 		textField.translatesAutoresizingMaskIntoConstraints = false
 
@@ -80,7 +88,7 @@ private extension LoginViewController {
 		return textField
 	}
 
-	func makeButtonLogin() -> UIButton {
+	func makeButtonLogin(accessibilityIndentifier: String) -> UIButton {
 		let button = UIButton()
 
 		button.configuration = .filled()
@@ -88,6 +96,8 @@ private extension LoginViewController {
 		button.configuration?.baseBackgroundColor = Theme.accentColor
 		button.configuration?.title = L10n.LoginScreen.Button.Login.title
 		button.addTarget(self, action: #selector(login), for: .touchUpInside)
+		
+		button.accessibilityIdentifier = accessibilityIndentifier
 
 		button.translatesAutoresizingMaskIntoConstraints = false
 

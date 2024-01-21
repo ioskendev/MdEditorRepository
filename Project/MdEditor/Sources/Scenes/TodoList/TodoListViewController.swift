@@ -58,7 +58,11 @@ extension TodoListViewController {
 	}
 
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		viewModel.tasksBySections[section].title
+		
+		let header = tableView.headerView(forSection: section)
+		header?.accessibilityIdentifier = "Section\(section)"
+		
+		return viewModel.tasksBySections[section].title
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

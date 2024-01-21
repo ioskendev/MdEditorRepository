@@ -60,7 +60,7 @@ extension TodoListViewController {
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		
 		let header = tableView.headerView(forSection: section)
-		header?.accessibilityIdentifier = "Section\(section)"
+		header?.accessibilityIdentifier = AccessibilityIdentifier.section(index: section).description
 		
 		return viewModel.tasksBySections[section].title
 	}
@@ -74,6 +74,12 @@ extension TodoListViewController {
 		let task = getTaskForIndex(indexPath)
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		configureCell(cell, with: task)
+		
+		cell.accessibilityIdentifier = AccessibilityIdentifier.cell(
+			section: indexPath.section,
+			row: indexPath.row
+		).description
+		
 		return cell
 	}
 

@@ -32,7 +32,7 @@ final class TodoListScreenObject: BaseScreenObject {
 	func validHeaderTitles() -> Self {
 
 		let otherElements = tableView.otherElements.allElementsBoundByIndex
-		let sections = otherElements.filter { $0.identifier.contains("Section") }
+		let sections = otherElements.filter { $0.identifier.contains("section") }
 
 		XCTAssertEqual(sections.count, 2, "Expected 2 sections, but found \(sections)")
 		assert(uncompletedTitle, [.exists])

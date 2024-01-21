@@ -12,9 +12,9 @@
 
 		// MARK: - Private properties
 
-		private lazy var textFieldLogin = app.textFields[AccessibilityIdentifier.textFieldLogin.rawValue]
-		private lazy var textFieldPass = app.secureTextFields[AccessibilityIdentifier.textFieldPass.rawValue]
-		private lazy var loginButton = app.buttons[AccessibilityIdentifier.buttonLogin.rawValue]
+		private lazy var textFieldLogin = app.textFields[AccessibilityIdentifier.textFieldLogin.description]
+		private lazy var textFieldPass = app.secureTextFields[AccessibilityIdentifier.textFieldPass.description]
+		private lazy var loginButton = app.buttons[AccessibilityIdentifier.buttonLogin.description]
 
 		private lazy var alert = app.alerts.firstMatch
 		private lazy var alertButton = alert.buttons.firstMatch

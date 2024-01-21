@@ -18,13 +18,13 @@ final class LoginViewController: UIViewController {
 	// MARK: - Private properties
 
 	private lazy var textFieldLogin: UITextField = makeTextField(
-		accessibilityIndentifier: AccessibilityIdentifier.textFieldLogin.rawValue
+		accessibilityIndentifier: AccessibilityIdentifier.textFieldLogin.description
 	)
 	private lazy var textFieldPass: UITextField = makeTextField(
-		accessibilityIndentifier: AccessibilityIdentifier.textFieldPass.rawValue
+		accessibilityIndentifier: AccessibilityIdentifier.textFieldPass.description
 	)
 	private lazy var buttonLogin: UIButton = makeButtonLogin(
-		accessibilityIndentifier: AccessibilityIdentifier.buttonLogin.rawValue
+		accessibilityIndentifier: AccessibilityIdentifier.buttonLogin.description
 	)
 
 	private var constraints = [NSLayoutConstraint]()

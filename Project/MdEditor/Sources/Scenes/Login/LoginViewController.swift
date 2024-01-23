@@ -50,6 +50,11 @@ final class LoginViewController: UIViewController {
 		super.viewDidLayoutSubviews()
 		layout()
 	}
+	
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		textFieldLogin.layer.borderColor = Theme.mainColor.cgColor
+		textFieldPass.layer.borderColor = Theme.mainColor.cgColor
+	}
 }
 
 // MARK: - Actions

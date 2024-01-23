@@ -1,32 +1,45 @@
-/* 
+/*
   Localizable.strings
   MdEditor
 
-  Created by Maxim Alekseev on 13.01.2024.
-  
+  Created by Alexey Turulin on 1/14/24.
+  Copyright © 2024 repakuku. All rights reserved.
 */
 
-	// MARK: - Error
+// MARK: - Error strings
 
-	"Error.WrongLoginOrPassword.text" = "Неверный логин или пароль";
+"LoginError.WrongLoginOrPassword" = "Неверный логин или пароль";
 
-	// MARK: -  Common strings
+// MARK: -  Common strings
 
-	"Ok.text" = "Ок";
-	"Error.text" = "Ошибка";
+"Ok.text" = "Ок";
+"Error.text" = "Ошибка";
 
-	// MARK: - LoginScreen
+// MARK: - Login strings
 
-	"LoginScreen.Title" = "Авторизация";
-	"LoginScreen.Textfield.Login.Placeholder" = "Логин";
-	"LoginScreen.Textfield.Password.Placeholder" = "Пароль";
-	"LoginScreen.Button.Login.Title" = "Войти";
+"Login.title" = "Авторизация";
+"Login.loginPlaceholder" = "Логин";
+"Login.passwordPlaceholder" = "Пароль";
+"Login.buttonLogin" = "Войти";
 
-	// MARK: - TodoListScreen
+// MARK: - TodoList strings
 
-	"TodoListScreen.Title" = "Список задач";
-	"TodoListScreen.Section.Completed.text" = "Завершённые";
-	"TodoListScreen.Section.Uncompleted.text" = "Незавершённые";
-	"TodoListScreen.Section.AllTasks.text" = "Все";
-	"TodoListScreen.Section.Important.text" = "Важные";
-	"TodoListScreen.Section.Regular.text" = "Обычные";
+"TodoList.title" = "Задачи";
+"TodoList.deadline" = "Крайний срок: %@";
+"TodoList.TaskPriority.high" = "!!!";
+"TodoList.TaskPriority.medium" = "!!";
+"TodoList.TaskPriority.low" = "!";
+"TodoList.Section.completed" = "Завершённые";
+"TodoList.Section.uncompleted" = "Незавершённые";
+"TodoList.Section.allTasks" = "Все";
+"TodoList.Section.important" = "Важные";
+"TodoList.Section.regular" = "Обычные";
+"TodoList.dateFormat" = "dd MMMM YYYY";
+
+// MARK: - TaskData string
+
+"Task.doHomework" = "Выполнить домашнее задание";
+"Task.doWorkout" = "Выполнить тренировку";
+"Task.writeNewTasks" = "Написать новые задачи";
+"Task.solve3Algorithms" = "Решить 3 алгоритма";
+"Task.goShopping" = "Пойти за покупками";

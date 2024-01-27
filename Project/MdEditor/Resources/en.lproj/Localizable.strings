@@ -24,7 +24,7 @@
 
 // MARK: - TodoListScreen
 
-"TodoList.title" = "Title";
+"TodoList.title" = "Tasks";
 "TodoList.deadline" = "Deadline: %@";
 "TodoList.TaskPriority.high" = "!!!";
 "TodoList.TaskPriority.medium" = "!!";

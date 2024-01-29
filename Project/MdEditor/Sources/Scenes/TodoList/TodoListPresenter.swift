@@ -56,7 +56,7 @@ final class TodoListPresenter: ITodoListPresenter {
 			let result = TodoListModel.ViewModel.ImportantTask(
 				title: task.title,
 				completed: task.completed,
-				deadLine: "Deadline: \(task.deadLine)",
+				deadLine: L10n.TodoList.deadline(formatDate(task.deadLine)),
 				priority: "\(task.taskPriority)"
 			)
 			return .importantTask(result)
@@ -67,6 +67,25 @@ final class TodoListPresenter: ITodoListPresenter {
 					completed: task.completed
 				)
 			)
+		}
+	}
+	
+	private func formatDate(_ date: Date) -> String {
+		let formatter = DateFormatter()
+		formatter.dateFormat = L10n.TodoList.dateFormat
+		return formatter.string(from: date)
+	}
+}
+
+extension ImportantTask.TaskPriority: CustomStringConvertible {
+	public var description: String {
+		switch self {
+		case .high:
+			return L10n.TodoList.TaskPriority.high
+		case .medium:
+			return L10n.TodoList.TaskPriority.medium
+		case .low:
+			return L10n.TodoList.TaskPriority.low
 		}
 	}
 }

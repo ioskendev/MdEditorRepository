@@ -94,7 +94,7 @@ private extension TodoListViewController {
 
 	private func setupUI() {
 		view.backgroundColor = Theme.backgroundColor
-		title = L10n.TodoListScreen.title
+		title = L10n.TodoList.title
 		navigationController?.navigationBar.prefersLargeTitles = true
 		navigationItem.hidesBackButton = true
 
@@ -127,11 +127,6 @@ private extension TodoListViewController {
 			contentConfiguration.text = task.title
 			cell.accessoryType = task.completed ? .checkmark : .none
 		}
-
-		contentConfiguration.secondaryTextProperties.font = UIFont.preferredFont(forTextStyle: .caption1)
-		contentConfiguration.secondaryTextProperties.adjustsFontForContentSizeCategory = true
-		contentConfiguration.textProperties.font = UIFont.preferredFont(forTextStyle: .body)
-		contentConfiguration.textProperties.adjustsFontForContentSizeCategory = true
 
 		cell.contentConfiguration = contentConfiguration
 	}

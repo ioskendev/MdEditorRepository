@@ -50,6 +50,11 @@ final class LoginViewController: UIViewController {
 		super.viewDidLayoutSubviews()
 		layout()
 	}
+	
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		textFieldLogin.layer.borderColor = Theme.mainColor.cgColor
+		textFieldPass.layer.borderColor = Theme.mainColor.cgColor
+	}
 }
 
 // MARK: - Actions
@@ -94,7 +99,7 @@ private extension LoginViewController {
 		button.configuration = .filled()
 		button.configuration?.cornerStyle = .medium
 		button.configuration?.baseBackgroundColor = Theme.accentColor
-		button.configuration?.title = L10n.LoginScreen.Button.Login.title
+		button.configuration?.title = L10n.Login.buttonLogin
 		button.addTarget(self, action: #selector(login), for: .touchUpInside)
 		
 		button.accessibilityIdentifier = accessibilityIndentifier
@@ -106,12 +111,12 @@ private extension LoginViewController {
 
 	func setupUI() {
 		view.backgroundColor = Theme.backgroundColor
-		title = L10n.LoginScreen.title
+		title = L10n.Login.title
 		navigationController?.navigationBar.prefersLargeTitles = true
 
 		// Кастомная конфигурация наших полей
-		textFieldLogin.placeholder = L10n.LoginScreen.Textfield.Login.placeholder
-		textFieldPass.placeholder = L10n.LoginScreen.Textfield.Password.placeholder
+		textFieldLogin.placeholder = L10n.Login.loginPlaceholder
+		textFieldPass.placeholder = L10n.Login.passwordPlaceholder
 		textFieldPass.isSecureTextEntry = true
 
 		view.addSubview(textFieldLogin)

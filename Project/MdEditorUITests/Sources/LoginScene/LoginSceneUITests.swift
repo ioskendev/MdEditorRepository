@@ -16,7 +16,7 @@
 			let app = XCUIApplication()
 
 			app.launchArguments = [LaunchArguments.enableTesting.rawValue]
-			app.launchArguments = ["-AppleLanguages", "(en)"]
+			app.launchArguments += ["-AppleLanguages", "(en)"]
 		}
 
 		override func setUp() {

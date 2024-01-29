@@ -12,15 +12,26 @@ enum ProjectSettings {
 	public static var bundleId: String { "\(organizationName).\(projectName)" }
 }
 
-let swiftLintScriptBody = "SwiftLint/swiftlint --fix && SwiftLint/swiftlint"
-let swiftLintScript = TargetScript.post(
-	script: swiftLintScriptBody,
-	name: "SwiftLint",
-	basedOnDependencyAnalysis: false
-)
+private var swiftLintTargetScript: TargetScript {
+	let swiftLintScriptString = """
+		export PATH="$PATH:/opt/homebrew/bin"
+		if which swiftlint > /dev/null; then
+		  swiftlint
+		else
+		  echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+		  exit 1
+		fi
+		"""
+
+	return TargetScript.pre(
+		script: swiftLintScriptString,
+		name: "Run SwiftLint",
+		basedOnDependencyAnalysis: false
+	)
+}
 
 private let scripts: [TargetScript] = [
-	swiftLintScript
+	swiftLintTargetScript
 ]
 
 private let infoPlistExtension: [String: Plist.Value] = [

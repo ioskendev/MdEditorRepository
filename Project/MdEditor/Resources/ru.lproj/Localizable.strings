@@ -1,0 +1,45 @@
+/*
+  Localizable.strings
+  MdEditor
+
+  Created by Alexey Turulin on 1/14/24.
+  Copyright © 2024 repakuku. All rights reserved.
+*/
+
+// MARK: - Error strings
+
+"LoginError.WrongLoginOrPassword" = "Неверный логин или пароль";
+
+// MARK: -  Common strings
+
+"Ok.text" = "Ок";
+"Error.text" = "Ошибка";
+
+// MARK: - Login strings
+
+"Login.title" = "Авторизация";
+"Login.loginPlaceholder" = "Логин";
+"Login.passwordPlaceholder" = "Пароль";
+"Login.buttonLogin" = "Войти";
+
+// MARK: - TodoList strings
+
+"TodoList.title" = "Задачи";
+"TodoList.deadline" = "Крайний срок: %@";
+"TodoList.TaskPriority.high" = "!!!";
+"TodoList.TaskPriority.medium" = "!!";
+"TodoList.TaskPriority.low" = "!";
+"TodoList.Section.completed" = "Завершённые";
+"TodoList.Section.uncompleted" = "Незавершённые";
+"TodoList.Section.allTasks" = "Все";
+"TodoList.Section.important" = "Важные";
+"TodoList.Section.regular" = "Обычные";
+"TodoList.dateFormat" = "dd MMMM YYYY";
+
+// MARK: - TaskData string
+
+"Task.doHomework" = "Выполнить домашнее задание";
+"Task.doWorkout" = "Выполнить тренировку";
+"Task.writeNewTasks" = "Написать новые задачи";
+"Task.solve3Algorithms" = "Решить 3 алгоритма";
+"Task.goShopping" = "Пойти за покупками";

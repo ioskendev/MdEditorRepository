@@ -1,0 +1,45 @@
+/*
+  Localizable.strings
+  MdEditor
+
+  Created by Alexey Turulin on 1/14/24.
+  Copyright © 2024 repakuku. All rights reserved.
+*/
+
+// MARK: - Error strings
+
+"LoginError.WrongLoginOrPassword" = "Wrong login or password";
+
+// MARK: -  Common strings
+
+"Ok.text" = "Ok";
+"Error.text" = "Error";
+
+// MARK: - LoginScreen
+
+"Login.title" = "Authorization";
+"Login.loginPlaceholder" = "Login";
+"Login.passwordPlaceholder" = "Password";
+"Login.buttonLogin" = "Login";
+
+// MARK: - TodoListScreen
+
+"TodoList.title" = "Tasks";
+"TodoList.deadline" = "Deadline: %@";
+"TodoList.TaskPriority.high" = "!!!";
+"TodoList.TaskPriority.medium" = "!!";
+"TodoList.TaskPriority.low" = "!";
+"TodoList.Section.completed" = "Completed";
+"TodoList.Section.uncompleted" = "Uncompleted";
+"TodoList.Section.allTasks" = "All";
+"TodoList.Section.important" = "Important";
+"TodoList.Section.regular" = "Regular";
+"TodoList.dateFormat" = "yyyy-MM-dd";
+
+// MARK: - TaskData string
+
+"Task.doHomework" = "Do homework";
+"Task.doWorkout" = "Do workout";
+"Task.writeNewTasks" = "Write new tasks";
+"Task.solve3Algorithms" = "Solve 3 algorithms";
+"Task.goShopping" = "Go shopping";

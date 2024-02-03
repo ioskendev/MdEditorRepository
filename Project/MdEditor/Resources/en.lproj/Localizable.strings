@@ -47,3 +47,6 @@
 // MARK: - Start screen
 
 "Start.title" = "MdEditor";
+"Start.buttonNewFile" = "New";
+"Start.buttonOpenFile" = "Open";
+"Start.buttonAbout" = "About";

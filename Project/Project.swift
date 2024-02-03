@@ -136,5 +136,6 @@ let project = Project(
 			testAction: .targets(["\(ProjectSettings.projectName)UITests"]),
 			runAction: .runAction(executable: "\(ProjectSettings.projectName)UITests")
 		)
-	]
+	],
+	resourceSynthesizers: [.assets(), .strings()]
 )

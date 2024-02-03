@@ -23,13 +23,18 @@ final class StartViewController: UIViewController {
 	}
 
 	// MARK: - Private properties
-	
-	// UI
 
+	// UI
 	private lazy var collectionView = makeCollectionView()
-	private lazy var buttonNewDocument = makeButtonNewDocument(image: "doc", title: "New")
-	private lazy var buttonOpenDocument = makeButtonNewDocument(image: "folder", title: "Open")
-	private lazy var buttonAbout = makeButtonNewDocument(image: "info.bubble", title: "About")
+	private lazy var buttonNewDocument = makeButtonNewDocument(
+		image: Asset.Icons.doc.image, title: L10n.Start.buttonNewFile
+	)
+	private lazy var buttonOpenDocument = makeButtonNewDocument(
+		image: Asset.Icons.folder.image, title: L10n.Start.buttonOpenFile
+	)
+	private lazy var buttonAbout = makeButtonNewDocument(
+		image: Asset.Icons.infoBubble.image, title: L10n.Start.buttonAbout
+	)
 
 	// Other
 	private var viewModel = StartModel.ViewModel(recentFiles: [])
@@ -75,7 +80,7 @@ extension StartViewController: IStartViewController {
 private extension StartViewController {
 	func setup() {
 		view.backgroundColor = Theme.backgroundColor
-		title = "MdEditor"
+		title = L10n.Start.title
 		navigationController?.navigationBar.prefersLargeTitles = true
 	}
 
@@ -103,13 +108,13 @@ private extension StartViewController {
 		return collectionView
 	}
 
-	func makeButtonNewDocument(image: String, title: String) -> UIButton {
+	func makeButtonNewDocument(image: UIImage, title: String) -> UIButton {
 		let button = UIButton(type: .system)
 		
 		button.configuration = .plain()
 		button.configuration?.baseForegroundColor = Theme.accentColor
 		button.configuration?.title = title
-		button.configuration?.image = UIImage(named: image)?.withTintColor(Theme.accentColor)
+		button.configuration?.image = image.withTintColor(Theme.accentColor)
 		button.configuration?.baseForegroundColor = Theme.accentColor
 		button.configuration?.imagePadding = Sizes.Padding.half
 		button.contentHorizontalAlignment = .leading

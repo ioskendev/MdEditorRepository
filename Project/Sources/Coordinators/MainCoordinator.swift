@@ -8,7 +8,7 @@
 import UIKit
 import TaskManagerPackage
 
-final class TodoListCoordinator: ICoordinator {
+final class MainCoordinator: ICoordinator {
 
 	// MARK: - Dependencies
 

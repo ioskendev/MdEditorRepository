@@ -46,7 +46,8 @@ private let infoPlistExtension: [String: Plist.Value] = [
 			]
 		]
 	],
-	"UILaunchStoryboardName": "LaunchScreen"
+	"UILaunchStoryboardName": "LaunchScreen",
+	"UISupportedInterfaceOrientations": ["UIInterfaceOrientationPortrait"]
 ]
 
 let target = Target(
@@ -56,13 +57,18 @@ let target = Target(
 	bundleId: ProjectSettings.bundleId,
 	deploymentTargets: .iOS(ProjectSettings.targetVersion),
 	infoPlist: .extendingDefault(with: infoPlistExtension),
-	sources: ["\(ProjectSettings.projectName)/Sources/**", "\(ProjectSettings.projectName)/Shared/**"],
-	resources: ["\(ProjectSettings.projectName)/Resources/**"],
+	sources: ["Sources/**", "Shared/**"],
+	resources: ["Resources/**"],
 	scripts: scripts,
 	dependencies: [
 		.package(product: "TaskManagerPackage"),
 		.package(product: "DataStructuresPackage")
-	]
+	],
+	settings: .settings(
+		base: [
+			"TARGETED_DEVICE_FAMILY": "1"
+		]
+	)
 )
 
 let testTarget = Target(
@@ -72,11 +78,17 @@ let testTarget = Target(
 	bundleId: "\(ProjectSettings.bundleId)Tests",
 	deploymentTargets: .iOS(ProjectSettings.targetVersion),
 	infoPlist: .none,
-	sources: ["\(ProjectSettings.projectName)Tests/Sources/**", "\(ProjectSettings.projectName)/Shared/**"],
+	sources: ["Tests/**", "Shared/**"],
+	scripts: scripts,
 	dependencies: [
 		.target(name: "\(ProjectSettings.projectName)")
 	],
-	settings: .settings(base: ["GENERATE_INFOPLIST_FILE": "YES"])
+	settings: .settings(
+		base: [
+			"GENERATE_INFOPLIST_FILE": "YES",
+			"TARGETED_DEVICE_FAMILY": "1"
+		]
+	)
 )
 
 let uiTestTarget = Target(
@@ -86,11 +98,18 @@ let uiTestTarget = Target(
 	bundleId: "\(ProjectSettings.bundleId)UITests",
 	deploymentTargets: .iOS(ProjectSettings.targetVersion),
 	infoPlist: .none,
-	sources: ["\(ProjectSettings.projectName)UITests/Sources/**", "\(ProjectSettings.projectName)/Shared/**"],
+	sources: ["UITests/**", "Shared/**"],
+	resources: ["Resources/**"],
+	scripts: scripts,
 	dependencies: [
 		.target(name: "\(ProjectSettings.projectName)")
 	],
-	settings: .settings(base: ["GENERATE_INFOPLIST_FILE": "YES"])
+	settings: .settings(
+		base: [
+			"GENERATE_INFOPLIST_FILE": "YES",
+			"TARGETED_DEVICE_FAMILY": "1"
+		]
+	)
 )
 
 let project = Project(

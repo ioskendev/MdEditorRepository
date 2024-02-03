@@ -24,7 +24,7 @@ final class TaskRepositoryStub: ITaskRepository {
 	func getTasks() -> [Task] {
 		[
 			ImportantTask(title: L10n.Task.doHomework, taskPriority: .high),
-			RegularTask(title: L10n.Task.doHomework, completed: true),
+			RegularTask(title: L10n.Task.doWorkout, completed: true),
 			ImportantTask(title: L10n.Task.writeNewTasks, taskPriority: .low),
 			RegularTask(title: L10n.Task.solve3Algorithms),
 			ImportantTask(title: L10n.Task.goShopping, taskPriority: .medium)

@@ -28,6 +28,9 @@ final class AppCoordinator: BaseCoordinator {
 	// MARK: - Internal methods
 
 	override func start() {
+		window?.rootViewController = navigationController
+		window?.makeKeyAndVisible()
+
 		runLoginFlow()
 	}
 
@@ -41,13 +44,10 @@ final class AppCoordinator: BaseCoordinator {
 		}
 
 		coordinator.start()
-
-		window?.rootViewController = navigationController
-		window?.makeKeyAndVisible()
 	}
 
 	func runMainFlow() {
-		let coordinator: ICoordinator = TodoListCoordinator(
+		let coordinator: ICoordinator = MainCoordinator(
 			navigationController: navigationController,
 			taskManager: taskManager
 		)
@@ -55,5 +55,18 @@ final class AppCoordinator: BaseCoordinator {
 		addDependency(coordinator)
 
 		coordinator.start()
+	}
+}
+
+extension AppCoordinator: ITestCoordinator {
+	func testStart(parameters: [LaunchArguments: Bool]) {
+		window?.rootViewController = navigationController
+		window?.makeKeyAndVisible()
+
+		if let skipLogin = parameters[LaunchArguments.skipLogin], skipLogin {
+			runMainFlow()
+		} else {
+			runLoginFlow()
+		}
 	}
 }

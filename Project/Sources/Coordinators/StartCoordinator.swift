@@ -38,7 +38,7 @@ final class StartCoordinator: IStartCoordinator {
 
 	func showStartScene() {
 		let viewController = StartAssembler().assembly { [weak self] in
-			guard let self else { return }
+			guard let self = self else { return }
 			finishFlow?()
 		}
 		navigationController.setViewControllers([viewController], animated: true)

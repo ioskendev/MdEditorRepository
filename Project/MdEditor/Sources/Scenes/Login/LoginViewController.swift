@@ -119,6 +119,10 @@ private extension LoginViewController {
 		textFieldPass.placeholder = L10n.Login.passwordPlaceholder
 		textFieldPass.isSecureTextEntry = true
 
+		// TODO:- Remove after developing
+		textFieldLogin.text = "Admin"
+		textFieldPass.text = "pa$$32!"
+
 		view.addSubview(textFieldLogin)
 		view.addSubview(textFieldPass)
 		view.addSubview(buttonLogin)

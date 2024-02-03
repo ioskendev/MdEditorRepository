@@ -43,3 +43,7 @@
 "Task.writeNewTasks" = "Write new tasks";
 "Task.solve3Algorithms" = "Solve 3 algorithms";
 "Task.goShopping" = "Go shopping";
+
+// MARK: - Start screen
+
+"Start.title" = "MdEditor";

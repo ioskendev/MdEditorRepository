@@ -41,9 +41,11 @@ disabled_rules:
 
 # путь к исходникам для проверки кода
 included:
-  - MdEditor
-  - MdEditorTests
-  - MdEditorUITests
+  - Resources
+  - Shared
+  - Sources
+  - Tests
+  - UITests
 
 # подкаталоги, в которых линтер не будет делать проверку кода
 excluded:

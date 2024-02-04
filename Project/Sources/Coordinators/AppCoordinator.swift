@@ -39,8 +39,9 @@ final class AppCoordinator: BaseCoordinator {
 		addDependency(coordinator)
 
 		coordinator.finishFlow = { [weak self, weak coordinator] in
-			self?.runMainFlow()
-			coordinator.map { self?.removeDependency($0) }
+			guard let self else { return }
+			runStartFlow()
+			coordinator.map { self.removeDependency($0) }
 		}
 
 		coordinator.start()
@@ -54,6 +55,12 @@ final class AppCoordinator: BaseCoordinator {
 
 		addDependency(coordinator)
 
+		coordinator.start()
+	}
+
+	func runStartFlow() {
+		let coordinator = StartCoordinator(navigationController: navigationController)
+		addDependency(coordinator)
 		coordinator.start()
 	}
 }

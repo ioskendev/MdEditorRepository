@@ -1,12 +1,12 @@
 //
-	//  BaseScreenObject.swift
-	//  MdEditorUITests
-	//
-	//  Created by Alexey Turulin on 1/18/24.
-	//  Copyright © 2024 repakuku. All rights reserved.
-	//
+//  BaseScreenObject.swift
+//  MdEditorUITests
+//
+//  Created by Alexey Turulin on 1/18/24.
+//  Copyright © 2024 repakuku. All rights reserved.
+//
 
-	import XCTest
+import XCTest
 
 class BaseScreenObject {
 

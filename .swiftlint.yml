@@ -35,7 +35,7 @@ opt_in_rules:
   - vertical_parameter_alignment_on_call
   - vertical_whitespace_closing_braces
 
-# trailing whitespace good autocorrection enable
+# trailing whitespace autocorrection enable
 trailing_whitespace:
   autocorrect: true
 indentation: tabs

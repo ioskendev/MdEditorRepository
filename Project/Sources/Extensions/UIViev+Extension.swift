@@ -20,11 +20,11 @@ extension UIView {
 			}
 		}
 	}
-	
+
 	func removeSubview(view: UIView) throws {
 		view.removeFromSuperview()
 	}
-	
+
 	func removeSubviewRecycle(view: UIView) throws {
 		let subviews = view.subviews
 		for subview in subviews {

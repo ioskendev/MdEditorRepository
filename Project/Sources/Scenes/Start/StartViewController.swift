@@ -110,7 +110,7 @@ private extension StartViewController {
 
 	func makeButtonNewDocument(image: UIImage, title: String) -> UIButton {
 		let button = UIButton(type: .system)
-		
+
 		button.configuration = .plain()
 		button.configuration?.baseForegroundColor = Theme.accentColor
 		button.configuration?.title = title
@@ -126,7 +126,7 @@ private extension StartViewController {
 // MARK: - Layout
 
 private extension StartViewController {
-	
+
 	func layout() {
 		view.addSubview(collectionView)
 		view.addSubview(buttonNewDocument)
@@ -148,7 +148,7 @@ private extension StartViewController {
 				equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Sizes.Padding.normal
 			),
 			buttonNewDocument.heightAnchor.constraint(equalToConstant: Sizes.M.height),
-			
+
 			buttonOpenDocument.topAnchor.constraint(equalTo: buttonNewDocument.bottomAnchor, constant: Sizes.Padding.half),
 			buttonOpenDocument.leadingAnchor.constraint(
 				equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Sizes.Padding.normal

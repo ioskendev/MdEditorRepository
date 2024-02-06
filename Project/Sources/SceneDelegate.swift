@@ -30,15 +30,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 		appCoordinator = AppCoordinator(window: window, taskManager: taskManager)
 
-#if DEBUG
+		#if DEBUG
 		let parameters = LaunchArguments.parameters()
 		if let enableTesting = parameters[LaunchArguments.enableTesting], enableTesting {
 			UIView.setAnimationsEnabled(false)
 		}
 		appCoordinator.testStart(parameters: parameters)
-#else
+		#else
 		appCoordinator.start()
-#endif
+		#endif
 		self.window = window
 	}
 }

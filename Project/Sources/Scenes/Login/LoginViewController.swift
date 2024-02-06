@@ -50,7 +50,7 @@ final class LoginViewController: UIViewController {
 		super.viewDidLayoutSubviews()
 		layout()
 	}
-	
+
 	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 		textFieldLogin.layer.borderColor = Theme.mainColor.cgColor
 		textFieldPass.layer.borderColor = Theme.mainColor.cgColor
@@ -82,7 +82,7 @@ private extension LoginViewController {
 		textField.layer.cornerRadius = Sizes.cornerRadius
 		textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: Sizes.Padding.half, height: textField.frame.height))
 		textField.leftViewMode = .always
-		
+
 		textField.accessibilityIdentifier = accessibilityIndentifier
 
 		textField.translatesAutoresizingMaskIntoConstraints = false
@@ -101,7 +101,7 @@ private extension LoginViewController {
 		button.configuration?.baseBackgroundColor = Theme.accentColor
 		button.configuration?.title = L10n.Login.buttonLogin
 		button.addTarget(self, action: #selector(login), for: .touchUpInside)
-		
+
 		button.accessibilityIdentifier = accessibilityIndentifier
 
 		button.translatesAutoresizingMaskIntoConstraints = false

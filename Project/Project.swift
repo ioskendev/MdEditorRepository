@@ -58,7 +58,7 @@ let target = Target(
 	deploymentTargets: .iOS(ProjectSettings.targetVersion),
 	infoPlist: .extendingDefault(with: infoPlistExtension),
 	sources: ["Sources/**", "Shared/**"],
-	resources: ["Resources/**"],
+	resources: ["Resources/**", "Resources/Book_of_knowledge/**"],
 	scripts: scripts,
 	dependencies: [
 		.package(product: "TaskManagerPackage"),

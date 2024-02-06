@@ -40,7 +40,7 @@ final class AppCoordinator: BaseCoordinator {
 
 		coordinator.finishFlow = { [weak self, weak coordinator] in
 			guard let self = self else { return }
-			runStartFlow()
+			self.runStartFlow()
 			coordinator.map { self.removeDependency($0) }
 		}
 

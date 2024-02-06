@@ -69,7 +69,7 @@ final class TodoListPresenter: ITodoListPresenter {
 			)
 		}
 	}
-	
+
 	private func formatDate(_ date: Date) -> String {
 		let formatter = DateFormatter()
 		formatter.dateFormat = L10n.TodoList.dateFormat

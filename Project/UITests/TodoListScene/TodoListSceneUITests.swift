@@ -9,25 +9,25 @@
 import XCTest
 
 final class TodoListSceneUITests: XCTestCase {
-	
+
 	private let app = XCUIApplication()
 	private lazy var screen = TodoListScreenObject(app: app)
-	
+
 	override func setUp() {
 		super.setUp()
 		continueAfterFailure = false
 		app.launchArguments = [LaunchArguments.skipLogin.rawValue]
-		
+
 		app.launch()
 	}
-	
+
 	func test_sectionTitles_mustBeValidTitle() {
 		screen
 			.isTodoListScreen()
 			.checkSectionTitle(index: 0, title: L10n.TodoList.Section.uncompleted)
 			.checkSectionTitle(index: 1, title: L10n.TodoList.Section.completed)
 	}
-	
+
 	func test_taskCountAndTitles_mustBeValidCountAndTitles() {
 		screen
 			.isTodoListScreen()
@@ -39,7 +39,7 @@ final class TodoListSceneUITests: XCTestCase {
 			.checkCellTitle(section: 0, row: 3, title: L10n.Task.solve3Algorithms)
 			.checkCellTitle(section: 1, row: 0, title: L10n.Task.doWorkout)
 	}
-	
+
 	func test_doTaskCompleted_mustBeCompleted() {
 		screen
 			.isTodoListScreen()
@@ -52,7 +52,7 @@ final class TodoListSceneUITests: XCTestCase {
 			.checkCellTitle(section: 1, row: 0, title: L10n.Task.doHomework)
 			.checkCellTitle(section: 1, row: 1, title: L10n.Task.doWorkout)
 	}
-	
+
 	func test_undoTaskCompleted_mustBeUncompleted() {
 		screen
 			.isTodoListScreen()

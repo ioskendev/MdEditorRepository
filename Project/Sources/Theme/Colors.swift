@@ -72,7 +72,7 @@ enum Theme {
 
 	static let white = Colors.white
 	static let black = Colors.black
-	
+
 	static let green = Colors.green
 	static let orange = Colors.orange
 }

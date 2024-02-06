@@ -62,6 +62,7 @@ enum Colors {
 	static let black = UIColor.color(light: UIColor(hex: 0x000000), dark: UIColor(hex: 0xFFFFFF))
 	static let dark = UIColor.color(light: FlatColor.Blue.BlueWhale, dark: FlatColor.Gray.Iron)
 	static let light = UIColor.color(light: FlatColor.Gray.Iron, dark: FlatColor.Blue.BlueWhale)
+	static let orange = UIColor.color(light: UIColor(hex: 0xFDA353), dark: UIColor(hex: 0xFDA353))
 }
 
 enum Theme {
@@ -71,4 +72,6 @@ enum Theme {
 
 	static let white = Colors.white
 	static let black = Colors.black
+	static let green = Colors.green
+	static let orange = Colors.orange
 }

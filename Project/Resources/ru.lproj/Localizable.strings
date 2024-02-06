@@ -43,3 +43,10 @@
 "Task.writeNewTasks" = "Написать новые задачи";
 "Task.solve3Algorithms" = "Решить 3 алгоритма";
 "Task.goShopping" = "Пойти за покупками";
+
+// MARK: - Start screen
+
+"Start.title" = "MdEditor";
+"Start.buttonNewFile" = "Новый";
+"Start.buttonOpenFile" = "Открыть";
+"Start.buttonAbout" = "О приложении";

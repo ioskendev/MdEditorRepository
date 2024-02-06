@@ -15,7 +15,7 @@ protocol ITodoListViewController: AnyObject {
 	func render(viewModel: TodoListModel.ViewModel)
 }
 
-/// Главный экран приложения.
+/// Todolist screen logic
 final class TodoListViewController: UITableViewController {
 
 	// MARK: - Dependencies

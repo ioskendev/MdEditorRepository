@@ -4,11 +4,14 @@ on:
   pull_request:
     branches: [ "develop" ]
 
-jobs: 
-  build:
-    name: Test DataStructuresPackage
-    runs-on: macos-latest
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: macos-13
     steps:
+      - name: List Xcode installations
+        run: sudo ls -1 /Applications | grep "Xcode"
+
       - name: Checkout repository
         uses: actions/checkout@v4
 

@@ -36,7 +36,7 @@ final class LoginWorker: ILoginWorker {
 	///   - password: Пароль пользователя.
 	/// - Returns: Результат прохождения авторизации.
 	func login(login: String, password: String) -> Result<Void, LoginError> {
-	
+
 		if login == validLogin && password == validPassword {
 			return .success(())
 		} else {

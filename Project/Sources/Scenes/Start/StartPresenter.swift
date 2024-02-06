@@ -9,7 +9,7 @@
 import Foundation
 
 /// Start screen Presentation logic protocol
-protocol IStartPresenter { 
+protocol IStartPresenter {
 	/// Perform request for present recent files list
 	func presentRecentFilesList()
 }

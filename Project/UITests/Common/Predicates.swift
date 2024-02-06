@@ -32,7 +32,7 @@ enum Predicate {
 
 	var format: String {
 		switch self {
-			
+
 		case .contains(let value):
 			return "label == \"\(value.replacingOccurrences(of: "\"", with: "\\\""))\""
 		case .doesNotContain(let value):

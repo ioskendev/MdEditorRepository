@@ -17,7 +17,7 @@ final class RecentFileCollectionViewCell: UICollectionViewCell {
 	}
 
 	// MARK: - Lifecycle
-	
+
 	override func prepareForReuse() {
 		super.prepareForReuse()
 		removeAllSubviews()
@@ -59,7 +59,7 @@ private extension RecentFileCollectionViewCell {
 		)
 		viewFileThumbPreview.layer.cornerRadius = Sizes.cornerRadius
 		switch contentType {
-			
+
 		case .usual:
 			viewFileThumbPreview.backgroundColor = Theme.green
 		case .richText:

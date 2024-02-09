@@ -14,14 +14,14 @@ final class StartAssembler {
 	/// Assembly start scene
 	/// - Parameter onFinishPresent: escaping closure () -> Void launch when start screen end presenting
 	/// - Returns: StartViewController
-	func assembly(onFinishPresent: @escaping () -> Void) -> StartViewController {
+	func assembly(onAboutPresent: @escaping () -> Void, onFinishPresent: @escaping () -> Void) -> StartViewController {
 		let viewController = StartViewController()
 		let presenter = StartPresenter(
 			viewController: viewController,
 			fileManager: FileManagerStub(),
 			onFinishPresent: onFinishPresent
 		)
-		let interactor = StartInteractor(presenter: presenter)
+		let interactor = StartInteractor(presenter: presenter, onAboutPresent: onAboutPresent)
 		viewController.interactor = interactor
 		return viewController
 	}

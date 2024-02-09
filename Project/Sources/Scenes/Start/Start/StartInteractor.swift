@@ -11,6 +11,7 @@ import Foundation
 protocol IStartInteractor {
 	/// Make request to fetch list of recent files
 	func fetchRecentFiles()
+	func aboutAction()
 }
 
 final class StartInteractor: IStartInteractor {
@@ -18,11 +19,13 @@ final class StartInteractor: IStartInteractor {
 	// MARK: - Dependencies
 
 	private var presenter: IStartPresenter
+	private var onAboutPresent: () -> Void
 
 	// MARK: - Initialization
 
-	init(presenter: IStartPresenter) {
+	init(presenter: IStartPresenter, onAboutPresent: @escaping () -> Void) {
 		self.presenter = presenter
+		self.onAboutPresent = onAboutPresent
 	}
 
 	// MARK: - Public methods
@@ -30,5 +33,9 @@ final class StartInteractor: IStartInteractor {
 	/// Make request to fetch list of recent files
 	func fetchRecentFiles() {
 		presenter.presentRecentFilesList()
+	}
+
+	func aboutAction() {
+		onAboutPresent()
 	}
 }

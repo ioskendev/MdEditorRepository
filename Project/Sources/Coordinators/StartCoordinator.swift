@@ -37,10 +37,21 @@ final class StartCoordinator: IStartCoordinator {
 	}
 
 	func showStartScene() {
+
 		let viewController = StartAssembler().assembly { [weak self] in
 			guard let self = self else { return }
-			self.finishFlow?()
+			self.showAboutScene()
+		} onFinishPresent: { [weak self] in
+				guard let self = self else { return }
+				self.finishFlow?()
 		}
+
+		navigationController.setViewControllers([viewController], animated: true)
+	}
+
+	func showAboutScene() {
+		let viewController = AboutAssembler().assembly()
+
 		navigationController.setViewControllers([viewController], animated: true)
 	}
 }

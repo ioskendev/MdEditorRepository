@@ -32,9 +32,7 @@ final class StartViewController: UIViewController {
 	private lazy var buttonOpenDocument = makeButtonNewDocument(
 		image: Asset.Icons.folder.image, title: L10n.Start.buttonOpenFile
 	)
-	private lazy var buttonAbout = makeButtonNewDocument(
-		image: Asset.Icons.infoBubble.image, title: L10n.Start.buttonAbout
-	)
+	private lazy var buttonAbout = makeButtonAbout()
 
 	// Other
 	private var viewModel = StartModel.ViewModel(recentFiles: [])
@@ -72,6 +70,15 @@ extension StartViewController: IStartViewController {
 	func render(viewModel: StartModel.ViewModel) {
 		self.viewModel = viewModel
 		collectionView.reloadData()
+	}
+}
+
+// MARK: - Actions
+
+private extension StartViewController {
+	@objc
+	func aboutAction() {
+		interactor?.aboutAction()
 	}
 }
 
@@ -119,6 +126,15 @@ private extension StartViewController {
 		button.configuration?.imagePadding = Sizes.Padding.half
 		button.contentHorizontalAlignment = .leading
 		button.translatesAutoresizingMaskIntoConstraints = false
+		return button
+	}
+
+	func makeButtonAbout() -> UIButton {
+		let button = makeButtonNewDocument(
+			image: Asset.Icons.infoBubble.image, title: L10n.Start.buttonAbout
+		)
+		button.addTarget(self, action: #selector(aboutAction), for: .touchUpInside)
+
 		return button
 	}
 }

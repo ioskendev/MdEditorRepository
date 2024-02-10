@@ -30,7 +30,7 @@ final class AboutInteractor: IAboutInteractor {
 	/// - Parameter request: LoginModel.Request
 	func show() { // Users/volegov/Developer/Next_aboutWindow/MdEditorRepository/Project/Resources/Book_of_knowledge
 
-		if let filepath = Bundle.main.path(forResource: "README", ofType: Types.md) {
+		if let filepath = Bundle.main.path(forResource: "Book_of_knowledge/README", ofType: Types.md) {
 			do {
 				let contents = try String(contentsOfFile: filepath)
 				presenter?.present(responce: AboutModel.Response(aboutText: contents))

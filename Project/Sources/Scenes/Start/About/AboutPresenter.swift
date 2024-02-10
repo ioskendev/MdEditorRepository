@@ -33,7 +33,6 @@ final class AboutPresenter: IAboutPresenter {
 	/// - Parameter response: About model data to present.
 	func present(responce: AboutModel.Response) {
 		let viewModel = AboutModel.ViewModel(aboutText: responce.aboutText)
-		print(responce.aboutText)
 		viewController?.render(viewModel: viewModel)
 	}
 }

@@ -29,16 +29,20 @@ final class AboutInteractor: IAboutInteractor {
 	/// login func realisation with request model
 	/// - Parameter request: LoginModel.Request
 	func show() { // Users/volegov/Developer/Next_aboutWindow/MdEditorRepository/Project/Resources/Book_of_knowledge
-		if let filePath = Bundle.main.path(forResource: "README", ofType: "md", inDirectory: "Resources/Book_of_knowledge/") {
-				do {
-					let content = try String(contentsOfFile: filePath, encoding: .utf8)
-					let response = AboutModel.Response(aboutText: content)
-					presenter?.present(responce: AboutModel.Response(aboutText: response.aboutText))
-				} catch {
-					print("Ошибка при чтении файла: \(error)")
-				}
-			} else {
-				print("Файл README.md не найден")
+
+		if let filepath = Bundle.main.path(forResource: "README", ofType: Types.md) {
+			do {
+				let contents = try String(contentsOfFile: filepath)
+				presenter?.present(responce: AboutModel.Response(aboutText: contents))
+			} catch {
+				print("contents could not be loaded \(error)")
 			}
+		} else {
+			print("file not found")
+		}
+	}
+
+	enum Types {
+		static var md = "md"
 	}
 }

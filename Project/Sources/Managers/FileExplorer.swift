@@ -6,6 +6,8 @@
 //  Copyright © 2024 ioskendev. All rights reserved.
 //
 
+// swiftlint:disable force_cast
+// swiftlint:disable force_unwrapping
 import Foundation
 
 class File {
@@ -18,13 +20,11 @@ class File {
 	var creationDate = Date()
 	var modificationDate = Date()
 	var fullname: String {
-		get {
-			return "\(path)/\(name)"
-		}
+		return "\(path)/\(name)"
 	}
 
 	func getFormattedSize(with size: UInt64) -> String {
-		var convertedValue: Double = Double(size)
+		var convertedValue = Double(size)
 		var multiplyFactor = 0
 		let tokens = ["bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
 		while convertedValue > 1024 {
@@ -56,7 +56,7 @@ class File {
 		do {
 			text = try String(contentsOfFile: fullPath, encoding: String.Encoding.utf8)
 		} catch {
-			print("Failed to read text from \(name)")
+			print("Failed to read text from \(name)") // swiftlint:disable:this print_using
 		}
 
 		return text
@@ -73,7 +73,6 @@ class FileExplorer {
 
 		var onlyFiles = [File]()
 		var onlyFolders = [File]()
-
 
 		do {
 			let items = try fileManager.contentsOfDirectory(atPath: fullPath)
@@ -95,10 +94,10 @@ class FileExplorer {
 	}
 
 	func getFile(withNAme name: String, atPath: String) -> File? {
-		let fm = FileManager.default
+		let fileManager = FileManager.default
 		let fullPath = Bundle.main.resourcePath! + "/\(atPath)"
 		do {
-			let attr = try fm.attributesOfItem(atPath: fullPath + "/" + name)
+			let attr = try fileManager.attributesOfItem(atPath: fullPath + "/" + name)
 
 			let file = File()
 			file.name = name
@@ -117,7 +116,6 @@ class FileExplorer {
 
 			return file
 		} catch {
-
 		}
 
 		return nil
@@ -130,8 +128,7 @@ class FileExplorer {
 			try empty.write(toFile: fullName, atomically: false, encoding: .utf8)
 			print("Filename created \(fullName)")
 			return true
-		}
-		catch {/* error handling here */
+		} catch {/* error handling here */
 			print("Error, can not create file \(fullName)")
 			return false
 		}
@@ -140,21 +137,21 @@ class FileExplorer {
 	static func createFile2(withName name: String) {
 		let fullPath = Bundle.main.resourcePath! + "/\(name)"
 		let data = "Created on \(Date())".data(using: String.Encoding.utf8)
-		let fm = FileManager.default
-		fm.createFile(atPath: fullPath, contents: data, attributes: [:])
+		let fileManager = FileManager.default
+		fileManager.createFile(atPath: fullPath, contents: data, attributes: [:])
 	}
-
 
 	/// Создание папки.
 	/// - Parameter name: Имя папки.
 	static func createFolder(withName name: String) {
 		let fullPath = Bundle.main.resourcePath! + "/\(name)"
-		let fm = FileManager.default
+		let fileManager = FileManager.default
 		do {
-			try fm.createDirectory(atPath: fullPath, withIntermediateDirectories: false, attributes: nil)
+			try fileManager.createDirectory(atPath: fullPath, withIntermediateDirectories: false, attributes: nil)
 		} catch let error as NSError {
-			print(error.localizedDescription);
+			print(error.localizedDescription)
 		}
 	}
-
 }
+// swiftlint:enable force_cast
+// swiftlint:enable force_unwrapping

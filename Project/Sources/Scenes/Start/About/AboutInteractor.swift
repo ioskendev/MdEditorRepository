@@ -1,9 +1,8 @@
 //
-//  AboutInteractor.swift
+//  AboutViewController.swift
 //  MdEditor
 //
-//  Created by Yuri Volegov on 08.02.2024.
-//  Copyright © 2024 ioskendev. All rights reserved.
+//  Created by ioskendev on 25.12.2023.
 //
 
 import Foundation
@@ -26,9 +25,9 @@ final class AboutInteractor: IAboutInteractor {
 
 	// MARK: - Public methods
 
-	/// login func realisation with request model
-	/// - Parameter request: LoginModel.Request
-	func show() { // Users/volegov/Developer/Next_aboutWindow/MdEditorRepository/Project/Resources/Book_of_knowledge
+	/// About func realisation with request model
+	/// - Parameter request: AboutModel.Request
+	func show() {
 
 		if let filepath = Bundle.main.path(forResource: "Book_of_knowledge/README", ofType: Types.md) {
 			do {
@@ -42,7 +41,7 @@ final class AboutInteractor: IAboutInteractor {
 		}
 	}
 
-	enum Types {
+	enum Types { // stub for types in file manager
 		static var md = "md"
 	}
 }

@@ -1,9 +1,8 @@
 //
-//  AboutAssembler.swift
+//  AboutViewController.swift
 //  MdEditor
 //
-//  Created by Yuri Volegov on 08.02.2024.
-//  Copyright © 2024 ioskendev. All rights reserved.
+//  Created by ioskendev on 25.12.2023.
 //
 
 import UIKit

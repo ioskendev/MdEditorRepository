@@ -42,9 +42,13 @@ Follow these steps to install MdEditor:
 1. **Clone the repository:**
     git@github.com:ioskendev/MdEditorRepository.git
 2. **Navigate to the project directory in console:**
+```
 cd ./MdEditorRepository/Progect
+```
 3. **Run:**
+```
 tuist generate
+```
    
    After these steps, MdEditor should be running on your machine and you can build the project.
 

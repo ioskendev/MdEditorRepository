@@ -33,7 +33,7 @@ final class MainInteractor: IMainInteractor {
 	func fetchData() {
 		var response = MainModel.Response(files: [])
 
-		let files = fileExplorer.getFiles(from: "/Notes")
+		let files = fileExplorer.getFiles(from: BundleFiles.notes.path)
 		response.files = files
 
 		presenter.present(response: response)

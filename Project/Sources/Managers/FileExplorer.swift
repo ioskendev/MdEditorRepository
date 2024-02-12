@@ -8,6 +8,29 @@
 
 import Foundation
 
+enum BundleFiles {
+	case about
+	case notes
+
+	var name: String {
+		switch self {
+		case .about:
+			return "about.md"
+		case .notes:
+			return "Notes"
+		}
+	}
+
+	var path: String {
+		switch self {
+		case .about:
+			return ""
+		case .notes:
+			return "/Notes"
+		}
+	}
+}
+
 struct File {
 
 	enum FileType {

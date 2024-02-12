@@ -13,6 +13,7 @@ final class OpenCoordinator: ICoordinator {
 	// MARK: - Dependencies
 
 	private let navigationController: UINavigationController
+	private let fileExplorer: IFileExplorer
 
 	// MARK: - Internal properties
 
@@ -20,8 +21,9 @@ final class OpenCoordinator: ICoordinator {
 
 	// MARK: - Initialization
 
-	init(navigationController: UINavigationController) {
+	init(navigationController: UINavigationController, fileExplorer: IFileExplorer) {
 		self.navigationController = navigationController
+		self.fileExplorer = fileExplorer
 	}
 
 	// MARK: - Internal methods
@@ -31,7 +33,7 @@ final class OpenCoordinator: ICoordinator {
 	}
 
 	func showOpenScene() {
-		let assembler = OpenAssembler()
+		let assembler = OpenAssembler(fileExplorer: fileExplorer)
 		let viewController = assembler.assemble { [weak self] in
 			self?.finishFlow?()
 		}

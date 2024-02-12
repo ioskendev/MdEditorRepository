@@ -82,5 +82,11 @@ private extension OpenViewController {
 	}
 
 	func configureCell(_ cell: UITableViewCell, with file: OpenModel.ViewModel.File) {
+		var content = cell.defaultContentConfiguration()
+		content.text = file.name
+		content.secondaryText = file.description
+		content.image = UIImage(systemName: file.image)
+		cell.contentConfiguration = content
+		cell.backgroundColor = Theme.backgroundColor
 	}
 }

@@ -1,8 +1,8 @@
 //
 //  AppCoordinator.swift
-//  MdEdit
+//  MdEditor
 //
-//  Created by ioskendev on 12.01.2024.
+//  Created by Alexey Turulin on 1/14/24.
 //
 
 import UIKit
@@ -86,7 +86,8 @@ final class AppCoordinator: BaseCoordinator {
 
 	func runOpenFlow() {
 		let coordinator = OpenCoordinator(
-			navigationController: navigationController
+			navigationController: navigationController,
+			fileExplorer: fileExplorer
 		)
 		addDependency(coordinator)
 

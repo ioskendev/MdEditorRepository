@@ -18,17 +18,20 @@ protocol IOpenInteractor {
 	// MARK: - Dependencies
 
 	private let presenter: IOpenPresenter
+	 private let fileExplorer: IFileExplorer
 
 	// MARK: - Initialization
 
-	 init(presenter: IOpenPresenter) {
+	 init(presenter: IOpenPresenter, fileExplorer: IFileExplorer) {
 		 self.presenter = presenter
+		 self.fileExplorer = fileExplorer
 	 }
 
 	// MARK: - Public Methods
 
 	 func fetchData() {
-		 let response = OpenModel.Response(files: [])
+		 let files = fileExplorer.getFiles(from: BundleFiles.notes.path)
+		 let response = OpenModel.Response(files: files)
 		 presenter.present(response: response)
 	 }
 

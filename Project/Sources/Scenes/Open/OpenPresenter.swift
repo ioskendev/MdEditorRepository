@@ -30,11 +30,28 @@ final class OpenPresenter: IOpenPresenter {
 	// MARK: - Public Methods
 
 	func present(response: OpenModel.Response) {
-		let viewModel = OpenModel.ViewModel(files: [])
+		var viewModel = OpenModel.ViewModel(files: [])
+
+		for file in response.files {
+			viewModel.files.append(mapFile(file))
+		}
+
 		viewController?.render(viewModel: viewModel)
 	}
 
 	func presentMainScreen() {
 		backClosure?()
+	}
+
+	// MARK: - Private dependencies
+
+	private func mapFile(_ file: File) -> OpenModel.ViewModel.File {
+
+		var viewModelFile = OpenModel.ViewModel.File()
+		viewModelFile.name = file.name
+		viewModelFile.description = file.getFormattedAttributes()
+		viewModelFile.image = file.getImage()
+
+		return viewModelFile
 	}
 }

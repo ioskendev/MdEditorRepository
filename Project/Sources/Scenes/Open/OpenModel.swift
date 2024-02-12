@@ -15,10 +15,12 @@ enum OpenModel {
 	}
 
 	struct ViewModel {
-		let files: [File]
+		var files: [File]
 
 		struct File {
-			let name: String
+			var name = ""
+			var description = ""
+			var image = ""
 		}
 	}
 }

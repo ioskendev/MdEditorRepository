@@ -60,6 +60,12 @@ extension OpenViewController {
 		configureCell(cell, with: file)
 		return cell
 	}
+
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let file = viewModel.files[indexPath.row]
+		tableView.deselectRow(at: indexPath, animated: true)
+		interactor?.didFileSelected(request: OpenModel.Request.FileSelected(fileName: file.name))
+	}
 }
 
 // MARK: - IOpenViewController

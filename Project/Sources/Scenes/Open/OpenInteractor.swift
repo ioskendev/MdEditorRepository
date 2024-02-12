@@ -11,6 +11,7 @@ import Foundation
 protocol IOpenInteractor {
 	func fetchData()
 	func backButtonPressed()
+	func didFileSelected(request: OpenModel.Request.FileSelected)
 }
 
  final class OpenInteractor: IOpenInteractor {
@@ -38,4 +39,17 @@ protocol IOpenInteractor {
 	 func backButtonPressed() {
 		 presenter.presentMainScreen()
 	 }
+
+	 func didFileSelected(request: OpenModel.Request.FileSelected) {
+		 let file = fileExplorer.getFile(withName: request.fileName, atPath: BundleFiles.notes.path)
+		 if file?.type == .folder {
+			 let path = BundleFiles.notes.path + "/" + request.fileName
+			 let files = fileExplorer.getFiles(from: path)
+			 let response = OpenModel.Response(files: files)
+			 presenter.present(response: response)
+		 }
+	 }
  }
+
+final class Manager {
+}

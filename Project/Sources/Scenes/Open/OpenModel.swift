@@ -10,6 +10,12 @@ import Foundation
 
 enum OpenModel {
 
+	enum Request {
+		struct FileSelected {
+			let fileName: String
+		}
+	}
+
 	struct Response {
 		let files: [File]
 	}

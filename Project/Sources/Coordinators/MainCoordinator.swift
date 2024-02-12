@@ -13,24 +13,30 @@ final class MainCoordinator: ICoordinator {
 	// MARK: - Dependencies
 
 	private let navigationController: UINavigationController
-	private let taskManager: ITaskManager
+	private let fileExplorer: IFileExplorer
+
+	// MARK: - Internal properties
+
+	var finishFlow: ((NextScreen) -> Void)?
 
 	// MARK: - Initialization
 
-	init(navigationController: UINavigationController, taskManager: ITaskManager) {
+	init(navigationController: UINavigationController, fileExplorer: IFileExplorer) {
 		self.navigationController = navigationController
-		self.taskManager = taskManager
+		self.fileExplorer = fileExplorer
 	}
 
 	// MARK: - Internal methods
 
 	func start() {
-		showTodoListScene()
+		showMainScene()
 	}
 
-	private func showTodoListScene() {
-		let assembler = TodoListAssembler(taskManager: taskManager)
-		let viewController = assembler.assembly()
+	func showMainScene() {
+		let assembler = MainAssembler(fileExplorer: fileExplorer)
+		let viewController = assembler.assembly { [weak self] nextScreen in
+			self?.finishFlow?(nextScreen)
+		}
 		navigationController.pushViewController(viewController, animated: true)
 	}
 }

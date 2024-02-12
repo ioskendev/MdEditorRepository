@@ -58,7 +58,11 @@ let target = Target(
 	deploymentTargets: .iOS(ProjectSettings.targetVersion),
 	infoPlist: .extendingDefault(with: infoPlistExtension),
 	sources: ["Sources/**", "Shared/**"],
-	resources: ["Resources/**"],
+	resources: [
+		"Resources/**",
+		"../DataBase/Assets/about.md",
+		.folderReference(path: "../DataBase/Assets/Notes")
+	],
 	scripts: scripts,
 	dependencies: [
 		.package(product: "TaskManagerPackage"),

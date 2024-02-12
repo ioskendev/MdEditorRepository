@@ -22,6 +22,21 @@
 "Login.passwordPlaceholder" = "Пароль";
 "Login.buttonLogin" = "Войти";
 
+// MARK: - MainScreen
+
+"Main.title" = "MdEditor";
+"Main.buttonNew" = "Новый";
+"Main.buttonOpen" = "Открыть";
+"Main.buttonAbout" = "О приложении";
+
+// MARK: - OpenScreen
+
+"Open.title" = "Примеры";
+
+// MARK: - AboutScreen
+
+"About.title" = "About";
+
 // MARK: - TodoList strings
 
 "TodoList.title" = "Задачи";
@@ -43,10 +58,3 @@
 "Task.writeNewTasks" = "Написать новые задачи";
 "Task.solve3Algorithms" = "Решить 3 алгоритма";
 "Task.goShopping" = "Пойти за покупками";
-
-// MARK: - Start screen
-
-"Start.title" = "MdEditor";
-"Start.buttonNewFile" = "Новый";
-"Start.buttonOpenFile" = "Открыть";
-"Start.buttonAbout" = "О приложении";

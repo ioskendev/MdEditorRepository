@@ -18,15 +18,14 @@ final class MarkdownToHtmlConverter: IMarkdownToHtmlConverter {
 		let lines = text.components(separatedBy: .newlines)
 		var html = [String?]()
 
-		lines.forEach() { line in
+		lines.forEach { line in
 			html.append(parseHeader(text: line))
 			html.append(parseBlockquote(text: line))
 			html.append(parseParagraph(text: line))
 		}
 
-		return makeHtml(html.compactMap{ $0 }.joined())
+		return makeHtml(html.compactMap { $0 }.joined())
 	}
-
 }
 
 private extension MarkdownToHtmlConverter {
@@ -35,7 +34,7 @@ private extension MarkdownToHtmlConverter {
 	}
 
 	func parseHeader(text: String) -> String? {
-		let regex = /^(?<headerLevel>#{1,6})\s+(?<headerText>.+)/
+		let regex = /^(?<headerLevel>#{1,6})\s+(?<headerText>.+)/ // swiftlint:disable:this opening_brace
 
 		if let match = text.wholeMatch(of: regex) {
 			let headerLevel = String(match.headerLevel).count
@@ -71,7 +70,7 @@ private extension MarkdownToHtmlConverter {
 	func parseText(_ text: String) -> String {
 		let boldItalicPattern = #"\*\*\*(.+?)\*\*\*"#
 		let boldPattern = #"\*\*(.+?)\*\*"#
-		let italicPattern =  #"\*(.+?)\*"#
+		let italicPattern = #"\*(.+?)\*"#
 
 		var result = text
 

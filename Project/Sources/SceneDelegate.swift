@@ -49,7 +49,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 		return nil
 	}
-
 }
 
 enum FileExt: String {

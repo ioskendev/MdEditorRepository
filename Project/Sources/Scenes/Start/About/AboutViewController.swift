@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import WebKit
 
 protocol IAboutViewController: AnyObject {
 	func render(viewModel: AboutModel.ViewModel)
 }
 
-final class AboutViewController: UIViewController {
+final class AboutViewController: UIViewController, WKNavigationDelegate {
 
 	// MARK: - Dependencies
 
@@ -19,7 +20,7 @@ final class AboutViewController: UIViewController {
 
 	// MARK: - Private properties
 
-	private lazy var textViewAbout: UITextView = makeTextView()
+	private var webView = WKWebView()
 
 	private var constraints = [NSLayoutConstraint]()
 
@@ -37,54 +38,24 @@ final class AboutViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		setupUI()
 		interactor?.show()
-	}
 
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-		layout()
+		webView.navigationDelegate = self
+		view = webView
 	}
 }
 
-// MARK: - Setup UI
+// MARK: - Load page
 
 private extension AboutViewController {
-
-	func makeTextView() -> UITextView {
-		let textView = UITextView()
-
-		textView.translatesAutoresizingMaskIntoConstraints = false
-
-		return textView
+	private func loadPage(url: URL) {
+		webView.load(URLRequest(url: url))
+		webView.allowsBackForwardNavigationGestures = true
 	}
 
-	func setupUI() {
-		view.backgroundColor = .white
-		title = "About"
-		navigationController?.navigationBar.prefersLargeTitles = true
-
-		view.addSubview(textViewAbout)
-	}
-}
-
-// MARK: - Layout UI
-
-private extension AboutViewController {
-
-	func layout() {
-		NSLayoutConstraint.deactivate(constraints)
-
-		let newConstraints = [
-			textViewAbout.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-			textViewAbout.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-			textViewAbout.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-			textViewAbout.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-		]
-
-		NSLayoutConstraint.activate(newConstraints)
-
-		constraints = newConstraints
+	private func loadPage(html: String) {
+		webView.loadHTMLString(html, baseURL: nil)
+		webView.allowsBackForwardNavigationGestures = false
 	}
 }
 
@@ -92,6 +63,7 @@ private extension AboutViewController {
 
 extension AboutViewController: IAboutViewController {
 	func render(viewModel: AboutModel.ViewModel) {
-		textViewAbout.text = viewModel.aboutText
+		let html = MarkdownToHtmlConverter().convert(viewModel.aboutText)
+		loadPage(html: html)
 	}
 }

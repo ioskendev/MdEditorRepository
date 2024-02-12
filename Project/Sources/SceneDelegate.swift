@@ -53,7 +53,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 enum FileExt: String {
 	case swift
-	case md
+	case md // swiftlint:disable:this identifier_name
 	case txt
 	case jpg
 	case jpeg

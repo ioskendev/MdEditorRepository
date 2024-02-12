@@ -29,7 +29,7 @@ final class AboutInteractor: IAboutInteractor {
 	/// - Parameter request: AboutModel.Request
 	func show() {
 
-		if let filepath = Bundle.main.path(forResource: "Book_of_knowledge/README", ofType: Types.md) {
+		if let filepath = Bundle.main.path(forResource: "Book_of_knowledge/README", ofType: FileExt.md.rawValue) {
 			do {
 				let contents = try String(contentsOfFile: filepath)
 				presenter?.present(responce: AboutModel.Response(aboutText: contents))
@@ -39,9 +39,5 @@ final class AboutInteractor: IAboutInteractor {
 		} else {
 			print("file not found")
 		}
-	}
-
-	enum Types { // stub for types in file manager
-		static var md = "md"
 	}
 }

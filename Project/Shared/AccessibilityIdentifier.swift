@@ -41,4 +41,21 @@ enum AccessibilityIdentifier {
 			}
 		}
 	}
+
+	enum FinderScene: CustomStringConvertible {
+		case table
+		case section(Int)
+		case cell(section: Int, row: Int)
+
+		var description: String {
+			switch self {
+			case .table:
+				return "finderScene.table"
+			case .section(let index):
+				return "finderScene.section-\(index)"
+			case .cell(section: let section, row: let row):
+				return "finderScene.cell-\(section)-\(row)"
+			}
+		}
+	}
 }

@@ -50,3 +50,17 @@
 "Start.buttonNewFile" = "New";
 "Start.buttonOpenFile" = "Open";
 "Start.buttonAbout" = "About";
+
+// MARK: - FinderScreen
+
+"Finder.title" = "Tasks";
+"Finder.deadline" = "Deadline: %@";
+"Finder.TaskPriority.high" = "!!!";
+"Finder.TaskPriority.medium" = "!!";
+"Finder.TaskPriority.low" = "!";
+"Finder.Section.completed" = "Completed";
+"Finder.Section.uncompleted" = "Uncompleted";
+"Finder.Section.allTasks" = "All";
+"Finder.Section.important" = "Important";
+"Finder.Section.regular" = "Regular";
+"Finder.dateFormat" = "yyyy-MM-dd";

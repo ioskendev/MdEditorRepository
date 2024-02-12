@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TaskManagerPackage
 
 protocol IStartCoordinator: ICoordinator {
 
@@ -51,6 +52,12 @@ final class StartCoordinator: IStartCoordinator {
 
 	func showAboutScene() {
 		let viewController = AboutAssembler().assembly()
+
+		navigationController.setViewControllers([viewController], animated: true)
+	}
+
+	func showFinderScene() {
+		let viewController = FinderAssembler(taskManager: TaskManager()).assembly()
 
 		navigationController.setViewControllers([viewController], animated: true)
 	}

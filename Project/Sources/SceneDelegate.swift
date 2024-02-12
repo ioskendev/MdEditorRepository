@@ -41,4 +41,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		#endif
 		self.window = window
 	}
+
+	func getData(name: String, withExtension ext: FileExt) -> Data? {
+		if let url = Bundle.main.url(forResource: name, withExtension: ext.rawValue) {
+			return try? Data(contentsOf: url)
+		}
+
+		return nil
+	}
+
+}
+
+enum FileExt: String {
+	case swift
+	case md
+	case txt
+	case jpg
+	case jpeg
+	case png
+	case json
 }

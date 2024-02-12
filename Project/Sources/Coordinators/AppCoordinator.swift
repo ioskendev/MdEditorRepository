@@ -1,8 +1,8 @@
 //
 //  AppCoordinator.swift
-//  MdEdit
+//  MdEditor
 //
-//  Created by ioskendev on 12.01.2024.
+//  Created by Alexey Turulin on 1/14/24.
 //
 
 import UIKit
@@ -14,15 +14,18 @@ final class AppCoordinator: BaseCoordinator {
 
 	private let navigationController: UINavigationController
 	private var window: UIWindow?
-
 	private let taskManager: ITaskManager
+	private let fileExplorer: IFileExplorer
+	private let converter: IMarkdownToHTMLConverter
 
 	// MARK: - Initialization
 
-	init(window: UIWindow?, taskManager: ITaskManager) {
+	init(window: UIWindow?, taskManager: ITaskManager, fileExplorer: IFileExplorer, converter: IMarkdownToHTMLConverter) {
 		self.window = window
 		self.taskManager = taskManager
 		self.navigationController = UINavigationController()
+		self.fileExplorer = fileExplorer
+		self.converter = converter
 	}
 
 	// MARK: - Internal methods
@@ -35,32 +38,63 @@ final class AppCoordinator: BaseCoordinator {
 	}
 
 	func runLoginFlow() {
+
 		let coordinator = LoginCoordinator(navigationController: navigationController)
 		addDependency(coordinator)
 
 		coordinator.finishFlow = { [weak self, weak coordinator] in
-			guard let self = self else { return }
-			self.runStartFlow()
-			coordinator.map { self.removeDependency($0) }
+			self?.runMainFlow()
+			coordinator.map { self?.removeDependency($0) }
 		}
 
 		coordinator.start()
 	}
 
 	func runMainFlow() {
-		let coordinator: ICoordinator = MainCoordinator(
+		let coordinator = MainCoordinator(
 			navigationController: navigationController,
-			taskManager: taskManager
+			fileExplorer: fileExplorer
 		)
-
 		addDependency(coordinator)
+
+		coordinator.finishFlow = { [weak self] nextSCreen in
+			switch nextSCreen {
+			case .about:
+				self?.runAboutFlow()
+			case .open:
+				self?.runOpenFlow()
+			}
+		}
 
 		coordinator.start()
 	}
 
-	func runStartFlow() {
-		let coordinator = StartCoordinator(navigationController: navigationController)
+	func runAboutFlow() {
+		let coordinator = AboutCoordinator(
+			navigationController: navigationController,
+			fileExplorer: fileExplorer,
+			converter: converter
+		)
 		addDependency(coordinator)
+
+		coordinator.finishFlow = { [weak self, weak coordinator] in
+			coordinator.map { self?.removeDependency($0) }
+		}
+
+		coordinator.start()
+	}
+
+	func runOpenFlow() {
+		let coordinator = OpenCoordinator(
+			navigationController: navigationController,
+			fileExplorer: fileExplorer
+		)
+		addDependency(coordinator)
+
+		coordinator.finishFlow = { [weak self, weak coordinator] in
+			coordinator.map { self?.removeDependency($0) }
+		}
+
 		coordinator.start()
 	}
 }

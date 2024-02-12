@@ -22,6 +22,21 @@
 "Login.passwordPlaceholder" = "Password";
 "Login.buttonLogin" = "Login";
 
+// MARK: - MainScreen
+
+"Main.title" = "MdEditor";
+"Main.buttonNew" = "New";
+"Main.buttonOpen" = "Open";
+"Main.buttonAbout" = "About";
+
+// MARK: - OpenScreen
+
+"Open.title" = "Examples";
+
+// MARK: - AboutScreen
+
+"About.title" = "About";
+
 // MARK: - TodoListScreen
 
 "TodoList.title" = "Tasks";
@@ -43,10 +58,3 @@
 "Task.writeNewTasks" = "Write new tasks";
 "Task.solve3Algorithms" = "Solve 3 algorithms";
 "Task.goShopping" = "Go shopping";
-
-// MARK: - Start screen
-
-"Start.title" = "MdEditor";
-"Start.buttonNewFile" = "New";
-"Start.buttonOpenFile" = "Open";
-"Start.buttonAbout" = "About";

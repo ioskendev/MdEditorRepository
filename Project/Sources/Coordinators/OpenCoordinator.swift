@@ -1,14 +1,14 @@
 //
-//  TodoListCoordinator.swift
-//  MdEdit
+//  OpenCoordinator.swift
+//  MdEditor
 //
-//  Created by ioskendev on 12.01.2024.
+//  Created by Alexey Turulin on 2/11/24.
+//  Copyright © 2024 repakuku. All rights reserved.
 //
 
 import UIKit
-import TaskManagerPackage
 
-final class MainCoordinator: ICoordinator {
+final class OpenCoordinator: ICoordinator {
 
 	// MARK: - Dependencies
 
@@ -17,7 +17,7 @@ final class MainCoordinator: ICoordinator {
 
 	// MARK: - Internal properties
 
-	var finishFlow: ((NextScreen) -> Void)?
+	var finishFlow: (() -> Void)?
 
 	// MARK: - Initialization
 
@@ -29,13 +29,13 @@ final class MainCoordinator: ICoordinator {
 	// MARK: - Internal methods
 
 	func start() {
-		showMainScene()
+		showOpenScene()
 	}
 
-	func showMainScene() {
-		let assembler = MainAssembler(fileExplorer: fileExplorer)
-		let viewController = assembler.assembly { [weak self] nextScreen in
-			self?.finishFlow?(nextScreen)
+	func showOpenScene() {
+		let assembler = OpenAssembler(fileExplorer: fileExplorer)
+		let viewController = assembler.assemble { [weak self] in
+			self?.finishFlow?()
 		}
 		navigationController.pushViewController(viewController, animated: true)
 	}

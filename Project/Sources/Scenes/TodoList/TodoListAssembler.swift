@@ -1,8 +1,8 @@
 //
 //  TodoListAssembler.swift
-//  MdEdit
+//  MdEditor
 //
-//  Created by ioskendev on 12.01.2024.
+//  Created by Alexey Turulin on 12/04/23.
 //
 
 import UIKit
@@ -16,22 +16,27 @@ final class TodoListAssembler {
 
 	// MARK: - Initialization
 
-	/// Init of TodoListAssembler.
+	/// Инициализатор сборщика модуля списка заданий.
 	/// - Parameters:
-	///   - taskManager: Task manager.
+	///   - taskManager: Менеджер заданий.
 	init(taskManager: ITaskManager) {
 		self.taskManager = taskManager
 	}
 
 	// MARK: - Public methods
 
-	/// Assemble TodoList scene
-	/// - Returns: TodoListViewController
-	func assembly() -> TodoListViewController {
+	/// Сборка модуля списка заданий.
+	/// - Parameter createTaskClosure: замыкание оповещающие о инициации создания заданий.
+	/// - Returns: TodoListViewController с проставленными зависимостями VIP цикла.
+	func assembly(createTaskClosure: (() -> Void)?) -> TodoListViewController {
 		let viewController = TodoListViewController()
 		let sectionForTaskManagerAdapter = SectionForTaskManagerAdapter(taskManager: taskManager)
 		let presenter = TodoListPresenter(viewController: viewController)
-		let interactor = TodoListInteractor(presenter: presenter, sectionManager: sectionForTaskManagerAdapter)
+		let interactor = TodoListInteractor(
+			presenter: presenter,
+			sectionManager: sectionForTaskManagerAdapter,
+			createTaskClosure: createTaskClosure
+		)
 		viewController.interactor = interactor
 
 		return viewController

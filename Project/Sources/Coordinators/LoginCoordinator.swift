@@ -8,8 +8,6 @@
 import UIKit
 
 protocol ILoginCoordinator: ICoordinator {
-
-	/// Finish flow method
 	var finishFlow: (() -> Void)? { get set }
 }
 
@@ -17,7 +15,7 @@ final class LoginCoordinator: ILoginCoordinator {
 
 	// MARK: - Dependencies
 
-	var navigationController: UINavigationController
+	private let navigationController: UINavigationController
 
 	// MARK: - Internal properties
 

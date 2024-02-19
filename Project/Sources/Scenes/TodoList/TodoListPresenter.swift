@@ -1,18 +1,17 @@
 //
 //  TodoListPresenter.swift
-//  MdEdit
+//  MdEditor
 //
-//  Created by ioskendev on 12.01.2024.
+//  Created by Alexey Turulin on 11/28/23.
 //
 
 import Foundation
 import TaskManagerPackage
 
-/// ITodoList Presentation logic protocol
 protocol ITodoListPresenter {
 
-	/// Show screen with task list.
-	/// - Parameter response: Prepared data to show.
+	/// Отображение экрана со списком заданий.
+	/// - Parameter response: Подготовленные к отображению данные.
 	func present(response: TodoListModel.Response)
 }
 
@@ -20,7 +19,7 @@ final class TodoListPresenter: ITodoListPresenter {
 
 	// MARK: - Dependencies
 
-	private weak var viewController: ITodoListViewController! // swiftlint:disable:this implicitly_unwrapped_optional
+	private weak var viewController: ITodoListViewController?
 
 	// MARK: - Initialization
 
@@ -39,7 +38,7 @@ final class TodoListPresenter: ITodoListPresenter {
 			)
 			sections.append(sectionData)
 		}
-		viewController.render(viewModel: TodoListModel.ViewModel(tasksBySections: sections))
+		viewController?.render(viewModel: TodoListModel.ViewModel(tasksBySections: sections))
 	}
 
 	// MARK: - Private methods
@@ -48,9 +47,9 @@ final class TodoListPresenter: ITodoListPresenter {
 		tasks.map { mapTaskData(task: $0) }
 	}
 
-	/// Map task from business model to task to show
-	/// - Parameter task: Task to mapping.
-	/// - Returns: Mapping result.
+	/// Мапинг одного задания из бизнес-модели в задание для отображения
+	/// - Parameter task: Задание для преобразования.
+	/// - Returns: Преобразованный результат.
 	private func mapTaskData(task: Task) -> TodoListModel.ViewModel.Task {
 		if let task = task as? ImportantTask {
 			let result = TodoListModel.ViewModel.ImportantTask(

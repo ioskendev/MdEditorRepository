@@ -1,8 +1,8 @@
 //
 //  LoginInteractor.swift
-//  MdEdit
+//  MdEditor
 //
-//  Created by ioskendev on 12.01.2024.
+//  Created by Alexey Turulin on 12/04/23.
 //
 
 import Foundation
@@ -15,8 +15,8 @@ final class LoginInteractor: ILoginInteractor {
 
 	// MARK: - Dependencies
 
-	private var presenter: ILoginPresenter?
-	private var worker: ILoginWorker
+	private let presenter: ILoginPresenter
+	private let worker: ILoginWorker
 
 	// MARK: - Initialization
 
@@ -27,12 +27,10 @@ final class LoginInteractor: ILoginInteractor {
 
 	// MARK: - Public methods
 
-	/// login func realisation with request model
-	/// - Parameter request: LoginModel.Request
 	func login(request: LoginModel.Request) {
 		let result = worker.login(login: request.login, password: request.password)
 		let responce = LoginModel.Response(result: result)
 
-		presenter?.present(responce: responce)
+		presenter.present(responce: responce)
 	}
 }

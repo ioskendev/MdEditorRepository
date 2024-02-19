@@ -12,8 +12,12 @@
 
 // MARK: -  Common strings
 
+"Yes.text" = "Да";
+"No.text" = "Нет";
+"Return.text" = "Вернуться";
 "Ok.text" = "Ок";
 "Error.text" = "Ошибка";
+"Message.text" = "Сообщение";
 
 // MARK: - Login strings
 
@@ -22,20 +26,12 @@
 "Login.passwordPlaceholder" = "Пароль";
 "Login.buttonLogin" = "Войти";
 
-// MARK: - MainScreen
+// MARK: - MainMenuScreen
 
-"Main.title" = "MdEditor";
-"Main.buttonNew" = "Новый";
-"Main.buttonOpen" = "Открыть";
-"Main.buttonAbout" = "О приложении";
-
-// MARK: - OpenScreen
-
-"Open.title" = "Примеры";
-
-// MARK: - AboutScreen
-
-"About.title" = "About";
+"MainMenu.title" = "MD Editor";
+"MainMenu.newFile" = "Новый документ";
+"MainMenu.openFile" = "Открыть документ";
+"MainMenu.about" = "О приложении";
 
 // MARK: - TodoList strings
 
@@ -58,3 +54,6 @@
 "Task.writeNewTasks" = "Написать новые задачи";
 "Task.solve3Algorithms" = "Решить 3 алгоритма";
 "Task.goShopping" = "Пойти за покупками";
+
+// MARK: - Other
+"aboutFileName" = "about_ru";

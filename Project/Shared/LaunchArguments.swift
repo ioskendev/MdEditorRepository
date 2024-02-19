@@ -2,7 +2,7 @@
 //  LaunchArguments.swift
 //  MdEditor
 //
-//  Created by Alexey Turulin on 1/16/24.
+//  Created by Alexey Turulin on 2/2/24.
 //  Copyright © 2024 repakuku. All rights reserved.
 //
 

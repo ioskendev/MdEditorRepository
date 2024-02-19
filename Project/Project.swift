@@ -60,8 +60,7 @@ let target = Target(
 	sources: ["Sources/**", "Shared/**"],
 	resources: [
 		"Resources/**",
-		"../DataBase/Assets/about.md",
-		.folderReference(path: "../DataBase/Assets/Notes")
+		.folderReference(path: "Examples")
 	],
 	scripts: scripts,
 	dependencies: [

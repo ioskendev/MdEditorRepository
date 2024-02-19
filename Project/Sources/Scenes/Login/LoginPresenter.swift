@@ -1,16 +1,16 @@
 //
 //  LoginPresenter.swift
-//  MdEdit
+//  MdEditor
 //
-//  Created by ioskendev on 12.01.2024.
+//  Created by Alexey Turulin on 12/04/23.
 //
 
 import Foundation
 
 protocol ILoginPresenter {
 
-	/// Login screen presentation.
-	/// - Parameter response: Login model ro present.
+	/// Отображение экрана со авторизации.
+	/// - Parameter response: Подготовленные к отображению данные.
 	func present(responce: LoginModel.Response)
 }
 
@@ -21,7 +21,7 @@ final class LoginPresenter: ILoginPresenter {
 	// MARK: - Dependencies
 
 	private weak var viewController: ILoginViewController?
-	private var loginResultClosure: LoginResultClosure?
+	private let loginResultClosure: LoginResultClosure?
 
 	// MARK: - Initialization
 
@@ -32,8 +32,8 @@ final class LoginPresenter: ILoginPresenter {
 
 	// MARK: - Public methods
 
-	/// Login scene presentation.
-	/// - Parameter response: Login model data to present.
+	/// Отображение экрана со авторизации.
+	/// - Parameter response: Подготовленные к отображению данные.
 	func present(responce: LoginModel.Response) {
 		loginResultClosure?(responce.result)
 	}

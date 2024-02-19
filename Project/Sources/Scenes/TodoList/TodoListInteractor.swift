@@ -1,41 +1,47 @@
 //
 //  TodoListInteractor.swift
-//  MdEdit
+//  MdEditor
 //
-//  Created by ioskendev on 12.01.2024.
+//  Created by Alexey Turulin on 11/28/23.
 //
 
 import Foundation
 
-/// TodoListInteractor protocol
 protocol ITodoListInteractor {
 
-	/// Event to response with data to tasklist.
+	/// Событие на предоставление информации для списка заданий.
 	func fetchData()
 
-	/// Did task selected event method.
-	/// - Parameter request: Request, with selected task information.
+	/// Событие, что задание было выбрано.
+	/// - Parameter request: Запрос, содержащий информацию о выбранном задании.
 	func didTaskSelected(request: TodoListModel.Request.TaskSelected)
+
+	func createTask()
 }
 
-/// Todo List Interactor logic
 final class TodoListInteractor: ITodoListInteractor {
 
 	// MARK: - Dependencies
 
-	private var presenter: ITodoListPresenter
-	private var sectionManager: ISectionForTaskManagerAdapter
+	private let presenter: ITodoListPresenter
+	private let sectionManager: ISectionForTaskManagerAdapter
+	private var createTaskClosure: (() -> Void)?
 
 	// MARK: - Initialization
 
-	init(presenter: ITodoListPresenter, sectionManager: ISectionForTaskManagerAdapter) {
+	init(
+		presenter: ITodoListPresenter,
+		sectionManager: ISectionForTaskManagerAdapter,
+		createTaskClosure: (() -> Void)?
+	) {
 		self.presenter = presenter
 		self.sectionManager = sectionManager
+		self.createTaskClosure = createTaskClosure
 	}
 
 	// MARK: - Public methods
 
-	/// fetch data realization func.
+	/// Событие на предоставление информации для списка заданий.
 	func fetchData() {
 		var responseData = [TodoListModel.Response.SectionWithTasks]()
 
@@ -51,12 +57,16 @@ final class TodoListInteractor: ITodoListInteractor {
 		presenter.present(response: response)
 	}
 
-	/// didTaskSelected action realization
-	/// - Parameter request: TodoListModel.Request.TaskSelected
+	/// Событие, что задание было выбрано.
+	/// - Parameter request: Запрос, содержащий информацию о выбранном задании.
 	func didTaskSelected(request: TodoListModel.Request.TaskSelected) {
 		let section = sectionManager.getSection(forIndex: request.indexPath.section)
 		let task = sectionManager.getTasksForSection(section: section)[request.indexPath.row]
 		task.completed.toggle()
 		fetchData()
+	}
+
+	func createTask() {
+		createTaskClosure?()
 	}
 }

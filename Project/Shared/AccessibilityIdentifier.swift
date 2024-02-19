@@ -24,6 +24,41 @@ enum AccessibilityIdentifier {
 			}
 		}
 	}
+	enum MainMenuScene: CustomStringConvertible {
+		case recentFiles
+		case menu
+
+		var description: String {
+			switch self {
+			case .recentFiles:
+				return "mainMenuScene.recentFIles"
+			case .menu:
+				return "mainMenuScene.menu"
+			}
+		}
+	}
+
+	enum FileManagerScene: CustomStringConvertible {
+		case menu
+
+		var description: String {
+			switch self {
+			case .menu:
+				return "fileManagerScene.menu"
+			}
+		}
+	}
+
+	enum TextPreviewScene: CustomStringConvertible {
+		case textView
+
+		var description: String {
+			switch self {
+			case .textView:
+				return "textPreviewScene.textView"
+			}
+		}
+	}
 
 	enum TodoListScene: CustomStringConvertible {
 		case table

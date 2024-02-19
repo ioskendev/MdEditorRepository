@@ -12,44 +12,37 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 	var window: UIWindow?
 
+	private var appCoordinator: AppCoordinator! // swiftlint:disable:this implicitly_unwrapped_optional
 	private var repository = TaskRepositoryStub()
 	private var taskManager: ITaskManager! // swiftlint:disable:this implicitly_unwrapped_optional
 	private var fileExplorer: IFileExplorer! // swiftlint:disable:this implicitly_unwrapped_optional
-	private var fileManager: FileManager! // swiftlint:disable:this implicitly_unwrapped_optional
-	private var converter: IMarkdownToHTMLConverter! // swiftlint:disable:this implicitly_unwrapped_optional
-
-	private var appCoordinator: AppCoordinator! // swiftlint:disable:this implicitly_unwrapped_optional
+	private var recentFileManager: IRecentFileManager! // swiftlint:disable:this implicitly_unwrapped_optional
 
 	func scene(
 		_ scene: UIScene,
 		willConnectTo session: UISceneSession,
 		options connectionOptions: UIScene.ConnectionOptions
 	) {
-		guard let windowScene = (scene as? UIWindowScene) else { return }
-		let window = UIWindow(windowScene: windowScene)
+		guard let scene = (scene as? UIWindowScene) else { return }
+		let window = UIWindow(windowScene: scene)
+		window.makeKeyAndVisible()
 
+		let navigationController = UINavigationController()
 		taskManager = OrderedTaskManager(taskManager: TaskManager())
 		taskManager.addTasks(tasks: repository.getTasks())
-		fileManager = FileManager.default
-		fileExplorer = FileExplorer(fileManager: fileManager)
-		converter = MarkdownToHTMLConverter()
+		fileExplorer = FileExplorer()
+		recentFileManager = StubRecentFileManager()
 
 		appCoordinator = AppCoordinator(
-			window: window,
+			router: navigationController,
 			taskManager: taskManager,
 			fileExplorer: fileExplorer,
-			converter: converter
+			recentFileManager: recentFileManager
 		)
 
-#if DEBUG
-		let parameters = LaunchArguments.parameters()
-		if let enableTesting = parameters[LaunchArguments.enableTesting], enableTesting {
-			UIView.setAnimationsEnabled(false)
-		}
-		appCoordinator.testStart(parameters: parameters)
-#else
-		appCoordinator.start()
-#endif
+		window.rootViewController = navigationController
 		self.window = window
+
+		appCoordinator.start()
 	}
 }

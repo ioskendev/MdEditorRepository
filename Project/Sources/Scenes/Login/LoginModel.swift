@@ -1,13 +1,13 @@
 //
 //  LoginModel.swift
-//  MdEdit
+//  MdEditor
 //
-//  Created by ioskendev on 12.01.2024.
+//  Created by Alexey Turulin on 11/24/23.
 //
 
 import Foundation
 
-/// LoginModel it is NameSpace for Login ViewData ond ViewData other screens
+/// LoginModel является NameSpace для отделения ViewData различных экранов друг отдруга
 enum LoginModel {
 	struct Request {
 		var login: String

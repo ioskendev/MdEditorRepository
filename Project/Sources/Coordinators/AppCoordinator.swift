@@ -13,38 +13,67 @@ final class AppCoordinator: BaseCoordinator {
 	// MARK: - Dependencies
 
 	private let navigationController: UINavigationController
-	private var window: UIWindow?
 	private let taskManager: ITaskManager
 	private let fileExplorer: IFileExplorer
-	private let converter: IMarkdownToHTMLConverter
+	private let recentFileManager: IRecentFileManager
 
 	// MARK: - Initialization
 
-	init(window: UIWindow?, taskManager: ITaskManager, fileExplorer: IFileExplorer, converter: IMarkdownToHTMLConverter) {
-		self.window = window
+	init(
+		router: UINavigationController,
+		taskManager: ITaskManager,
+		fileExplorer: IFileExplorer,
+		recentFileManager: IRecentFileManager
+	) {
+		self.navigationController = router
 		self.taskManager = taskManager
-		self.navigationController = UINavigationController()
 		self.fileExplorer = fileExplorer
-		self.converter = converter
+		self.recentFileManager = recentFileManager
 	}
 
 	// MARK: - Internal methods
 
 	override func start() {
-		window?.rootViewController = navigationController
-		window?.makeKeyAndVisible()
-
+#if DEBUG
+		let parameters = LaunchArguments.parameters()
+		if let enableTesting = parameters[LaunchArguments.enableTesting], enableTesting {
+			UIView.setAnimationsEnabled(false)
+		}
+		if let skipLogin = parameters[LaunchArguments.skipLogin], skipLogin {
+			runMainFlow()
+		} else {
+			runLoginFlow()
+		}
+#else
 		runLoginFlow()
+#endif
 	}
+}
 
+// MARK: - Private methods
+private extension AppCoordinator {
 	func runLoginFlow() {
-
 		let coordinator = LoginCoordinator(navigationController: navigationController)
 		addDependency(coordinator)
 
 		coordinator.finishFlow = { [weak self, weak coordinator] in
-			self?.runMainFlow()
-			coordinator.map { self?.removeDependency($0) }
+			guard let self = self else { return }
+
+#if DEBUG
+			let parameters = LaunchArguments.parameters()
+			if let enableTesting = parameters[LaunchArguments.enableTesting], enableTesting {
+				UIView.setAnimationsEnabled(false)
+				self.runTodoListFlow()
+			} else {
+				self.runMainFlow()
+			}
+#else
+			self.runMainFlow()
+#endif
+
+			if let coordinator = coordinator {
+				self.removeDependency(coordinator)
+			}
 		}
 
 		coordinator.start()
@@ -53,61 +82,16 @@ final class AppCoordinator: BaseCoordinator {
 	func runMainFlow() {
 		let coordinator = MainCoordinator(
 			navigationController: navigationController,
-			fileExplorer: fileExplorer
-		)
-		addDependency(coordinator)
-
-		coordinator.finishFlow = { [weak self] nextSCreen in
-			switch nextSCreen {
-			case .about:
-				self?.runAboutFlow()
-			case .open:
-				self?.runOpenFlow()
-			}
-		}
-
-		coordinator.start()
-	}
-
-	func runAboutFlow() {
-		let coordinator = AboutCoordinator(
-			navigationController: navigationController,
 			fileExplorer: fileExplorer,
-			converter: converter
+			recentFileManager: recentFileManager
 		)
 		addDependency(coordinator)
-
-		coordinator.finishFlow = { [weak self, weak coordinator] in
-			coordinator.map { self?.removeDependency($0) }
-		}
-
 		coordinator.start()
 	}
 
-	func runOpenFlow() {
-		let coordinator = OpenCoordinator(
-			navigationController: navigationController,
-			fileExplorer: fileExplorer
-		)
+	func runTodoListFlow() {
+		let coordinator = TodoListCoordinator(navigationController: navigationController)
 		addDependency(coordinator)
-
-		coordinator.finishFlow = { [weak self, weak coordinator] in
-			coordinator.map { self?.removeDependency($0) }
-		}
-
 		coordinator.start()
-	}
-}
-
-extension AppCoordinator: ITestCoordinator {
-	func testStart(parameters: [LaunchArguments: Bool]) {
-		window?.rootViewController = navigationController
-		window?.makeKeyAndVisible()
-
-		if let skipLogin = parameters[LaunchArguments.skipLogin], skipLogin {
-			runMainFlow()
-		} else {
-			runLoginFlow()
-		}
 	}
 }

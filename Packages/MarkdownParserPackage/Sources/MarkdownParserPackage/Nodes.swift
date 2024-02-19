@@ -105,3 +105,13 @@ public final class ImageNode: BaseNode {
 		self.size = size
 	}
 }
+
+public final class LinkNode: BaseNode {
+	let title: String?
+	let url: String
+	
+	public init(title: String?, url: String) {
+		self.title = title
+		self.url = url
+	}
+}

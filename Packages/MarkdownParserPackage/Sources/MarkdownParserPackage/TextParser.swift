@@ -37,7 +37,7 @@ public final class TextParser: ITextParser {
 		PartRegExp(type: .boldItalic, pattern: #"^\*\*\*(.*?)\*\*\*"#),
 		PartRegExp(type: .bold, pattern: #"^\*\*(.*?)\*\*"#),
 		PartRegExp(type: .italic, pattern: #"^\*(.*?)\*"#),
-		PartRegExp(type: .inlineCode, pattern: #"^`(.*?)`"#)
+		PartRegExp(type: .inlineCode, pattern: #"^`(.*?)`"#),
 	]
 	
 	public func parse(rawtext text: String) -> Text {

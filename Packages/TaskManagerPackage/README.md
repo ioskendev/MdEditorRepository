@@ -1,14 +1,14 @@
 # TaskManagerPackage
 
-Пакет содержит набор классов для реализации списка заданий.
+The package contains a set of classes for implementing a task list.
 
-Задания:
+Tasks:
 
-- Task -- Задание, для ведения списка дел;
-- RegularTask -- Обычное задание для ведения списка дел;
-- ImportantTask -- Важное задание с приоритетом для ведения списка дел.
+- Task – A task, for maintaining a to-do list;
+- RegularTask -- A regular task for keeping a to-do list;
+- ImportantTask -- Important task with priority for maintaining a to-do list.
 
-Менеджеры списка заданий:
+Task managers:
 
 - ITaskManager -- Протокол предоставляющий управление списком заданий;
 - TaskManager -- Менеджер списка заданий;

@@ -8,6 +8,7 @@
 
 import UIKit
 import TaskManagerPackage
+import MarkdownPackage
 
 final class TodoListCoordinator: ICoordinator {
 
@@ -29,12 +30,18 @@ final class TodoListCoordinator: ICoordinator {
 
 	private func showTodoListScene() {
 		let taskManager: ITaskManager = TaskManager()
-		let taskRepository: ITaskRepository = TaskRepositoryStub()
-		taskManager.addTasks(tasks: taskRepository.getTasks())
 
-		let assembler = TodoListAssembler(taskManager: OrderedTaskManager(taskManager: taskManager))
-		let viewController = assembler.assembly(createTaskClosure: nil)
+		if case .success(let file) = File.parse(url: Endpoints.documentTest) {
+			let markdownText = String(data: file.contentOfFile() ?? Data(), encoding: .utf8) ?? ""
+			let document = MarkdownToDocument().convert(markdownText: markdownText)
+			let taskRepository: ITaskRepository = TaskScanner(document: document)
 
-		navigationController.setViewControllers([viewController], animated: true)
+			taskManager.addTasks(tasks: taskRepository.getTasks())
+
+			let assembler = TodoListAssembler(taskManager: OrderedTaskManager(taskManager: taskManager))
+			let viewController = assembler.assembly(createTaskClosure: nil)
+
+			navigationController.setViewControllers([viewController], animated: true)
+		}
 	}
 }

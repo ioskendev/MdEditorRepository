@@ -1,26 +1,26 @@
 //
 //  TaskRepository.swift
-//  MdEdit
+//  MdEditor
 //
-//  Created by ioskendev on 12.01.2024.
+//  Created by Alexey Turulin on 11/28/23.
 //
 
 import Foundation
 import TaskManagerPackage
 
-/// Repository to get tasks.
+/// Репозиторий для получения заданий.
 protocol ITaskRepository {
 
-	/// Get task list.
-	/// - Returns: Array of tasks.
+	/// Получить список заданий.
+	/// - Returns: Массив заданий.
 	func getTasks() -> [Task]
 }
 
-/// Stub Repository to get tasks.
+/// Stub Репозиторя для получения заданий.
 final class TaskRepositoryStub: ITaskRepository {
 
-	/// Return stub data with tasks.
-	/// - Returns: Array of tasks.
+	/// Возвращает предустановленные данные для приолжения.
+	/// - Returns: Массив заданий.
 	func getTasks() -> [Task] {
 		[
 			ImportantTask(title: L10n.Task.doHomework, taskPriority: .high),

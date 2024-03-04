@@ -102,7 +102,7 @@ extension TextPreviewViewController: ITextPreviewViewController {
 		self.viewModel = viewModel
 		title = viewModel.currentTitle
 		textView.isScrollEnabled = false
-		textView.text = viewModel.text
+		textView.attributedText = viewModel.text
 		textView.isScrollEnabled = true
 	}
 }

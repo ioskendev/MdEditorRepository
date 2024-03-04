@@ -6,9 +6,12 @@
 //  Copyright © 2024 repakuku. All rights reserved.
 //
 
+import Foundation
+
 enum LaunchArguments: String {
 	case enableTesting = "-enableTesting"
-	case skipLogin = "-skipLogin"
+	case runTodoListFlow = "-runTodoListFlow"
+	case runMainFlow = "-runMainFlow"
 
 	static func parameters() -> [LaunchArguments: Bool] {
 		var parameters = [LaunchArguments: Bool]()

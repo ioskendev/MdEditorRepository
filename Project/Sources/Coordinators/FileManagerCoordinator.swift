@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MarkdownPackage
 
 protocol IFileManagerCoordinator: ICoordinator {
 	var finishFlow: (() -> Void)? { get set }
@@ -19,7 +20,8 @@ final class FileManagerCoordinator: NSObject, IFileManagerCoordinator {
 	private let navigationController: UINavigationController
 	private var topViewController: UIViewController?
 
-	private let fileExplorer: IFileExplorer
+	private let fileExplorer = FileExplorer()
+	private let converter: IMarkdownToAttributedStringConverter
 
 	// MARK: - Internal properties
 
@@ -30,11 +32,11 @@ final class FileManagerCoordinator: NSObject, IFileManagerCoordinator {
 	init(
 		navigationController: UINavigationController,
 		topViewController: UIViewController?,
-		fileExplorer: IFileExplorer
+		converter: IMarkdownToAttributedStringConverter
 	) {
 		self.navigationController = navigationController
 		self.topViewController = topViewController
-		self.fileExplorer = fileExplorer
+		self.converter = converter
 
 		super.init()
 
@@ -64,7 +66,10 @@ private extension FileManagerCoordinator {
 	}
 
 	func showTextPreviewScene(file: File) {
-		let assembler = TextPreviewAssembler(file: file)
+		let assembler = TextPreviewAssembler(
+			file: file,
+			converter: converter
+		)
 		let viewController = assembler.assembly()
 
 		navigationController.pushViewController(viewController, animated: true)

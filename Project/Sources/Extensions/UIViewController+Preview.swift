@@ -1,6 +1,6 @@
 //
 //  UIViewController+Preview.swift
-//  MdEdit
+//  MdEditor
 //
 //  Created by ioskendev on 12.01.2024.
 //

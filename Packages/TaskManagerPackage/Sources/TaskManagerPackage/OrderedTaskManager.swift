@@ -2,73 +2,73 @@
 //  OrderedTaskManager.swift
 //  TaskManagerPackage
 //
-//  Created by ioskendev on 27.12.2023.
+//  Created by Alexey Turulin on 11/22/23.
 //
 
 import Foundation
 
-/// Prevent ordered task list by priority.
+/// Provides a list of tasks sorted by priority.
 public final class OrderedTaskManager: ITaskManager {
 
 	private let taskManager: ITaskManager
 
-
-	/// Ordered taskmanager creation.
-	/// - Parameter taskManager: Task list manager to give manage point of tasks list with ordering.
+	/// Initializes a list of tasks sorted by priority.
+	/// - Parameter taskManager: The task manager that will provide the tasks.
 	public init(taskManager: ITaskManager) {
 		self.taskManager = taskManager
 	}
 
-	/// All tasks list.
+	/// Returns a list of all tasks, sorted by priority.
 	///
-	/// - Complexity: O(n log n), where n -- task list size.
-	/// - Returns: Array of tasks.
+	/// Complexity: O(n log n), where n is the number of tasks.
+	/// - Returns: An array of tasks.
 	public func allTasks() -> [Task] {
 		sorted(tasks: taskManager.allTasks())
 	}
 
-	/// Compleated tasks.
+	/// Returns a list of completed tasks, sorted by priority.
 	///
-	/// - Complexity: O(n log n), where n -- size of task list.
-	/// - Returns: Array of tasks.
+	/// Complexity: O(n log n), where n is the number of tasks.
+	/// - Returns: An array of tasks.
 	public func completedTasks() -> [Task] {
 		sorted(tasks: taskManager.completedTasks())
 	}
 
-	/// Uncompleated tasks.
+	/// Returns a list of tasks to be completed, sorted by priority.
 	///
-	/// - Complexity: O(n log n), где n -- размер списка заданий.
-	/// - Returns: Массив заданий.
+	/// Complexity: O(n log n), where n is the number of tasks.
+	/// - Returns: An array of tasks.
 	public func uncompletedTasks() -> [Task] {
 		sorted(tasks: taskManager.uncompletedTasks())
 	}
 
-	/// Add new task.
+	/// Adds a new task.
 	///
-	/// - Complexity: O(1).
-	/// - Parameter task: task to adding.
+	/// Complexity: O(1) on average for many calls to append(_:) on an array.
+	/// - Parameter task: The task to be added.
 	public func addTask(task: Task) {
 		taskManager.addTask(task: task)
 	}
 
-	/// Add task list.
+	/// Adds a list of tasks.
 	///
-	/// - Complexity: O(m), where m is size of "tasks" parameter.
-	/// - Parameter tasks: Task list array.
+	/// Complexity: O(m) on average, where m is the size of the list being added, 
+	/// for many calls to append(_:) on an array.
+	/// - Parameter tasks: An array of tasks to be added.
 	public func addTasks(tasks: [Task]) {
 		taskManager.addTasks(tasks: tasks)
 	}
 
-	/// Delete task from list. Delete all tasks by identical method with input Task parameter (x === y).
+	/// Removes a task from the list. When this method is called, 
+	/// all instances of this task will be removed by task identity.
 	///
-	/// - Complexity: O(n), where n -- is task list size.
-	/// - Parameter task: Task, to deletion.
+	/// Complexity: O(n), where n is the number of tasks.
+	/// - Parameter task: The task to be removed.
 	public func removeTask(task: Task) {
 		taskManager.removeTask(task: task)
 	}
 }
 
-// Private extension with sorting method
 private extension OrderedTaskManager {
 	func sorted(tasks: [Task]) -> [Task] {
 		tasks.sorted {
@@ -82,4 +82,3 @@ private extension OrderedTaskManager {
 		}
 	}
 }
-

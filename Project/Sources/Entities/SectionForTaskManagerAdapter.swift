@@ -1,28 +1,28 @@
 //
 //  SectionForTaskManagerAdapter.swift
-//  MdEdit
+//  MdEditor
 //
-//  Created by ioskendev on 12.01.2024.
+//  Created by Alexey Turulin on 11/28/23.
 //
 
 import Foundation
 import TaskManagerPackage
 
-/// Adapter protocol, to use TaskManager to return tasks from sections.
+/// Протокол адаптера, позволяющего использовать TaskManager для предоставления заданий по секциям.
 protocol ISectionForTaskManagerAdapter {
 
-	/// Get list of sections.
-	/// - Returns: Array with sections.
+	/// Получить список секций.
+	/// - Returns: Массив с ссекциями.
 	func getSections() -> [Section]
 
-	/// Access to section from index.
-	/// - Parameter index: Index, to return section with.
-	/// - Returns: Section.
+	/// Доступ к секции по индексу.
+	/// - Parameter index: Индекс, для которого нужно вернуть секцию.
+	/// - Returns: Нужная секция.
 	func getSection(forIndex index: Int) -> Section
 
-	/// Get tasks for section.
-	/// - Parameter section: Section to return tasks.
-	/// - Returns: Array with Tasks.
+	/// Получить список заданий для конкретной секции.
+	/// - Parameter section: Секция для которой нужен список заданий.
+	/// - Returns: Массив с секциями.
 	func getTasksForSection(section: Section) -> [Task]
 }
 
@@ -49,7 +49,6 @@ enum Section {
 	}
 }
 
-/// SectionForTaskManagerAdapter provide new functions with sections to ITaskManager type member
 final class SectionForTaskManagerAdapter: ISectionForTaskManagerAdapter {
 	// MARK: - Dependencies
 
@@ -72,17 +71,11 @@ final class SectionForTaskManagerAdapter: ISectionForTaskManagerAdapter {
 		sections
 	}
 
-	/// Get section for index
-	/// - Parameter index: index of section
-	/// - Returns: Section for index
 	func getSection(forIndex index: Int) -> Section {
 		let correctedIndex = min(index, sections.count - 1)
 		return sections[correctedIndex]
 	}
 
-	/// return array of TaskManagerPackage Tasks from tasks type
-	/// - Parameter section: enum Section with staks description
-	/// - Returns: [TaskManagerPackage.Task]
 	func getTasksForSection(section: Section) -> [TaskManagerPackage.Task] {
 		switch section {
 		case .completed:

@@ -46,7 +46,6 @@ final class OrderedTaskManagerTests: XCTestCase {
 			MockTaskManager.mediumImportantTask,
 			MockTaskManager.lowImportantTask,
 			MockTaskManager.uncompletedRegularTask
-
 		]
 
 		let resultTasks = sut.uncompletedTasks()

@@ -238,8 +238,6 @@ public final class AttributedTextVisitor: IVisitor {
 	/// - Parameter node: The image node to convert.
 	/// - Returns: A 'NSMutableAttributedString' including a reference to the image.
 	public func visit(node: ImageNode) -> NSMutableAttributedString {
-		let attachment = NSTextAttachment()
-
 		let attributes: [NSAttributedString.Key: Any] = [
 			.font: UIFont.systemFont(ofSize: Appearance.textSize)
 		]

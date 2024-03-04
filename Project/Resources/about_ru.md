@@ -1,46 +1,58 @@
-# MdEditor (Бета)
+## Overview
 
-Welcome to MdEditor, a sophisticated Markdown editor developed using the robust CleanSwift architecture. 
-MdEditor is more than just a text editor; it’s a seamless blend of intuitive markdown editing and efficient 
-task management, designed to cater to both casual and power users who desire a streamlined writing and coding 
-experience.
+MdEditor for iOS is a versatile and user-friendly app designed to offer a delightful experience for writing Markdown. It integrates a variety of features that cater to both novice and experienced Markdown users, enabling them to craft, preview, and export their Markdown documents directly from their iOS devices.
+
+
+## Architecture
+MdEditor is built on CleanSwift architecture pattern. 
+
+Clean Swift (also known as the VIP architecture) is an architecture pattern for iOS apps that organizes code into distinct layers with well-defined responsibilities, which helps in making the code more testable, maintainable, and scalable. The three key components of Clean Swift are:
+
+- View Controller (V): Handles the display of the user interface and user interactions. It sends user events to the Interactor and receives ViewModel from the Presenter to update the UI.
+- Interactor (I): Contains the business logic of the application. It receives requests from the View Controller, processes them (including communicating with models or workers), and sends the results to the Presenter.
+- Presenter (P): Transforms raw data received from the Interactor into displayable ViewModel and passes it back to the View Controller for presentation.
+
+The data flow in Clean Swift is unidirectional, making it easier to trace and debug. The separation of concerns facilitated by this architecture allows for more modular code and supports the Single Responsibility Principle, leading to cleaner and more organized codebases for iOS applications.
 
 ## Features
+MdEditor comes with a range of handy features that streamline the markdown writing process:
 
-- **Interactive Live Preview:** Watch your Markdown transform in real-time with our dynamic live preview feature.
-- **Advanced Syntax Highlighting:** Our syntax highlighting improves readability, particularly for code blocks, 
-making it a breeze to write and review code in Markdown.
-- **Comprehensive Markdown Support:** From basic to extended Markdown syntax, MdEditor supports a wide range of 
-elements, catering to all your formatting needs.
-- **Keyboard Shortcuts:** Increase your efficiency with our thoughtfully designed keyboard shortcuts for common 
-Markdown formatting tasks.
-- **Multiple Export Options:** Flexibility to export your Markdown documents to HTML, PDF, and more, perfect for 
-various distribution needs.
-- **Theming Options:** Choose from dark and light themes to customize your writing environment to your comfort.
+- Live preview of Markdown content
+- Syntax highlighting for code blocks
+- Support for standard Markdown as well as extended syntax elements
+- Keyboard shortcuts for common formatting actions
+- Exporting Markdown to other formats such as HTML or PDF
+- Dark and light themes for comfortable writing
 
-## Integrated Task Management
+## Getting Started
+To start using MdEditor, follow the simple steps below to get it up and running on your machine.
 
-- **Task Manager Integration:** MdEditor integrates with TaskManagerPackage, offering an in-built task management tool to keep track of your writing milestones and code-related tasks.
-- **Prioritization and Organization:** Organize tasks based on priority, ensuring that critical tasks are always at the forefront.
-- **Seamless Workflow:** The combination of Markdown editing and task management in a single application enhances productivity and focus.
+### Requirements
+Before you install MdEditor, ensure your system meets the following requirements:
+- Operating System: macOS X 10.14 or later
+- Runtime Environment: Xcode 15.1 or higher
+- Additional Dependencies: tuist, swiftgen.
 
-## Requirements
+### Installation
+Follow these steps to install MdEditor:
 
-- Runtime Environment: Xcode 14.2 or higher.
-- Additional Dependencies: Tuist, SwiftGen.
-
-## Installation
-
-1.	Clone the Repository:
-```
-git clone https://github.com/repakuku/MdEditor.git
-```
-2.	Navigate to the Project Directory in Console:
-```
-cd ./MdEditorRepository/Project
-```
-3.	Run Tuist to Generate the Project:
-```
+1. **Clone the repository:**
+    git@github.com:ioskendev/MdEditorRepository.git
+2. **Navigate to the project directory in console:**
+cd ./MdEditorRepository/Progect
+3. **Run:**
 tuist generate
-```
-Now you’re ready to use MdEditor with all its powerful features! If you encounter any issues during installation, please refer to the documentation for troubleshooting.
+   
+   After these steps, MdEditor should be running on your machine and you can build the project.
+
+---
+
+We hope you enjoy using MdEditor project, and we welcome any feedback, contributions, or bug reports in our issues section.
+
+## Developers(ioskendev team):
+- Yuri Volegov (iosken - teamlead)
+- Maxim Alexeev
+- Alexey Turulin
+- Dinar Khakimov
+- Rinat
+   

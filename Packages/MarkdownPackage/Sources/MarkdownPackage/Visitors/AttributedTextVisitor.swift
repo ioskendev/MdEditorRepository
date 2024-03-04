@@ -239,23 +239,14 @@ public final class AttributedTextVisitor: IVisitor {
 	/// - Returns: A 'NSMutableAttributedString' including a reference to the image.
 	public func visit(node: ImageNode) -> NSMutableAttributedString {
 		let attachment = NSTextAttachment()
-		var result = NSMutableAttributedString()
 
-		if let url = URL(string: node.url) {
-			let data = try? Data(contentsOf: url)
-			let image = UIImage(data: data ?? Data())
-			attachment.image = image
+		let attributes: [NSAttributedString.Key: Any] = [
+			.font: UIFont.systemFont(ofSize: Appearance.textSize)
+		]
 
-			let attributes: [NSAttributedString.Key: Any] = [
-				.attachment: attachment
-			]
-
-			result = NSMutableAttributedString(string: node.url, attributes: attributes)
-		} else {
-			result = NSMutableAttributedString(string: node.url)
-		}
-
+		let result = NSMutableAttributedString(string: node.url, attributes: attributes)
 		result.append(String.lineBreak)
+
 		return result
 	}
 

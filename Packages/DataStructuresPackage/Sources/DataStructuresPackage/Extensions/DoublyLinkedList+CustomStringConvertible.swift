@@ -19,7 +19,7 @@ extension DoublyLinkedList: CustomStringConvertible {
 		var current = head
 
 		while current != nil {
-			values.append("\(current!)")
+			values.append("\(current!)") // swiftlint:disable:this force_unwrapping
 			current = current?.next
 		}
 

@@ -1,8 +1,9 @@
 //
-//  Sizes.swift
-//  MdEdit
+//  Colors.swift
+//  MdEditor
 //
-//  Created by ioskendev on 12.01.2024.
+//  Created by Alexey Turulin on 1/14/24.
+//  Copyright © 2024 repakuku. All rights reserved.
 //
 
 import Foundation

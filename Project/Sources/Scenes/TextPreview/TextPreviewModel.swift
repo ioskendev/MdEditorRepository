@@ -16,6 +16,6 @@ enum TextPreviewModel {
 
 	struct ViewModel {
 		let currentTitle: String
-		let text: String
+		let text: NSMutableAttributedString
 	}
 }

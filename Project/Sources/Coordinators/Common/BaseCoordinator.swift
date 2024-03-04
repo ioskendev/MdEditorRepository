@@ -1,8 +1,8 @@
 //
 //  ICoordinator.swift
-//  MdEdit
+//  MdEditor
 //
-//  Created by ioskendev on 12.01.2024.
+//  Created by Alexey Turulin on 1/14/24.
 //
 
 protocol ICoordinator: AnyObject {
@@ -15,36 +15,37 @@ class BaseCoordinator: ICoordinator {
 
 	func start() {}
 
-	/// Add dependency (coordinator) in array childCoordinators.
+	/// Добавление зависимости (coordinator) в массив childCoordinators.
 	///
-	/// Adding new dependency where depency is not contained in  childCoordinator
-	/// - Parameter coordinator: Dependency to adding.
+	/// Добавление новой зависимости только в том случае, если такой зависимости еще нет в массиве childCoordinators.
+	/// - Parameter coordinator: Зависимость, которую необходимо добавить.
 	func addDependency(_ coordinator: ICoordinator) {
-		// Checking: is array contains coordinator or not
+		// Проверяем, не содержится ли координатор уже в массиве
 		guard !childCoordinators.contains(where: { $0 === coordinator }) else { return }
-		// if coordinator not contains, then add it to array
+		// Если координатор не содержится, добавляем его в массив
 		childCoordinators.append(coordinator)
 	}
 
-	/// Remove dependency (coordinator) from array childCoordinators from parant coordinator.
-	/// It is checking, is coordinator nested from BaseCoordinator and is it have child coordinators or not.
-	/// If it is true, than recycle calling removeDependency method for each child coordinator
-	/// to delete all dependencies.
-	/// - Parameter coordinator: Dependency, to deletion.
+	/// Удаление зависимости (coordinator) из массива childCoordinators у родительского координатора.
+	///
+	/// Код проверяет, является ли переданный координатор подтипом BaseCoordinator и имеет ли дочерние координаторы.
+	/// Если условие выполняется, то происходит рекурсивный вызов removeDependency для каждого дочернего координатора,
+	///  чтобы удалить все их зависимости.
+	/// - Parameter coordinator: Зависимость, которую необходимо удалить.
 	func removeDependency(_ coordinator: ICoordinator) {
-		// cheking array childCoordinators is empty
+		// Проверяем, что массив childCoordinators не пуст
 		guard !childCoordinators.isEmpty else { return }
 
-		// It is checking, is coordinator nested from BaseCoordinator and is it have child coordinators or not.
-		// If it is true, than recycle calling removeDependency method for each child coordinator
-		// to delete all dependencies.
+		// Блок кода проверяет, является ли переданный координатор подтипом BaseCoordinator
+		// и имеет ли дочерние координаторы. Если условие выполняется, то происходит рекурсивный
+		// вызов removeDependency для каждого дочернего координатора, чтобы удалить все их зависимости.
 		if let coordinator = coordinator as? BaseCoordinator, !coordinator.childCoordinators.isEmpty {
 			coordinator.childCoordinators.forEach { coordinator.removeDependency($0) }
 		}
 
-		// Calling firstIndex(where:), to find first element index
-		// in array childCoordinaters, where element is same as first element in array
-		// coordinator ($0 = coordinator). If index find, then element is deleting from array.
+		// Этот блок кода использует метод firstIndex(where:), чтобы найти индекс первого элемента
+		// в массиве childCoordinators, который удовлетворяет условию, что объект равен переданному
+		// координатору ($0 === coordinator). Если индекс найден, то элемент удаляется из массива.
 		if let index = childCoordinators.firstIndex(where: { $0 === coordinator }) {
 			childCoordinators.remove(at: index)
 		}

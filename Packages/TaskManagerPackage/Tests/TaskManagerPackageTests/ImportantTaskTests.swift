@@ -22,6 +22,7 @@ final class ImportantTaskTests: XCTestCase {
 
 	func test_deadLine_lowPriorityTask() {
 		let currentDate = Date()
+		// swiftlint:disable:next force_unwrapping
 		let deadLine = Calendar.current.date(byAdding: .day, value: 3, to: currentDate)!
 
 		let sut = ImportantTask(title: title, taskPriority: .low, createDate: currentDate)
@@ -31,6 +32,7 @@ final class ImportantTaskTests: XCTestCase {
 
 	func test_deadLine_mediumPriorityTask() {
 		let currentDate = Date()
+		// swiftlint:disable:next force_unwrapping
 		let deadLine = Calendar.current.date(byAdding: .day, value: 2, to: currentDate)!
 
 		let sut = ImportantTask(title: title, taskPriority: .medium, createDate: currentDate)
@@ -40,6 +42,7 @@ final class ImportantTaskTests: XCTestCase {
 
 	func test_deadLine_highPriorityTask() {
 		let currentDate = Date()
+		// swiftlint:disable:next force_unwrapping
 		let deadLine = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
 
 		let sut = ImportantTask(title: title, taskPriority: .high, createDate: currentDate)

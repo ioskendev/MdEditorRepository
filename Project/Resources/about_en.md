@@ -1,6 +1,3 @@
-# MdEditorRepository
-This is the central repository for the MdEditor, a simple yet powerful Markdown editor designed for writing and previewing markdown documents. It's hosts the source code for MdEditor and its SPM, an intuitive Markdown editor for iOS that lets users create and manage Markdown documents with ease on their iPhone and iPad.
-
 ## Overview
 
 MdEditor for iOS is a versatile and user-friendly app designed to offer a delightful experience for writing Markdown. It integrates a variety of features that cater to both novice and experienced Markdown users, enabling them to craft, preview, and export their Markdown documents directly from their iOS devices.
@@ -42,13 +39,9 @@ Follow these steps to install MdEditor:
 1. **Clone the repository:**
     git@github.com:ioskendev/MdEditorRepository.git
 2. **Navigate to the project directory in console:**
-```
 cd ./MdEditorRepository/Progect
-```
 3. **Run:**
-```
 tuist generate
-```
    
    After these steps, MdEditor should be running on your machine and you can build the project.
 
@@ -62,3 +55,4 @@ We hope you enjoy using MdEditor project, and we welcome any feedback, contribut
 - Alexey Turulin
 - Dinar Khakimov
 - Rinat
+   

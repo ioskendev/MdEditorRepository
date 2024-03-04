@@ -1,53 +1,45 @@
 //
-//  LinkedList.swift
+//  QueueList.swift
 //
 //
-//  Created by ioskendev on 28.12.2023.
+//  Created by Alexey Turulin on 10/30/23.
 //
 
 import Foundation
 
-/// Linear twosided list.
+/// Represents a doubly linked list.
 public struct DoublyLinkedList<T: Equatable> {
 
-	/// Two linear node.
+	/// Node within the doubly linked list, holding a value, previous, and next pointers.
 	final class Node<N> {
-		/// Value was stored in node.
 		var value: N
-
-		/// Link to previous Node (if previous Node is exist).
 		var previous: Node<N>?
-
-		/// Link to next Node (if next Node is exist).
 		var next: Node<N>?
 
-		/// Twosided list initialisator.
+		/// Initializes a new node with a given value, and optional previous and next nodes.
 		/// - Parameters:
-		///   - value: Value to store in node;
-		///   - next: link to next Node if next Node is exist.
+		///   - value: The value stored in the node.
+		///   - previous: An optional reference to the node’s predecessor in the list.
+		///   - next: An optional reference to the node’s successor in the list.
 		init(_ value: N, previous: Node<N>? = nil, next: Node<N>? = nil) {
 			self.value = value
-			self.previous = previous
 			self.next = next
+			self.previous = previous
 		}
 	}
 
 	private(set) var head: Node<T>?
 	private(set) var tail: Node<T>?
 
-	/// Return elements count result.
-	///
-	/// - Complexity: O(1).
 	private(set) var count = 0
 
-	/// Returns bool, with empty or not LinkedList meaneng.
-	/// - Complexity: O(1).
+	/// Indicates whether the list is empty.
 	var isEmpty: Bool {
 		head == nil && tail == nil
 	}
 
-	/// LinkedList init.
-	/// - Parameter value: Create LinkedList with Equatable type value parameter.
+	/// Initializes a new doubly linked list, optionally with a single initial value.
+	/// - Parameter value: The initial value to be contained in the list.
 	public init(_ value: T? = nil) {
 		if let value = value {
 			let newNode = Node(value)
@@ -57,10 +49,8 @@ public struct DoublyLinkedList<T: Equatable> {
 		}
 	}
 
-	/// Adding to tail(beginning) of list.
-	///
-	/// - Complexity: O(1).
-	/// - Parameter value: Equatable type value to adding to LinkedList to tail(beginning).
+	/// Adds a value to the beginning of the doubly linked list.
+	/// - Parameter value: The value to be added at the beginning of the list.
 	public mutating func push(_ value: T) {
 		let newNode = Node(value, next: head)
 		head?.previous = newNode
@@ -73,10 +63,8 @@ public struct DoublyLinkedList<T: Equatable> {
 		count += 1
 	}
 
-	/// Adding value to head(end) of list.
-	///
-	/// - Complexity: O(1).
-	/// - Parameter value: Value to adding to list.
+	/// Appends a value to the end of the doubly linked list.
+	/// - Parameter value: The value to be added at the end of the list.
 	public mutating func append(_ value: T) {
 		let newNode = Node(value, previous: tail)
 
@@ -90,12 +78,10 @@ public struct DoublyLinkedList<T: Equatable> {
 		count += 1
 	}
 
-	/// Inserting value to middle of list.
-	///
-	/// - Complexity: O(n).
+	/// Inserts a value at a specified position in the list.
 	/// - Parameters:
-	///   - value: Value to adding to middle of list.
-	///   - index: index, after wich will be inserting.
+	///   - value: The value to insert into the list.
+	///   - index: The index at which to insert the value.
 	public mutating func insert(_ value: T, after index: Int) {
 		guard let currentNode = node(at: index) else { return }
 		let nextNode = currentNode.next
@@ -110,10 +96,8 @@ public struct DoublyLinkedList<T: Equatable> {
 		count += 1
 	}
 
-	/// Cut value from start of list.
-	///
-	/// - Complexity: O(1).
-	/// - Returns: Cuting value from start of list.
+	/// Removes and returns the first element of the list.
+	/// - Returns: The value of the first element if the list is not empty; otherwise, 'nil'.
 	public mutating func pop() -> T? {
 		guard let currentHead = head else { return nil }
 		head = currentHead.next
@@ -128,10 +112,8 @@ public struct DoublyLinkedList<T: Equatable> {
 		return currentHead.value
 	}
 
-	/// Cut value from end of list.
-	///
-	/// - Complexity: O(1).
-	/// - Returns: Cuting value from end of list.
+	/// Removes and returns the last element of the list.
+	/// - Returns: The value of the last element if the list is not empty; otherwise, 'nil'.
 	public mutating func removeLast() -> T? {
 		guard let currentTail = tail else { return nil }
 		tail = currentTail.previous
@@ -146,18 +128,18 @@ public struct DoublyLinkedList<T: Equatable> {
 		return currentTail.value
 	}
 
-	/// Cut value from middle of list after index.
-	/// - Parameter index: Index, after wich will be cutting.
-	/// - Returns: Cuting value from middle of list after index.
+	/// Removes and returns an element after a specified index.
+	/// - Parameter index: The index before the element to remove.
+	/// - Returns: The value of the removed element if it exists and the index is valid; otherwise, 'nil'.
 	public mutating func remove(after index: Int) -> T? {
 		guard let currentNode = node(at: index), let nextNode = currentNode.next else { return nil }
 
-		if nextNode === tail {
+		if currentNode.next === tail {
 			tail = currentNode
 			currentNode.next = nil
 		} else {
-				currentNode.next = nextNode.next
-				nextNode.next?.previous = currentNode
+			currentNode.next = nextNode.next
+			nextNode.next?.previous = currentNode
 		}
 
 		count -= 1
@@ -165,19 +147,14 @@ public struct DoublyLinkedList<T: Equatable> {
 		return nextNode.value
 	}
 
-	/// Return value from index.
-	/// - Parameter index: index of target value.
-	/// - Returns: Value.
+	/// Returns the value of a node at a specified index.
+	/// - Parameter index: The index of the node whose value is to be returned.
+	/// - Returns: The value of the node at the given index if it exists; otherwise, 'nil'.
 	public func value(at index: Int) -> T? {
 		node(at: index)?.value
 	}
 
-	/// Return node of list from index.
-	///
-	/// - Complexity: O(n)
-	/// - Parameter index: Index, which returns nodes element.
-	/// - Returns: Node.
-	func node(at index: Int) -> Node<T>? {
+	private func node(at index: Int) -> Node<T>? {
 		guard index >= 0 && index < count else { return nil }
 
 		var currentIndex = 0
@@ -197,7 +174,7 @@ public struct DoublyLinkedList<T: Equatable> {
 				currentIndex -= 1
 			}
 		}
-		
+
 		return currentNode
 	}
 }

@@ -6,26 +6,20 @@
 //
 
 import UIKit
-import TaskManagerPackage
+import MarkdownPackage
 
 final class MainCoordinator: BaseCoordinator {
 
 	// MARK: - Dependencies
 
 	private let navigationController: UINavigationController
-	private let fileExplorer: IFileExplorer
-	private let recentFileManager: IRecentFileManager
+	private let recentFileManager = StubRecentFileManager()
+	private let converter = MarkdownToAttributedStringConverter()
 
 	// MARK: - Initialization
 
-	init(
-		navigationController: UINavigationController,
-		fileExplorer: IFileExplorer,
-		recentFileManager: IRecentFileManager
-	) {
+	init(navigationController: UINavigationController) {
 		self.navigationController = navigationController
-		self.fileExplorer = fileExplorer
-		self.recentFileManager = recentFileManager
 	}
 
 	// MARK: - Internal methods
@@ -49,7 +43,10 @@ private extension MainCoordinator {
 	}
 
 	func showTextPreviewScene(file: File) {
-		let assembler = TextPreviewAssembler(file: file)
+		let assembler = TextPreviewAssembler(
+			file: file,
+			converter: converter
+		)
 		let viewController = assembler.assembly()
 
 		navigationController.pushViewController(viewController, animated: true)
@@ -60,7 +57,7 @@ private extension MainCoordinator {
 		let coordinator = FileManagerCoordinator(
 			navigationController: navigationController,
 			topViewController: topViewController,
-			fileExplorer: fileExplorer
+			converter: converter
 		)
 		addDependency(coordinator)
 

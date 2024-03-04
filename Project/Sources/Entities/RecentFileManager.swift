@@ -22,8 +22,8 @@ final class StubRecentFileManager: IRecentFileManager {
 	func getRecentFiles() -> [RecentFile] {
 		return [
 			RecentFile(
-				previewText: "# О приложении",
-				url: Endpoints.documentAbout,
+				previewText: "# Markdown Test",
+				url: Endpoints.documentTest,
 				createDate: Date()
 			),
 

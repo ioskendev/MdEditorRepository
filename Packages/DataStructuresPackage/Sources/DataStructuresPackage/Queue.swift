@@ -2,41 +2,41 @@
 //  QueueList.swift
 //
 //
-//  Created by ioskendev on 28.12.2023.
+//  Created by Alexey Turulin on 10/30/23.
 //
 
 import Foundation
 
+/// A generic queue data structure that operates on a first-in, first-out (FIFO) principle.
+/// This implementation uses a doubly linked list to efficiently manage its elements.
 public struct Queue<T: Equatable> {
 
 	private var elements = DoublyLinkedList<T>()
-	
-	/// The count of the queue list.
+
+	/// The number of elements in the queue.
 	public var count: Int {
 		elements.count
 	}
 
-	/// The empty status of the queue list as a Bool value.
-	/// - Returns: True if the list is empty and False if is not.
+	/// A Boolean value indicating whether the queue is empty.
 	public var isEmpty: Bool {
 		elements.isEmpty
 	}
-	
-	/// Peeking a value from the beginning of the list.
-	/// - Returns: The first value from the queue list.
+
+	/// The element at the front of the queue, if available.
 	public var peek: T? {
 		elements.value(at: 0)
 	}
-	
-	/// Appending a value to the end of the queue list.
-	/// - Parameter value: An Equatable value to append to the  linked list.
+
+	/// Adds a new element to the end of the queue.
+	/// - Parameter element: The element to add to the queue.
 	public mutating func enqueue(_ element: T) {
 		elements.append(element)
 	}
-	
-	/// Removing a value from the beginning of the list.
-	/// - Returns: The removed value.
+
+	/// Removes and returns the element at the front of the queue, if the queue is not empty.
+	/// - Returns: The element at the front of the queue, or `nil` if the queue is empty.
 	public mutating func dequeue() -> T? {
-		elements.pop()
+		return elements.pop()
 	}
 }

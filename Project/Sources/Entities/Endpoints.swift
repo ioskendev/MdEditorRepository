@@ -33,6 +33,13 @@ enum Endpoints {
 		)!
 	}()
 
+	static var documentTest: URL = {
+		Bundle.main.url(
+			forResource: "Examples/test",
+			withExtension: "md"
+		)!
+	}()
+
 	static var documentHeadings: URL = {
 		Bundle.main.url(
 			forResource: "Examples/Docs/headings",

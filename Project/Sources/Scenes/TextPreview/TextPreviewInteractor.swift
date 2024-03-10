@@ -8,11 +8,20 @@
 
 import Foundation
 
+protocol ITextPreviewDelegate: AnyObject {
+	func openPdf(file: File)
+}
+
 protocol ITextPreviewInteractor {
 	func fetchData()
+	func performAction()
 }
 
 final class TextPreviewInteractor: ITextPreviewInteractor {
+
+	// MARK: - Public properties
+
+	weak var delegate: ITextPreviewDelegate?
 
 	// MARK: - Dependencies
 
@@ -35,5 +44,9 @@ final class TextPreviewInteractor: ITextPreviewInteractor {
 		let content = String(data: file.contentOfFile() ?? Data(), encoding: .utf8) ?? ""
 		let response = TextPreviewModel.Response(fileUrl: file.url, fileContent: content)
 		presenter.present(response: response)
+	}
+
+	func performAction() {
+		delegate?.openPdf(file: file)
 	}
 }

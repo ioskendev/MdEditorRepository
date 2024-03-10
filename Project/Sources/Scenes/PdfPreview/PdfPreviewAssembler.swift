@@ -1,5 +1,5 @@
 //
-//  TextPreviewAssembler.swift
+//  PdfPreviewAssembler.swift
 //  MdEditor
 //
 //  Created by Alexey Turulin on 2/10/24.
@@ -9,13 +9,13 @@
 import UIKit
 import MarkdownPackage
 
-final class TextPreviewAssembler {
+final class PdfPreviewAssembler {
 
 	// MARK: - Dependencies
 
 	private let file: File
 
-	private let converter = MarkdownToAttributedStringConverter()
+	private let converter = MainQueueDispatchDecorator(decoratee: MarkdownToPdfConverter())
 
 	// MARK: - Initializers
 
@@ -27,13 +27,13 @@ final class TextPreviewAssembler {
 
 	// MARK: - Public methods
 
-	func assembly() -> (TextPreviewViewController, TextPreviewInteractor) {
-		let viewController = TextPreviewViewController()
-		let presenter: ITextPreviewPresenter = TextPreviewPresenter(
+	func assembly() -> (PdfPreviewController, PdfPreviewInteractor) {
+		let viewController = PdfPreviewController()
+		let presenter: IPdfPreviewPresenter = PdfPreviewPresenter(
 			viewController: viewController,
 			converter: converter
 		)
-		let interactor = TextPreviewInteractor(
+		let interactor = PdfPreviewInteractor(
 			presenter: presenter,
 			file: file
 		)

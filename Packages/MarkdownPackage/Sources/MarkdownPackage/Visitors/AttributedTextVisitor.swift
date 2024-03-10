@@ -32,7 +32,6 @@ public final class AttributedTextVisitor: IVisitor {
 		result.append(code)
 		result.append(text)
 		result.append(String.lineBreak)
-		result.append(String.lineBreak)
 
 		let attributes: [NSAttributedString.Key: Any] = [
 			.foregroundColor: Appearance.headerColor[node.level - 1],
@@ -49,7 +48,6 @@ public final class AttributedTextVisitor: IVisitor {
 	/// - Returns: A formatted 'NSMutableAttributedString' representing the paragraph.
 	public func visit(node: ParagraphNode) -> NSMutableAttributedString {
 		let result = visitChildren(of: node).joined()
-		result.append(String.lineBreak)
 		result.append(String.lineBreak)
 
 		let paragraphStyle = NSMutableParagraphStyle()
@@ -69,7 +67,6 @@ public final class AttributedTextVisitor: IVisitor {
 		let result = NSMutableAttributedString()
 		result.append(code)
 		result.append(text)
-		result.append(String.lineBreak)
 		result.append(String.lineBreak)
 
 		return result

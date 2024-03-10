@@ -11,8 +11,18 @@ import UIKit
 /// to support rich text formatting.
 public final class AttributedTextVisitor: IVisitor {
 
+	// MARK: - Dependencies
+
+	private let theme: IAttributedTextColors
+
+	// MARK: - Initialization
+
 	/// Initializes a new AttributedTextVisitor instance.
-	public init() { }
+	public init(theme: IAttributedTextColors) {
+		self.theme = theme
+	}
+
+	// MARK: - Public methods
 
 	/// Visits a document node and converts its children into an array of 'NSMutableAttributedString'.
 	/// - Parameter node: The document node to visit.
@@ -25,16 +35,14 @@ public final class AttributedTextVisitor: IVisitor {
 	/// - Parameter node: The header node to convert.
 	/// - Returns: A formatted 'NSMutableAttributedString' representing the header.
 	public func visit(node: HeaderNode) -> NSMutableAttributedString {
-		let code = makeMarkdownCode(String(repeating: "#", count: node.level) + " ")
 		let text = visitChildren(of: node).joined()
 
 		let result = NSMutableAttributedString()
-		result.append(code)
 		result.append(text)
 		result.append(String.lineBreak)
 
 		let attributes: [NSAttributedString.Key: Any] = [
-			.foregroundColor: Appearance.headerColor[node.level - 1],
+			.foregroundColor: theme.mainColor,
 			.font: UIFont.systemFont(ofSize: Appearance.headerSize[node.level - 1])
 		]
 
@@ -77,7 +85,7 @@ public final class AttributedTextVisitor: IVisitor {
 	/// - Returns: A formatted 'NSMutableAttributedString' representing the text node's content.
 	public func visit(node: TextNode) -> NSMutableAttributedString {
 		let attributes: [NSAttributedString.Key: Any] = [
-			.foregroundColor: Appearance.textColor,
+			.foregroundColor: theme.mainColor,
 			.font: UIFont.systemFont(ofSize: Appearance.textSize)
 		]
 		let result = NSMutableAttributedString(string: node.text, attributes: attributes)
@@ -88,19 +96,16 @@ public final class AttributedTextVisitor: IVisitor {
 	/// - Parameter node: The bold text node to convert.
 	/// - Returns: A bold formatted 'NSMutableAttributedString'.
 	public func visit(node: BoldTextNode) -> NSMutableAttributedString {
-		let code = makeMarkdownCode("**")
 
 		let attributes: [NSAttributedString.Key: Any] = [
-			.foregroundColor: Appearance.textBoldColor,
+			.foregroundColor: theme.mainColor,
 			.font: UIFont.boldSystemFont(ofSize: Appearance.textSize)
 		]
 
 		let text = NSMutableAttributedString(string: node.text, attributes: attributes)
 
 		let result = NSMutableAttributedString()
-		result.append(code)
 		result.append(text)
-		result.append(code)
 
 		return result
 	}
@@ -109,19 +114,16 @@ public final class AttributedTextVisitor: IVisitor {
 	/// - Parameter node: The italic text node to convert.
 	/// - Returns: An italic formatted 'NSMutableAttributedString'.
 	public func visit(node: ItalicTextNode) -> NSMutableAttributedString {
-		let code = makeMarkdownCode("*")
 
 		let attributes: [NSAttributedString.Key: Any] = [
-			.foregroundColor: Appearance.textItalicColor,
+			.foregroundColor: theme.mainColor,
 			.font: UIFont.italicSystemFont(ofSize: Appearance.textSize)
 		]
 
 		let text = NSMutableAttributedString(string: node.text, attributes: attributes)
 
 		let result = NSMutableAttributedString()
-		result.append(code)
 		result.append(text)
-		result.append(code)
 
 		return result
 	}
@@ -130,7 +132,6 @@ public final class AttributedTextVisitor: IVisitor {
 	/// - Parameter node: The bold and italic text node to convert.
 	/// - Returns: A 'NSMutableAttributedString' with both bold and italic formatting..
 	public func visit(node: BoldItalicTextNode) -> NSMutableAttributedString {
-		let code = makeMarkdownCode("***")
 
 		let font: UIFont
 
@@ -143,16 +144,14 @@ public final class AttributedTextVisitor: IVisitor {
 		}
 
 		let attributes: [NSAttributedString.Key: Any] = [
-			.foregroundColor: Appearance.textBoldItalicColor,
+			.foregroundColor: theme.mainColor,
 			.font: font
 		]
 
 		let text = NSMutableAttributedString(string: node.text, attributes: attributes)
 
 		let result = NSMutableAttributedString()
-		result.append(code)
 		result.append(text)
-		result.append(code)
 
 		return result
 	}
@@ -174,7 +173,7 @@ public final class AttributedTextVisitor: IVisitor {
 		paragraphStyle.alignment = .right
 
 		let attributes: [NSAttributedString.Key: Any] = [
-			.foregroundColor: Appearance.codeLangColor,
+			.foregroundColor: theme.accentColor,
 			.font: UIFont.italicSystemFont(ofSize: Appearance.codeTextSize),
 			.paragraphStyle: paragraphStyle
 		]
@@ -191,7 +190,7 @@ public final class AttributedTextVisitor: IVisitor {
 	/// - Returns: A formatted 'NSMutableAttributedString' representing the code line.
 	public func visit(node: CodeLineNode) -> NSMutableAttributedString {
 		let attributes: [NSAttributedString.Key: Any] = [
-			.foregroundColor: Appearance.codeTextColor,
+			.foregroundColor: theme.mainColor,
 			.font: UIFont(
 				name: "Menlo Regular",
 				size: Appearance.codeTextSize
@@ -213,7 +212,7 @@ public final class AttributedTextVisitor: IVisitor {
 	/// - Returns: An empty 'NSMutableAttributedString'.
 	public func visit(node: InlineCodeNode) -> NSMutableAttributedString {
 		let attributes: [NSAttributedString.Key: Any] = [
-			.foregroundColor: Appearance.codeTextColor,
+			.foregroundColor: theme.mainColor,
 			.font: UIFont(
 				name: "Menlo Regular",
 				size: Appearance.codeTextSize
@@ -236,6 +235,7 @@ public final class AttributedTextVisitor: IVisitor {
 	/// - Returns: A 'NSMutableAttributedString' including a reference to the image.
 	public func visit(node: ImageNode) -> NSMutableAttributedString {
 		let attributes: [NSAttributedString.Key: Any] = [
+			.foregroundColor: theme.mainColor,
 			.font: UIFont.systemFont(ofSize: Appearance.textSize)
 		]
 
@@ -304,7 +304,7 @@ public final class AttributedTextVisitor: IVisitor {
 private extension AttributedTextVisitor {
 	func makeMarkdownCode(_ code: String) -> NSMutableAttributedString {
 		let attributes: [NSAttributedString.Key: Any] = [
-			.foregroundColor: Appearance.markdownCodeColor
+			.foregroundColor: theme.accentColor
 		]
 
 		return NSMutableAttributedString(string: code, attributes: attributes)
@@ -313,23 +313,21 @@ private extension AttributedTextVisitor {
 
 // MARK: - Appearance
 
+/// Protocol defining the color scheme for attributed text rendering.
+public protocol IAttributedTextColors {
+
+	/// The primary color.
+	var mainColor: UIColor { get }
+
+	/// An accent color.
+	var accentColor: UIColor { get }
+}
+
 private extension AttributedTextVisitor {
 	enum Appearance {
-
-		static let markdownCodeColor: UIColor = .lightGray
-
 		static let textHeadIndent: CGFloat = 18
 		static let textSize: CGFloat = 18
-		static let textColor: UIColor = .black
-		static let textBoldColor: UIColor = .black
-		static let textBoldItalicColor: UIColor = .black
-		static let textItalicColor: UIColor = .black
-
 		static let headerSize: [CGFloat] = [40, 30, 26, 22, 20, 18]
-		static let headerColor: [UIColor] = [.black, .black, .black, .black, .black, .black]
-
 		static let codeTextSize: CGFloat = 18
-		static let codeLangColor: UIColor = .darkGray
-		static let codeTextColor: UIColor = .black
 	}
 }

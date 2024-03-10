@@ -39,13 +39,17 @@ public final class MarkdownToPdfConverter: IMarkdownToPdfConverter {
 
 	// MARK: - Dependencies
 
-	private let visitor = AttributedTextVisitor()
+	private let theme: IAttributedTextColors
+	private let visitor: AttributedTextVisitor
 	private let markdownToDocument = MarkdownToDocument()
 
 	// MARK: - Initialization
 
 	/// Initializes a MarkdownToPdfConverter instance.
-	public init() { }
+	public init(theme: IAttributedTextColors) {
+		self.theme = theme
+		visitor = AttributedTextVisitor(theme: theme)
+	}
 
 	// MARK: - Public Methods
 

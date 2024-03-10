@@ -15,7 +15,14 @@ final class PdfPreviewAssembler {
 
 	private let file: File
 
-	private let converter = MainQueueDispatchDecorator(decoratee: MarkdownToPdfConverter())
+	private let converter = MainQueueDispatchDecorator(
+		decoratee: MarkdownToPdfConverter(
+			theme: AttributedTextColors(
+				mainColor: .black,
+				accentColor: Theme.accentColor
+			)
+		)
+	)
 
 	// MARK: - Initializers
 

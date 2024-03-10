@@ -22,13 +22,17 @@ public final class MarkdownToAttributedStringConverter: IMarkdownToAttributedStr
 
 	// MARK: - Dependencies
 
-	private let visitor = AttributedTextVisitor()
+	private let theme: IAttributedTextColors
+	private let visitor: AttributedTextVisitor
 	private let markdownToDocument = MarkdownToDocument()
 
 	// MARK: - initialization
 
 	/// Initializes a MarkdownToAttributedStringConverter instance.
-	public init() { }
+	public init(theme: IAttributedTextColors) {
+		self.theme = theme
+		visitor = AttributedTextVisitor(theme: theme)
+	}
 
 	// MARK: - Public methods
 

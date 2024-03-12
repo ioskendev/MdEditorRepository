@@ -27,6 +27,8 @@ final class PdfPreviewController: UIViewController {
 		accessibilityIdentifier: AccessibilityIdentifier.PdfPreviewScene.pdfView.description
 	)
 
+	private lazy var activityIndicator = makeActivityIndicator()
+
 	private var constraints = [NSLayoutConstraint]()
 
 	// MARK: - Initialization
@@ -84,6 +86,10 @@ private extension PdfPreviewController {
 		navigationController?.navigationBar.prefersLargeTitles = true
 
 		view.addSubview(pdfView)
+		view.addSubview(activityIndicator)
+
+		activityIndicator.center = view.center
+		activityIndicator.startAnimating()
 	}
 
 	func makePdfView(accessibilityIdentifier: String) -> PDFView {
@@ -105,6 +111,16 @@ private extension PdfPreviewController {
 			target: self,
 			action: #selector(share)
 		)
+	}
+
+	func makeActivityIndicator() -> UIActivityIndicatorView {
+		let activityIndicator = UIActivityIndicatorView()
+
+		activityIndicator.hidesWhenStopped = true
+		activityIndicator.style = .large
+		activityIndicator.color = Theme.accentColor
+
+		return activityIndicator
 	}
 }
 
@@ -136,5 +152,6 @@ extension PdfPreviewController: IPdfPreviewController {
 	func render(viewModel: PdfPreviewModel.ViewModel) {
 		title = viewModel.currentTitle
 		pdfView.document = PDFDocument(data: viewModel.data)
+		activityIndicator.stopAnimating()
 	}
 }

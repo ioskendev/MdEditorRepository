@@ -42,6 +42,8 @@ final class MainQueueDispatchDecorator: IMarkdownToPdfConverter {
 		completion: @escaping (Data) -> Void
 	) {
 		DispatchQueue.global(qos: .userInitiated).async {
+			// Just for simulating intense activity.
+			sleep(1)
 			self.decoratee.convert(
 				markdownText: markdownText,
 				author: author,

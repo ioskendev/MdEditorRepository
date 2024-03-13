@@ -5,7 +5,8 @@
 //  Created by Alexey Turulin on 11/28/23.
 //
 
-import UIKit
+import SwiftUI
+import TaskManagerPackage
 
 /// Протокол главного экрана приложения.
 protocol ITodoListViewController: AnyObject {
@@ -142,5 +143,17 @@ extension TodoListViewController: ITodoListViewController {
 	func render(viewModel: TodoListModel.ViewModel) {
 		self.viewModel = viewModel
 		tableView.reloadData()
+	}
+}
+
+// MARK: - Preview
+
+struct TodoListViewControllerProvider: PreviewProvider {
+	static var previews: some View {
+		TodoListAssembler(
+			taskManager: TaskManager(
+				taskList: TaskRepositoryStub().getTasks()
+			)
+		).assembly(createTaskClosure: nil).preview()
 	}
 }

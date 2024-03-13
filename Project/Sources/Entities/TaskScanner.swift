@@ -10,16 +10,29 @@ import Foundation
 import MarkdownPackage
 import TaskManagerPackage
 
+/// Scans a document structure to identify and extract tasks.
 final class TaskScanner: ITaskRepository {
 
-	private let visitor = AttributedTextVisitor()
+	// MARK: - Dependencies
+
+	private let visitor = AttributedTextVisitor(theme: AttributedTextColors())
+
+	// MARK: - Private Properties
 
 	private let document: Document
 
+	// MARK: - Initialization
+
+	/// Initializes a new TaskScaneer with a given document.
+	/// - Returns: The document to scan for tasks.
 	init(document: Document) {
 		self.document = document
 	}
 
+	// MARK: - Public Methods
+
+	/// Scans the document and returns a list of tasks found within.
+	/// - Returns: An array of 'Task' instances extracted from the document.
 	func getTasks() -> [Task] {
 		scan(document: document)
 	}

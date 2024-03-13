@@ -1,5 +1,5 @@
 //
-//  TextPreviewModel.swift
+//  PdfPreviewModel.swift
 //  MdEditor
 //
 //  Created by Alexey Turulin on 2/10/24.
@@ -8,7 +8,11 @@
 
 import Foundation
 
-enum TextPreviewModel {
+enum PdfPreviewModel {
+
+	struct Request {
+		let data: Data
+	}
 
 	struct Response {
 		let fileUrl: URL
@@ -17,6 +21,6 @@ enum TextPreviewModel {
 
 	struct ViewModel {
 		let currentTitle: String
-		let text: NSMutableAttributedString
+		let data: Data
 	}
 }

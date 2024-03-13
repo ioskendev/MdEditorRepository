@@ -9,6 +9,13 @@
 import UIKit
 
 extension UIColor {
+
+	/// Initializes a UIColor object with the specified red, green, blue, and alpha values.
+	/// - Parameters:
+	///   - red: The red component of the color, specified as a value from 0 to 255.
+	///   - green: The green component of the color, specified as a value from 0 to 255.
+	///   - blue: The blue component of the color, specified as a value from 0 to 255.
+	///   - alpha: The alpha component of the color, specified as a value from 0 to 255.
 	convenience init(red: UInt8, green: UInt8, blue: UInt8, alpha: UInt8 = 255) {
 		self.init(
 			red: CGFloat(red) / 255.0,
@@ -18,6 +25,8 @@ extension UIColor {
 		)
 	}
 
+	/// Initializes a UIColor object with a hexadecimal integer.
+	/// - Parameter hex: A hexadecimal representation of the color.
 	convenience init(hex: Int) {
 		if hex > 0xffffff {
 			self.init(
@@ -35,6 +44,8 @@ extension UIColor {
 		}
 	}
 
+	/// Initializes a UIColor object with a hexadecimal string.
+	/// - Parameter hex: A string representation of the hexadecimal color.
 	convenience init(hex: String) {
 		var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 		hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
@@ -44,6 +55,10 @@ extension UIColor {
 		self.init(hex: Int(hex))
 	}
 
+	/// Converts the UIColor to a hexadecimal string representation.
+	/// - Parameter withAlpha: A Boolean value that determines whether the alpha value
+	/// is included in the hexadecimal string.
+	/// - Returns: A hexadecimal string representation of the color, optionally including the alpha value.
 	func toHex(withAlpha: Bool = false) -> String? {
 		guard let components = cgColor.components, components.count >= 3 else {
 			return nil

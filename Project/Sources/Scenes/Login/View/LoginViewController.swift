@@ -5,7 +5,7 @@
 //  Created by Alexey Turulin on 11/14/23.
 //
 
-import UIKit
+import SwiftUI
 
 protocol ILoginViewController: AnyObject {}
 
@@ -162,3 +162,11 @@ private extension LoginViewController {
 // MARK: - ILoginViewController
 
 extension LoginViewController: ILoginViewController {}
+
+// MARK: - Preview
+
+struct LoginViewControllerProvider: PreviewProvider {
+	static var previews: some View {
+		LoginAssembler().assembly(loginResultClosure: nil).preview()
+	}
+}

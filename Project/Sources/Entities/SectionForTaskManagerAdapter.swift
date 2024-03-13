@@ -8,31 +8,43 @@
 import Foundation
 import TaskManagerPackage
 
-/// Протокол адаптера, позволяющего использовать TaskManager для предоставления заданий по секциям.
+/// Protocol defining the requirements for adapting  task manager data into sections for display.
 protocol ISectionForTaskManagerAdapter {
 
-	/// Получить список секций.
-	/// - Returns: Массив с ссекциями.
+	/// Retrieves all sections representing grouped tasks.
+	/// - Returns: An array of 'Section' representing the sections in the task manager.
 	func getSections() -> [Section]
 
-	/// Доступ к секции по индексу.
-	/// - Parameter index: Индекс, для которого нужно вернуть секцию.
-	/// - Returns: Нужная секция.
+	/// Retrieves a specific section by its index.
+	/// - Parameter index: The index of the section to retrieve.
+	/// - Returns: The 'Section' at the given index.
 	func getSection(forIndex index: Int) -> Section
 
-	/// Получить список заданий для конкретной секции.
-	/// - Parameter section: Секция для которой нужен список заданий.
-	/// - Returns: Массив с секциями.
+	/// Retrieves tasks for a specific section.
+	/// - Parameter section: The section for which to retrieve tasks.
+	/// - Returns: An array of 'Task' belonging to the specified section.
 	func getTasksForSection(section: Section) -> [Task]
 }
 
+/// An enumeration representing the sections within a task management sustem.
 enum Section {
+
+	/// Represents completed tasks.
 	case completed
+
+	/// Represents uncompleted tasks.
 	case uncompleted
+
+	/// represents all tasks.
 	case allTasks
+
+	/// Represents important tasks.
 	case important
+
+	/// Represents regular tasks.
 	case regular
 
+	/// Provides a localized title for each section.
 	var title: String {
 		switch self {
 		case .completed:
@@ -49,6 +61,7 @@ enum Section {
 	}
 }
 
+/// Adapts the task manager to work with sections.
 final class SectionForTaskManagerAdapter: ISectionForTaskManagerAdapter {
 	// MARK: - Dependencies
 
@@ -60,6 +73,10 @@ final class SectionForTaskManagerAdapter: ISectionForTaskManagerAdapter {
 
 	// MARK: - Initialization
 
+	/// Initializes the adapter with a task manager and optional section configuration.
+	/// - Parameters:
+	///   - taskManager: The task manager instance to adapt.
+	///   - sections: The sections to be displayed, with default sections if none provided.
 	init(taskManager: ITaskManager, sections: [Section] = [.uncompleted, .completed]) {
 		self.taskManager = taskManager
 		self.sections = sections
@@ -67,15 +84,23 @@ final class SectionForTaskManagerAdapter: ISectionForTaskManagerAdapter {
 
 	// MARK: - Public methods
 
+	/// Retrieves all sections representing grouped tasks.
+	/// - Returns: An array of 'Section' representing the sections in the task manager.
 	func getSections() -> [Section] {
 		sections
 	}
 
+	/// Retrieves a specific section by its index.
+	/// - Parameter index: The index of the section to retrieve.
+	/// - Returns: The 'Section' at the given index.
 	func getSection(forIndex index: Int) -> Section {
 		let correctedIndex = min(index, sections.count - 1)
 		return sections[correctedIndex]
 	}
 
+	/// Retrieves tasks for a specific section.
+	/// - Parameter section: The section for which to retrieve tasks.
+	/// - Returns: An array of 'Task' belonging to the specified section.
 	func getTasksForSection(section: Section) -> [TaskManagerPackage.Task] {
 		switch section {
 		case .completed:

@@ -51,12 +51,25 @@ final class TextPreviewViewController: UIViewController {
 	}
 }
 
+// MARK: - Actions
+
+extension TextPreviewViewController {
+	@objc
+	func openPdf() {
+		interactor?.performAction()
+	}
+}
+
 // MARK: - Setup UI
 
 private extension TextPreviewViewController {
 	func setupUI() {
 		view.backgroundColor = Theme.backgroundColor
 		navigationController?.navigationBar.prefersLargeTitles = true
+
+		navigationItem.rightBarButtonItem = makeBarButtonItem(
+			accessibilityIdentifier: AccessibilityIdentifier.TextPreviewScene.barButton.description
+		)
 
 		view.addSubview(textView)
 	}
@@ -72,9 +85,19 @@ private extension TextPreviewViewController {
 
 		return textView
 	}
+
+	func makeBarButtonItem(accessibilityIdentifier: String) -> UIBarButtonItem {
+		UIBarButtonItem(
+			title: "PDF",
+			style: .plain,
+			target: self,
+			action: #selector(openPdf)
+		)
+	}
 }
 
 // MARK: - Layout UI
+
 private extension TextPreviewViewController {
 	func layout() {
 		NSLayoutConstraint.deactivate(constraints)
@@ -95,7 +118,7 @@ private extension TextPreviewViewController {
 	}
 }
 
-// MARK: - IAboutViewController
+// MARK: - ITextPreviewViewController
 
 extension TextPreviewViewController: ITextPreviewViewController {
 	func render(viewModel: TextPreviewModel.ViewModel) {

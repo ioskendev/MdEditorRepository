@@ -6,7 +6,7 @@
 //  Copyright © 2024 repakuku. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
 protocol IMainMenuViewController: AnyObject {
 	func render(viewModel: MainMenuModel.ViewModel)
@@ -115,6 +115,7 @@ private extension MainMenuViewController {
 		let tableView = UITableView()
 		tableView.translatesAutoresizingMaskIntoConstraints = false
 		tableView.backgroundColor = Theme.backgroundColor
+		tableView.isScrollEnabled = false
 		tableView.delegate = self
 		tableView.dataSource = self
 
@@ -233,5 +234,15 @@ extension MainMenuViewController: IMainMenuViewController {
 		self.viewModel = viewModel
 		collectionViewRecentFiles.reloadData()
 		tableView.reloadData()
+	}
+}
+
+// MARK: - Preview
+
+struct MainMenuViewControllerProvider: PreviewProvider {
+	static var previews: some View {
+		MainMenuAssembler(
+			recentFileManager: StubRecentFileManager()
+		).assembly().0.preview()
 	}
 }

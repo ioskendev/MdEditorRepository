@@ -108,8 +108,9 @@ private extension Lexer {
 		if rawText.isEmpty { return nil }
 
 		let notParagraphPattern = #"""
-^(#|>|\s*- \[ \]|\s*- \[\*\]|\s*- \[x\]|\s*- \[X\]|\d\.|\s+\d\.|\s*[\-\+]|\[.+\]\(.+\)|\[\[.+\]\]).*
+^(#|>|\s*- \[ \]|\s*- \[\*\]|\s*- \[x\]|\s*- \[X\]|\d\.|\s+\d\.|\s*[\-\+]|\[.+\]\(.+\)|\[\[.+\]\]|\!\[\[.+\]\]).*
 """#
+
 		let regex = try? NSRegularExpression(pattern: notParagraphPattern)
 
 		if let notParagraph = regex?.match(rawText), notParagraph == true { return nil }
